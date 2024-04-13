@@ -271,7 +271,7 @@ public class Model_Banks implements GEntity{
                     lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBankIDxx = " + SQLUtil.toSQL(this.getBankID()));
                     
                     if (!lsSQL.isEmpty()){
-                        if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") == 1){
+                        if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
                             poJSON.put("result", "success");
                             poJSON.put("message", "Record saved successfully.");
                         } else {
