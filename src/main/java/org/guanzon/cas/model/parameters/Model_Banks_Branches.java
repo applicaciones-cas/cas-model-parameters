@@ -18,8 +18,8 @@ import org.json.simple.JSONObject;
 /**
  * @author Michael Cuison
  */
-public class Model_Banks implements GEntity{
-    final String XML = "Model_Banks.xml";
+public class Model_Banks_Branches implements GEntity{
+    final String XML = "Model_Banks_Branches.xml";
     
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
@@ -31,7 +31,7 @@ public class Model_Banks implements GEntity{
      * 
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Banks(GRider foValue){
+    public Model_Banks_Branches(GRider foValue){
         if (foValue == null){
             System.err.println("Application Driver is not set.");
             System.exit(1);
@@ -93,7 +93,7 @@ public class Model_Banks implements GEntity{
      */
     @Override
     public String getTable() {
-        return "Banks";
+        return "Banks_Branches";
     }
     
     /**
@@ -185,7 +185,7 @@ public class Model_Banks implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBankBranchID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -202,10 +202,10 @@ public class Model_Banks implements GEntity{
     public JSONObject openRecord(String fsValue) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this);
+        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
         
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sBankIDxx = " + SQLUtil.toSQL(fsValue));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sBrBankID = " + SQLUtil.toSQL(fsValue));
         
         ResultSet loRS = poGRider.executeQuery(lsSQL);
         
@@ -244,9 +244,9 @@ public class Model_Banks implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBankBranchID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
-                lsSQL = MiscUtil.makeSQL(this);
+                lsSQL = MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
                 
                 if (!lsSQL.isEmpty()){
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -261,14 +261,14 @@ public class Model_Banks implements GEntity{
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Banks loOldEntity = new Model_Banks(poGRider);
+                Model_Banks_Branches loOldEntity = new Model_Banks_Branches(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBankID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBankBranchID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBankIDxx = " + SQLUtil.toSQL(this.getBankID()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrBankID = " + SQLUtil.toSQL(this.getBankBranchID()), "xBankName»xBankCode»xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") == 1){
@@ -334,6 +334,57 @@ public class Model_Banks implements GEntity{
     }
     
     /**
+     * Sets the Bank Branch ID of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setBankBranchID(String fsValue){
+        return setValue("sBrBankID", fsValue);
+    }
+    
+    /**
+     * @return The Bank Branch ID of this record.
+     */
+    public String getBankBranchID(){
+        return (String) getValue("sBrBankID");
+    }
+    
+    /**
+     * Sets the Bank Branch Name of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setBankBranchName(String fsValue){
+        return setValue("sBrBankNm", fsValue);
+    }
+    
+    /**
+     * @return The Bank Branch Name of this record. 
+     */
+    public String getBankBranchName(){
+        return (String) getValue("sBrBankNm");
+    }
+    
+    /**
+     * Sets the Bank Branch Code of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setBankBranchCode(String fsValue){
+        return setValue("sBrBankCD", fsValue);
+    }
+    
+    /**
+     * @return The Bank Branch Code of this record. 
+     */
+    public String getBankBranchCode(){
+        return (String) getValue("sBrBankCD");
+    }
+    
+    /**
      * Sets the Bank ID of this record.
      * 
      * @param fsValue 
@@ -357,14 +408,14 @@ public class Model_Banks implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBankName(String fsValue){
-        return setValue("sBankName", fsValue);
+        return setValue("xBankName", fsValue);
     }
     
     /**
      * @return The Bank Name of this record. 
      */
     public String getBankName(){
-        return (String) getValue("sBankName");
+        return (String) getValue("xBankName");
     }
     
     /**
@@ -374,14 +425,116 @@ public class Model_Banks implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBankCode(String fsValue){
-        return setValue("sBankCode", fsValue);
+        return setValue("xBankCode", fsValue);
     }
     
     /**
      * @return The Bank Code of this record. 
      */
     public String getBankCode(){
-        return (String) getValue("sBankCode");
+        return (String) getValue("xBankCode");
+    }
+        
+    /**
+     * Sets the Contact Person of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setContactPerson(String fsValue){
+        return setValue("sContactP", fsValue);
+    }
+    
+    /**
+     * @return The Contact Person of this record.
+     */
+    public String getContactPerson(){
+        return (String) getValue("sContactP");
+    }
+    
+    /**
+     * Sets the Contact Person Address of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setContactPersonAddress(String fsValue){
+        return setValue("sAddressx", fsValue);
+    }
+    
+    /**
+     * @return The Contact Person Address of this record.
+     */
+    public String getContactPersonAddress(){
+        return (String) getValue("sAddressx");
+    }
+    
+    /**
+     * Sets the Contact Person Address Town ID of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setContactPersonAddressTownID(String fsValue){
+        return setValue("sTownIDxx", fsValue);
+    }
+    
+    /**
+     * @return The Contact Person Address Town ID of this record.
+     */
+    public String getContactPersonAddressTownID(){
+        return (String) getValue("sTownIDxx");
+    }
+    
+    /**
+     * Sets the Contact Person Address Town Name of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setContactPersonAddressTownName(String fsValue){
+        return setValue("xTownName", fsValue);
+    }
+    
+    /**
+     * @return The Contact Person Address Town Name of this record.
+     */
+    public String getContactPersonAddressTownName(){
+        return (String) getValue("xTownName");
+    }
+    
+    /**
+     * Sets the Bank Branch Landline of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setBankBranchLandine(String fsValue){
+        return setValue("sTelNoxxx", fsValue);
+    }
+    
+    /**
+     * @return The Bank Branch Landline of this record.
+     */
+    public String getBankBranchLandine(){
+        return (String) getValue("sTelNoxxx");
+    }
+    
+    /**
+     * Sets the Bank Branch Landline of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setBankBranchFaxNo(String fsValue){
+        return setValue("sFaxNoxxx", fsValue);
+    }
+    
+    /**
+     * @return The Bank Branch Landline of this record.
+     */
+    public String getBankBranchFaxNo(){
+        return (String) getValue("sFaxNoxxx");
     }
     
     /**
