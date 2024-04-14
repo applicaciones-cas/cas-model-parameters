@@ -137,12 +137,18 @@ public class Model_Banks implements GEntity{
      */
     @Override
     public JSONObject setValue(int fnColumn, Object foValue) {
-        poJSON = new JSONObject();
-        
-        try {
+        try {  
+            if (!System.getProperty("system.validate").equals("1")){
+                poJSON = MiscUtil.validateColumnValue(System.getProperty("sys.default.path.metadata") + XML, MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
+            } else {
+                poJSON = MiscUtil.validateColumnValue(poGRider, getTable(), MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
+            }
+            if ("error".equals((String) poJSON.get("result"))) return poJSON;
+            
             poEntity.updateObject(fnColumn, foValue);
             poEntity.updateRow();
-                
+            
+            poJSON = new JSONObject();
             poJSON.put("result", "success");
             poJSON.put("value", getValue(fnColumn));
         } catch (SQLException e) {
@@ -195,17 +201,17 @@ public class Model_Banks implements GEntity{
     /**
      * Opens a record.
      * 
-     * @param fsValue - primary key of the entity
+     * @param fsCondition - filter values
      * @return result as success/failed
      */
     @Override
-    public JSONObject openRecord(String fsValue) {
+    public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
         String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sBankIDxx = " + SQLUtil.toSQL(fsValue));
+        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
         
         ResultSet loRS = poGRider.executeQuery(lsSQL);
         
