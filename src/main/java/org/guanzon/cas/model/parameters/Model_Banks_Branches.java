@@ -138,11 +138,7 @@ public class Model_Banks_Branches implements GEntity{
     @Override
     public JSONObject setValue(int fnColumn, Object foValue) {
         try {  
-            if (!System.getProperty("system.validate").equals("1")){
-                poJSON = MiscUtil.validateColumnValue(System.getProperty("sys.default.path.metadata") + XML, MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
-            } else {
-                poJSON = MiscUtil.validateColumnValue(poGRider, getTable(), MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
-            }
+            poJSON = MiscUtil.validateColumnValue(System.getProperty("sys.default.path.metadata") + XML, MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
             if ("error".equals((String) poJSON.get("result"))) return poJSON;
             
             poEntity.updateObject(fnColumn, foValue);
