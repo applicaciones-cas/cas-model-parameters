@@ -42,6 +42,14 @@ public class Model_Banks_Branches implements GEntity{
         initialize();
     }
     
+    /**
+     * Gets edit mode of the record
+     * @return edit mode
+     */
+    @Override
+    public int getEditMode() {
+        return pnEditMode;
+    }
     
     /**
      * Gets the column index name.
@@ -248,7 +256,7 @@ public class Model_Banks_Branches implements GEntity{
                 //replace with the primary key column info
                 setBankBranchID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
-                lsSQL = MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+                lsSQL = makeSQL();
                 
                 if (!lsSQL.isEmpty()){
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -588,6 +596,15 @@ public class Model_Banks_Branches implements GEntity{
      */
     public Date getModifiedDate(){
         return (Date) getValue("dModified");
+    }
+    
+    /**
+     * Gets the SQL statement for this entity.
+     * 
+     * @return SQL Statement
+     */
+    public String makeSQL(){
+        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
     }
     
     private void initialize(){
