@@ -195,7 +195,7 @@ public class Model_Banks_Branches implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBankBranchID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBrBankID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Banks_Branches implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBankBranchID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBrBankID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Banks_Branches implements GEntity{
                 Model_Banks_Branches loOldEntity = new Model_Banks_Branches(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBankBranchID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBrBankID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrBankID = " + SQLUtil.toSQL(this.getBankBranchID()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrBankID = " + SQLUtil.toSQL(this.getBrBankID()), "xBankName»xBankCode»xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -349,14 +349,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankBranchID(String fsValue){
+    public JSONObject setBrBankID(String fsValue){
         return setValue("sBrBankID", fsValue);
     }
     
     /**
      * @return The Bank Branch ID of this record.
      */
-    public String getBankBranchID(){
+    public String getBrBankID(){
         return (String) getValue("sBrBankID");
     }
     
@@ -366,14 +366,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankBranchName(String fsValue){
+    public JSONObject setBrBankNm(String fsValue){
         return setValue("sBrBankNm", fsValue);
     }
     
     /**
      * @return The Bank Branch Name of this record. 
      */
-    public String getBankBranchName(){
+    public String getBrBankNm(){
         return (String) getValue("sBrBankNm");
     }
     
@@ -383,14 +383,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankBranchCode(String fsValue){
+    public JSONObject setBrBankCD(String fsValue){
         return setValue("sBrBankCD", fsValue);
     }
     
     /**
      * @return The Bank Branch Code of this record. 
      */
-    public String getBankBranchCode(){
+    public String getBrBankCD(){
         return (String) getValue("sBrBankCD");
     }
     
@@ -400,14 +400,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankID(String fsValue){
+    public JSONObject setBankIDxx(String fsValue){
         return setValue("sBankIDxx", fsValue);
     }
     
     /**
      * @return The Bank ID of this record. 
      */
-    public String getBankID(){
+    public String getBankIDxx(){
         return (String) getValue("sBankIDxx");
     }
     
@@ -417,15 +417,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankName(String fsValue){
-        return setValue("xBankName", fsValue);
+    public JSONObject setContactP(String fsValue){
+        return setValue("sContactP", fsValue);
     }
     
     /**
      * @return The Bank Name of this record. 
      */
-    public String getBankName(){
-        return (String) getValue("xBankName");
+    public String getContactP(){
+        return (String) getValue("sContactP");
     }
     
     /**
@@ -434,15 +434,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankCode(String fsValue){
-        return setValue("xBankCode", fsValue);
+    public JSONObject setAddressx(String fsValue){
+        return setValue("sAddressx", fsValue);
     }
     
     /**
      * @return The Bank Code of this record. 
      */
-    public String getBankCode(){
-        return (String) getValue("xBankCode");
+    public String getAddressx(){
+        return (String) getValue("sAddressx");
     }
         
     /**
@@ -451,15 +451,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setContactPerson(String fsValue){
-        return setValue("sContactP", fsValue);
+    public JSONObject setTownIDxx(String fsValue){
+        return setValue("sTownIDxx", fsValue);
     }
     
     /**
      * @return The Contact Person of this record.
      */
-    public String getContactPerson(){
-        return (String) getValue("sContactP");
+    public String getTownIDxx(){
+        return (String) getValue("sTownIDxx");
     }
     
     /**
@@ -468,15 +468,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setContactPersonAddress(String fsValue){
-        return setValue("sAddressx", fsValue);
+    public JSONObject setTelNoxxx(String fsValue){
+        return setValue("sTelNoxxx", fsValue);
     }
     
     /**
      * @return The Contact Person Address of this record.
      */
-    public String getContactPersonAddress(){
-        return (String) getValue("sAddressx");
+    public String getTelNoxxx(){
+        return (String) getValue("sTelNoxxx");
     }
     
     /**
@@ -485,15 +485,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setContactPersonAddressTownID(String fsValue){
-        return setValue("sTownIDxx", fsValue);
+    public JSONObject setFaxNoxxx(String fsValue){
+        return setValue("sFaxNoxxx", fsValue);
     }
     
     /**
      * @return The Contact Person Address Town ID of this record.
      */
-    public String getContactPersonAddressTownID(){
-        return (String) getValue("sTownIDxx");
+    public String getFaxNoxxx(){
+        return (String) getValue("sFaxNoxxx");
     }
     
     /**
@@ -502,15 +502,15 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setContactPersonAddressTownName(String fsValue){
-        return setValue("xTownName", fsValue);
+    public JSONObject setRecdStat(String fsValue){
+        return setValue("cRecdStat", fsValue);
     }
     
     /**
      * @return The Contact Person Address Town Name of this record.
      */
-    public String getContactPersonAddressTownName(){
-        return (String) getValue("xTownName");
+    public String getRecdStat(){
+        return (String) getValue("cRecdStat");
     }
     
     /**

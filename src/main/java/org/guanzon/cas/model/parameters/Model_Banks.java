@@ -195,7 +195,7 @@ public class Model_Banks implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBankIDxx(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Banks implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBankIDxx(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Banks implements GEntity{
                 Model_Banks loOldEntity = new Model_Banks(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBankID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBankIDxx());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBankIDxx = " + SQLUtil.toSQL(this.getBankID()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBankIDxx = " + SQLUtil.toSQL(this.getBankIDxx()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -349,14 +349,14 @@ public class Model_Banks implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBankID(String fsValue){
+    public JSONObject setBankIDxx(String fsValue){
         return setValue("sBankIDxx", fsValue);
     }
     
     /**
      * @return The Bank ID of this record. 
      */
-    public String getBankID(){
+    public String getBankIDxx(){
         return (String) getValue("sBankIDxx");
     }
     
@@ -392,6 +392,23 @@ public class Model_Banks implements GEntity{
      */
     public String getBankCode(){
         return (String) getValue("sBankCode");
+    }
+    
+    /**
+     * Sets the Bank Code of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setRecdStat(String fsValue){
+        return setValue("cRecdStat", fsValue);
+    }
+    
+    /**
+     * @return The Bank Code of this record. 
+     */
+    public String getRecdStat(){
+        return (String) getValue("cRecdStat");
     }
     
     /**
