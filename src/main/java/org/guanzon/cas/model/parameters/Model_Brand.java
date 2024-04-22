@@ -101,7 +101,7 @@ public class Model_Brand implements GEntity{
      */
     @Override
     public String getTable() {
-        return "Banks_Brand";
+        return "Brand";
     }
     
     /**
