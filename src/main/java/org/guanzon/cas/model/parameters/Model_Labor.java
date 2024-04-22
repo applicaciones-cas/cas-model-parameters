@@ -212,7 +212,7 @@ public class Model_Labor implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -278,7 +278,7 @@ public class Model_Labor implements GEntity{
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborIDx()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborIDx()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -383,7 +383,7 @@ public class Model_Labor implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv1(String fsValue){
+    public JSONObject setPriceLv1(Object fsValue){
         return setValue("nPriceLv1", fsValue);
     }
     
@@ -400,7 +400,7 @@ public class Model_Labor implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv2(String fsValue){
+    public JSONObject setPriceLv2(Object fsValue){
         return setValue("nPriceLv2", fsValue);
     }
     
@@ -417,7 +417,7 @@ public class Model_Labor implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv3(String fsValue){
+    public JSONObject setPriceLv3(Object fsValue){
         return setValue("nPriceLv3", fsValue);
     }
     
@@ -536,7 +536,7 @@ public class Model_Labor implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
     
     private void initialize(){
