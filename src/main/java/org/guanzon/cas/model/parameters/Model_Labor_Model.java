@@ -383,7 +383,7 @@ public class Model_Labor_Model implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setAmountxx(String fsValue){
+    public JSONObject setAmountxx(Object fsValue){
         return setValue("nAmountxx", fsValue);
     }
     
