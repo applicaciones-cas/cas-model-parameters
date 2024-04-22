@@ -212,7 +212,7 @@ public class Model_Region implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -278,7 +278,7 @@ public class Model_Region implements GEntity{
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sRegionID = " + SQLUtil.toSQL(this.getRegionID()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sRegionID = " + SQLUtil.toSQL(this.getRegionID()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -383,7 +383,7 @@ public class Model_Region implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMinWages(String fsValue){
+    public JSONObject setMinWages(Object fsValue){
         return setValue("nMinWages", fsValue);
     }
     
@@ -400,7 +400,7 @@ public class Model_Region implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColaAmtx(String fsValue){
+    public JSONObject setColaAmtx(Object fsValue){
         return setValue("nColaAmtx", fsValue);
     }
     
@@ -417,7 +417,7 @@ public class Model_Region implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMinWage2(String fsValue){
+    public JSONObject setMinWage2(Object fsValue){
         return setValue("nMinWage2", fsValue);
     }
     
@@ -434,7 +434,7 @@ public class Model_Region implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColaAmt2(String fsValue){
+    public JSONObject setColaAmt2(Object fsValue){
         return setValue("nColaAmt2", fsValue);
     }
     
@@ -519,7 +519,7 @@ public class Model_Region implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
     
     private void initialize(){
