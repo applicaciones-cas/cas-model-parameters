@@ -514,40 +514,6 @@ public class Model_Banks_Branches implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch Landline of this record.
-     * 
-     * @param fsValue 
-     * @return result as success/failed
-     */
-    public JSONObject setBankBranchLandine(String fsValue){
-        return setValue("sTelNoxxx", fsValue);
-    }
-    
-    /**
-     * @return The Bank Branch Landline of this record.
-     */
-    public String getBankBranchLandine(){
-        return (String) getValue("sTelNoxxx");
-    }
-    
-    /**
-     * Sets the Bank Branch Landline of this record.
-     * 
-     * @param fsValue 
-     * @return result as success/failed
-     */
-    public JSONObject setBankBranchFaxNo(String fsValue){
-        return setValue("sFaxNoxxx", fsValue);
-    }
-    
-    /**
-     * @return The Bank Branch Landline of this record.
-     */
-    public String getBankBranchFaxNo(){
-        return (String) getValue("sFaxNoxxx");
-    }
-    
-    /**
      * Sets record as active.
      * 
      * @param fbValue
