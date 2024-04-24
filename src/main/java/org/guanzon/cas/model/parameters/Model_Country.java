@@ -195,7 +195,7 @@ public class Model_Country implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Country implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 

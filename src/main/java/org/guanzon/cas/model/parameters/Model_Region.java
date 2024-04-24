@@ -195,7 +195,7 @@ public class Model_Region implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setRegionID(MiscUtil.getNextCode(getTable(), "sRegionID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setRegionID(MiscUtil.getNextCode(getTable(), "sRegionID", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");

@@ -195,7 +195,7 @@ public class Model_Category implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Category implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 

@@ -195,7 +195,7 @@ public class Model_Department implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Department implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 

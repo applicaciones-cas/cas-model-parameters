@@ -380,11 +380,11 @@ public class Model_Affiliated_Company implements GEntity{
     /**
      * Sets the Bank Branch Code of this record.
      * 
-     * @param fsValue 
+     * @param fdValue 
      * @return result as success/failed
      */
-    public JSONObject setAffiliat(String fsValue){
-        return setValue("dAffiliat", fsValue);
+    public JSONObject setAffiliat(Date fdValue){
+        return setValue("dAffiliat", fdValue);
     }
     
     /**

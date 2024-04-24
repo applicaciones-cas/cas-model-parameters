@@ -195,7 +195,7 @@ public class Model_Province implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Province implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 
