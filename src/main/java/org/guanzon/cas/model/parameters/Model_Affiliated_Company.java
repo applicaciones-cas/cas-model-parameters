@@ -195,7 +195,7 @@ public class Model_Affiliated_Company implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCompnyCd(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Affiliated_Company implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setCompnyCd(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Affiliated_Company implements GEntity{
                 Model_Affiliated_Company loOldEntity = new Model_Affiliated_Company(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getCompnyCd());
+                JSONObject loJSON = loOldEntity.openRecord(this.getCompanyCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCompnyCd = " + SQLUtil.toSQL(this.getCompnyCd()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCompnyCd = " + SQLUtil.toSQL(this.getCompanyCode()), "xBankName»xBankCode»xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,41 +344,41 @@ public class Model_Affiliated_Company implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Company Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCompnyCd(String fsValue){
+    public JSONObject setCompanyCode(String fsValue){
         return setValue("sCompnyCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Company Code of this record.
      */
-    public String getCompnyCd(){
+    public String getCompanyCode(){
         return (String) getValue("sCompnyCd");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Company Name of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCompnyNm(String fsValue){
+    public JSONObject setCompanyName(String fsValue){
         return setValue("sCompnyNm", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Company Name of this record. 
      */
-    public String getCompnyNm(){
+    public String getCompanyName(){
         return (String) getValue("sCompnyNm");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Affiliated Date of this record.
      * 
      * @param fdValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Affiliated_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Affiliated Code of this record. 
      */
     public String getAffiliat(){
         return (String) getValue("dAffiliat");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Affiliated RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Affiliated_Company implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Affiliated RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

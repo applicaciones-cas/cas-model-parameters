@@ -344,7 +344,7 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Company ID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,14 +354,14 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Company ID of this record.
      */
     public String getCompnyID(){
         return (String) getValue("sCompnyID");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Company Name of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -371,14 +371,14 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Company Name of this record. 
      */
     public String getCompnyNm(){
         return (String) getValue("sCompnyNm");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Company Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Company Code of this record. 
      */
     public String getCompnyCd(){
         return (String) getValue("sCompnyCd");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Employee No of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,14 +405,14 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Employee No of this record. 
      */
     public String getEmplyrNo(){
         return (String) getValue("sEmplyrNo");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the Company RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -422,7 +422,7 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The Company RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

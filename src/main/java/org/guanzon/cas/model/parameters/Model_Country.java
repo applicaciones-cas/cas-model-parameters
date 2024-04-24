@@ -344,7 +344,7 @@ public class Model_Country implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Country Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,14 +354,14 @@ public class Model_Country implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Country Code of this record.
      */
     public String getCntryCde(){
         return (String) getValue("sCntryCde");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Country Name of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -371,14 +371,14 @@ public class Model_Country implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Country Name of this record. 
      */
     public String getCntryNme(){
         return (String) getValue("sCntryNme");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Country National of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Country implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Country National of this record. 
      */
     public String getNational(){
         return (String) getValue("sNational");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Country RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Country implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Country RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

@@ -344,7 +344,7 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Color Detail ID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,14 +354,14 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Color Detail ID of this record.
      */
     public String getColorIDx(){
         return (String) getValue("sColorIDx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Color Detail Desc of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -371,14 +371,14 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Color Detail Desc of this record. 
      */
     public String getDescript(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Color Detail Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Color Detail Code of this record. 
      */
     public String getColorCde(){
         return (String) getValue("sColorCde");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Color Detail RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Color Detail RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
