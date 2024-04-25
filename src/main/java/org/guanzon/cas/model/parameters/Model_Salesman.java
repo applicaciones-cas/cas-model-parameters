@@ -195,7 +195,7 @@ public class Model_Salesman implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setEmployID(MiscUtil.getNextCode(getTable(), "sEmployID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setEmployerID(MiscUtil.getNextCode(getTable(), "sEmployID", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Salesman implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setEmployID(MiscUtil.getNextCode(getTable(), "sEmployID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setEmployerID(MiscUtil.getNextCode(getTable(), "sEmployID", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Salesman implements GEntity{
                 Model_Salesman loOldEntity = new Model_Salesman(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getEmployID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getEmployerID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sEmployID = " + SQLUtil.toSQL(this.getEmployID()), "xClientNm»xBranchNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sEmployID = " + SQLUtil.toSQL(this.getEmployerID()), "xClientNm»xBranchNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,41 +344,41 @@ public class Model_Salesman implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sEmployID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setEmployID(String fsValue){
+    public JSONObject setEmployerID(String fsValue){
         return setValue("sEmployID", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sEmployID of this record.
      */
-    public String getEmployID(){
+    public String getEmployerID(){
         return (String) getValue("sEmployID");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sBranchCd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBranchCd(String fsValue){
+    public JSONObject setBranchCode(String fsValue){
         return setValue("sBranchCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sBranchCd of this record. 
      */
-    public String getBranchCd(){
+    public String getBranchCode(){
         return (String) getValue("sBranchCd");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the sLastName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,48 +388,48 @@ public class Model_Salesman implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The sLastName of this record. 
      */
     public String getLastName(){
         return (String) getValue("sLastName");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the sFrstName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setFrstName(String fsValue){
+    public JSONObject setFristName(String fsValue){
         return setValue("sFrstName", fsValue);
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The sFrstName of this record. 
      */
-    public String getFrstName(){
+    public String getFristName(){
         return (String) getValue("sFrstName");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Description: Sets the sMiddName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMiddName(String fsValue){
+    public JSONObject setMiddleName(String fsValue){
         return setValue("sMiddName", fsValue);
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The sMiddName of this record. 
      */
-    public String getMiddName(){
+    public String getMiddleName(){
         return (String) getValue("sMiddName");
     }
     
     /**
-     * Sets the Bank Code of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -439,7 +439,7 @@ public class Model_Salesman implements GEntity{
     }
     
     /**
-     * @return The Bank Code of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
