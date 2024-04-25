@@ -195,7 +195,7 @@ public class Model_Inv_Location implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setLocatnCd(MiscUtil.getNextCode(getTable(), "sLocatnCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setLocationCode(MiscUtil.getNextCode(getTable(), "sLocatnCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -212,7 +212,7 @@ public class Model_Inv_Location implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -254,7 +254,7 @@ public class Model_Inv_Location implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setLocatnCd(MiscUtil.getNextCode(getTable(), "sLocatnCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setLocationCode(MiscUtil.getNextCode(getTable(), "sLocatnCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Inv_Location implements GEntity{
                 Model_Inv_Location loOldEntity = new Model_Inv_Location(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getLocatnCd());
+                JSONObject loJSON = loOldEntity.openRecord(this.getLocationCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLocatnCd = " + SQLUtil.toSQL(this.getLocatnCd()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLocatnCd = " + SQLUtil.toSQL(this.getLocationCode()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Inv_Location implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sLocatnCd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setLocatnCd(String fsValue){
+    public JSONObject setLocationCode(String fsValue){
         return setValue("sLocatnCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sLocatnCd of this record.
      */
-    public String getLocatnCd(){
+    public String getLocationCode(){
         return (String) getValue("sLocatnCd");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sDescript of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sDescript of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the sBriefDsc of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBriefDsc(String fsValue){
+    public JSONObject setBriefDescription(String fsValue){
         return setValue("sBriefDsc", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The sBriefDsc of this record. 
      */
-    public String getBriefDsc(){
+    public String getBriefDescription(){
         return (String) getValue("sBriefDsc");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Inv_Location implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
@@ -468,7 +468,7 @@ public class Model_Inv_Location implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
     
     private void initialize(){
