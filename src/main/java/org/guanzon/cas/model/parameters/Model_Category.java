@@ -195,7 +195,7 @@ public class Model_Category implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
+        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Category implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setCategrCd(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
+                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Category implements GEntity{
                 Model_Category loOldEntity = new Model_Category(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getCategrCd());
+                JSONObject loJSON = loOldEntity.openRecord(this.getCategoryCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategrCd()), "xInvTypNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategoryCode()), "xInvTypNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Category implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Category Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCategrCd(String fsValue){
+    public JSONObject setCategoryCode(String fsValue){
         return setValue("sCategrCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Category Code of this record.
      */
-    public String getCategrCd(){
+    public String getCategoryCode(){
         return (String) getValue("sCategrCd");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the CategoryDescript of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The CategoryDescript of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the CatergoryInvTyp Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setInvTypCd(String fsValue){
+    public JSONObject setInvenTorypCode(String fsValue){
         return setValue("sInvTypCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The CatergoryInvTyp Code of this record. 
      */
-    public String getInvTypCd(){
+    public String getInvenTorypCode(){
         return (String) getValue("sInvTypCd");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Category Classify of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,14 +405,14 @@ public class Model_Category implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Category Classify of this record. 
      */
     public String getClassify(){
         return (String) getValue("cClassify");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the Category RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -422,7 +422,7 @@ public class Model_Category implements GEntity{
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The Category RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
