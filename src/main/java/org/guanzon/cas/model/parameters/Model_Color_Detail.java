@@ -195,7 +195,7 @@ public class Model_Color_Detail implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setColorIDx(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Color_Detail implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setColorIDx(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Color_Detail implements GEntity{
                 Model_Color_Detail loOldEntity = new Model_Color_Detail(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getColorIDx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getColorID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorIDx = " + SQLUtil.toSQL(this.getColorIDx()), "xMnColorx");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorIDx = " + SQLUtil.toSQL(this.getColorID()), "xMnColorx");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -349,14 +349,14 @@ public class Model_Color_Detail implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColorIDx(String fsValue){
+    public JSONObject setColorID(String fsValue){
         return setValue("sColorIDx", fsValue);
     }
     
     /**
      * @return The Color Detail ID of this record.
      */
-    public String getColorIDx(){
+    public String getColorID(){
         return (String) getValue("sColorIDx");
     }
     
@@ -366,14 +366,14 @@ public class Model_Color_Detail implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
      * @return The Color Detail Desc of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
@@ -383,14 +383,14 @@ public class Model_Color_Detail implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColorCde(String fsValue){
+    public JSONObject setColorCode(String fsValue){
         return setValue("sColorCde", fsValue);
     }
     
     /**
      * @return The Color Detail Code of this record. 
      */
-    public String getColorCde(){
+    public String getColorCode(){
         return (String) getValue("sColorCde");
     }
     
