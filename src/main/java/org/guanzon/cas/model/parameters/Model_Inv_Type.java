@@ -195,7 +195,7 @@ public class Model_Inv_Type implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setInvTypCd(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -212,7 +212,7 @@ public class Model_Inv_Type implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -254,7 +254,7 @@ public class Model_Inv_Type implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setInvTypCd(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Inv_Type implements GEntity{
                 Model_Inv_Type loOldEntity = new Model_Inv_Type(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getInvTypCd());
+                JSONObject loJSON = loOldEntity.openRecord(this.getInventoryTypeCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sInvTypCd = " + SQLUtil.toSQL(this.getInvTypCd()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sInvTypCd = " + SQLUtil.toSQL(this.getInventoryTypeCode()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,41 +344,41 @@ public class Model_Inv_Type implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sInvTypCd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setInvTypCd(String fsValue){
+    public JSONObject setInventoryTypeCode(String fsValue){
         return setValue("sInvTypCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sInvTypCd of this record.
      */
-    public String getInvTypCd(){
+    public String getInventoryTypeCode(){
         return (String) getValue("sInvTypCd");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sDescript of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sDescript of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,7 +388,7 @@ public class Model_Inv_Type implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
@@ -451,7 +451,7 @@ public class Model_Inv_Type implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
     
     private void initialize(){

@@ -195,7 +195,7 @@ public class Model_Labor_Category implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setLaborIDx(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setLaborID(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Labor_Category implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setLaborIDx(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setLaborID(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Labor_Category implements GEntity{
                 Model_Labor_Category loOldEntity = new Model_Labor_Category(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getLaborIDx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getLaborID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborIDx()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborID()), "xCategrNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Labor_Category implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sLaborIDx of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setLaborIDx(String fsValue){
+    public JSONObject setLaborID(String fsValue){
         return setValue("sLaborIDx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sLaborIDx of this record.
      */
-    public String getLaborIDx(){
+    public String getLaborID(){
         return (String) getValue("sLaborIDx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sCategrCd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCategrCd(String fsValue){
+    public JSONObject setCategoryCode(String fsValue){
         return setValue("sCategrCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sCategrCd of this record. 
      */
-    public String getCategrCd(){
+    public String getCategoryCode(){
         return (String) getValue("sCategrCd");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the nAmountxx of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setAmountxx(Object fsValue){
+    public JSONObject setAmount(Object fsValue){
         return setValue("nAmountxx", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The nAmountxx of this record. 
      */
-    public String getAmountxx(){
+    public String getAmount(){
         return (String) getValue("nAmountxx");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Labor_Category implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

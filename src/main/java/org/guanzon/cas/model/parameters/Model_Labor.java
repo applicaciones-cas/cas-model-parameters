@@ -195,7 +195,7 @@ public class Model_Labor implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setLaborIDx(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setLaborID(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Labor implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setLaborIDx(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setLaborID(MiscUtil.getNextCode(getTable(), "sLaborIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Labor implements GEntity{
                 Model_Labor loOldEntity = new Model_Labor(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getLaborIDx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getLaborID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborIDx()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLaborIDx = " + SQLUtil.toSQL(this.getLaborID()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,126 +344,126 @@ public class Model_Labor implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sLaborIDx of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setLaborIDx(String fsValue){
+    public JSONObject setLaborID(String fsValue){
         return setValue("sLaborIDx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sLaborIDx of this record.
      */
-    public String getLaborIDx(){
+    public String getLaborID(){
         return (String) getValue("sLaborIDx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sLaborNme of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setLaborNme(String fsValue){
+    public JSONObject setLaborName(String fsValue){
         return setValue("sLaborNme", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sLaborNme of this record. 
      */
-    public String getLaborNme(){
+    public String getLaborName(){
         return (String) getValue("sLaborNme");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the nPriceLv1 of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv1(Object fsValue){
+    public JSONObject setPriceLevel1(Object fsValue){
         return setValue("nPriceLv1", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The nPriceLv1 of this record. 
      */
-    public String getPriceLv1(){
+    public String getPriceLevel1(){
         return (String) getValue("nPriceLv1");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the nPriceLv2 of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv2(Object fsValue){
+    public JSONObject setPriceLevel2(Object fsValue){
         return setValue("nPriceLv2", fsValue);
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The nPriceLv2 of this record. 
      */
-    public String getPriceLv2(){
+    public String getPriceLevel2(){
         return (String) getValue("nPriceLv2");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Description: Sets the nPriceLv3 of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setPriceLv3(Object fsValue){
+    public JSONObject setPriceLevel3(Object fsValue){
         return setValue("nPriceLv3", fsValue);
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The nPriceLv3 of this record. 
      */
-    public String getPriceLv3(){
+    public String getPriceLevel3(){
         return (String) getValue("nPriceLv3");
     }
     
     /**
-     * Sets the Bank Code of this record.
+     * Description: Sets the cInHousex of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setInHousex(String fsValue){
+    public JSONObject setInHouse(String fsValue){
         return setValue("cInHousex", fsValue);
     }
     
     /**
-     * @return The Bank Code of this record. 
+     * @return The cInHousex of this record. 
      */
-    public String getInHousex(){
+    public String getInHouse(){
         return (String) getValue("cInHousex");
     }
         
     /**
-     * Sets the Contact Person of this record.
+     * Description: Sets the cLaborTyp of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setLaborTyp(String fsValue){
+    public JSONObject setLaborType(String fsValue){
         return setValue("cLaborTyp", fsValue);
     }
     
     /**
-     * @return The Contact Person of this record.
+     * @return The cLaborTyp of this record.
      */
-    public String getLaborTyp(){
+    public String getLaborType(){
         return (String) getValue("cLaborTyp");
     }
     
     /**
-     * Sets the Contact Person Address of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -473,7 +473,7 @@ public class Model_Labor implements GEntity{
     }
     
     /**
-     * @return The Contact Person Address of this record.
+     * @return The cRecdStat of this record.
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
