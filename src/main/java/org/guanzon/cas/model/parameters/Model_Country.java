@@ -195,7 +195,7 @@ public class Model_Country implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
+        setCountryCode(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Country implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setCntryCde(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
+                setCountryCode(MiscUtil.getNextCode(getTable(), "sCntryCde", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Country implements GEntity{
                 Model_Country loOldEntity = new Model_Country(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getCntryCde());
+                JSONObject loJSON = loOldEntity.openRecord(this.getCountryCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCntryCde = " + SQLUtil.toSQL(this.getCntryCde()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCntryCde = " + SQLUtil.toSQL(this.getCountryCode()), "xBankName»xBankCode»xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -349,14 +349,14 @@ public class Model_Country implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCntryCde(String fsValue){
+    public JSONObject setCountryCode(String fsValue){
         return setValue("sCntryCde", fsValue);
     }
     
     /**
      * @return The Country Code of this record.
      */
-    public String getCntryCde(){
+    public String getCountryCode(){
         return (String) getValue("sCntryCde");
     }
     
@@ -366,14 +366,14 @@ public class Model_Country implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCntryNme(String fsValue){
+    public JSONObject setCounntryName(String fsValue){
         return setValue("sCntryNme", fsValue);
     }
     
     /**
      * @return The Country Name of this record. 
      */
-    public String getCntryNme(){
+    public String getCounntryName(){
         return (String) getValue("sCntryNme");
     }
     
