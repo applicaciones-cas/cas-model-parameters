@@ -350,14 +350,14 @@ public class Model_Banks_Branches implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBranchesBanksID(String fsValue){
-        return setValue("sBrBanksID", fsValue);
+        return setValue("sBrBankID", fsValue);
     }
     
     /**
      * @return The Banks Branches ID of this record.
      */
     public String getBranchesBanksID(){
-        return (String) getValue("sBranchesBanksID");
+        return (String) getValue("sBrBankID");
     }
     
     /**
@@ -367,14 +367,14 @@ public class Model_Banks_Branches implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBranchesBanksName(String fsValue){
-        return setValue("sBanksName", fsValue);
+        return setValue("sBrBankNm", fsValue);
     }
     
     /**
      * @return The Banks Branches Name of this record. 
      */
     public String getBranchesBanksName(){
-        return (String) getValue("sBanksName");
+        return (String) getValue("sBrBankNm");
     }
     
     /**
@@ -384,14 +384,14 @@ public class Model_Banks_Branches implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBranchesBanksCoDe(String fsValue){
-        return setValue("sBranchesBanksCoDe", fsValue);
+        return setValue("sBrBankCD", fsValue);
     }
     
     /**
      * @return The Banks Branches Code of this record. 
      */
     public String getBranchesBanksCoDe(){
-        return (String) getValue("sBranchesBanksCoDe");
+        return (String) getValue("sBrBankCD");
     }
     
     /**
@@ -401,14 +401,14 @@ public class Model_Banks_Branches implements GEntity{
      * @return result as success/failed
      */
     public JSONObject setBanksID(String fsValue){
-        return setValue("sBanksID", fsValue);
+        return setValue("sBankIDxx", fsValue);
     }
     
     /**
      * @return The Banks Branches ID of this record. 
      */
     public String getBanksID(){
-        return (String) getValue("sBanksID");
+        return (String) getValue("sBankIDxx");
     }
     
     /**
@@ -434,14 +434,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setAddressx(String fsValue){
+    public JSONObject setAddress(String fsValue){
         return setValue("sAddressx", fsValue);
     }
     
     /**
      * @return The Banks Branches Address of this record. 
      */
-    public String getAddressx(){
+    public String getAddress(){
         return (String) getValue("sAddressx");
     }
         
@@ -451,14 +451,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setTownIDxx(String fsValue){
+    public JSONObject setTownID(String fsValue){
         return setValue("sTownIDxx", fsValue);
     }
     
     /**
      * @return The Town of this record.
      */
-    public String getTownIDxx(){
+    public String getTownID(){
         return (String) getValue("sTownIDxx");
     }
     
@@ -468,14 +468,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setTelNoxxx(String fsValue){
+    public JSONObject setTelephoneNumber(String fsValue){
         return setValue("sTelNoxxx", fsValue);
     }
     
     /**
      * @return The Banks Branches TellNo this record.
      */
-    public String getTelNoxxx(){
+    public String getTelephoneNumber(){
         return (String) getValue("sTelNoxxx");
     }
     
@@ -485,14 +485,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setFaxNoxxx(String fsValue){
+    public JSONObject setFaxNumber(String fsValue){
         return setValue("sFaxNoxxx", fsValue);
     }
     
     /**
      * @return The Banks Branches FaxNo of this record.
      */
-    public String getFaxNoxxx(){
+    public String getFaxNumber(){
         return (String) getValue("sFaxNoxxx");
     }
     
