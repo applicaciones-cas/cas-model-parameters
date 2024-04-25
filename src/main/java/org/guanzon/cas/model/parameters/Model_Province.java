@@ -195,8 +195,8 @@ public class Model_Province implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
-        
+        setProvinceID(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
+
         poJSON = new JSONObject();
         poJSON.put("result", "success");
         return poJSON;
@@ -254,8 +254,8 @@ public class Model_Province implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setProvIDxx(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
-                
+                setProvinceID(MiscUtil.getNextCode(getTable(), "sProvIDxx", false, poGRider.getConnection(), ""));
+
                 lsSQL = makeSQL();
                 
                 if (!lsSQL.isEmpty()){
@@ -274,11 +274,11 @@ public class Model_Province implements GEntity{
                 Model_Province loOldEntity = new Model_Province(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getProvIDxx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getProvinceID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sProvIDxx = " + SQLUtil.toSQL(this.getProvIDxx()), "xRegionNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sProvIDxx = " + SQLUtil.toSQL(this.getProvinceID()), "xRegionNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,41 +344,41 @@ public class Model_Province implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sProvIDxx of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setProvIDxx(String fsValue){
+    public JSONObject setProvinceID(String fsValue){
         return setValue("sProvIDxx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sProvIDxx of this record.
      */
-    public String getProvIDxx(){
+    public String getProvinceID(){
         return (String) getValue("sProvIDxx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sProvName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setProvName(String fsValue){
+    public JSONObject setProvinceName(String fsValue){
         return setValue("sProvName", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sProvName of this record. 
      */
-    public String getProvName(){
+    public String getProvinceName(){
         return (String) getValue("sProvName");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the sRegionID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Province implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The sRegionID of this record. 
      */
     public String getRegionID(){
         return (String) getValue("sRegionID");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Province implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
