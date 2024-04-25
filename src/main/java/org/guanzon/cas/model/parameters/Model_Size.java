@@ -195,7 +195,7 @@ public class Model_Size implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setSizeIDxx(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -212,7 +212,7 @@ public class Model_Size implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -254,7 +254,7 @@ public class Model_Size implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setSizeIDxx(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Size implements GEntity{
                 Model_Size loOldEntity = new Model_Size(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getSizeIDxx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getSizeID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getSizeIDxx()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getSizeID()));
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,24 +344,24 @@ public class Model_Size implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sSizeIDxx of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSizeIDxx(String fsValue){
+    public JSONObject setSizeID(String fsValue){
         return setValue("sSizeIDxx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sSizeIDxx of this record.
      */
-    public String getSizeIDxx(){
+    public String getSizeID(){
         return (String) getValue("sSizeIDxx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sSizeName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -371,14 +371,14 @@ public class Model_Size implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sSizeName of this record. 
      */
     public String getSizeName(){
         return (String) getValue("sSizeName");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,7 +388,7 @@ public class Model_Size implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The cRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
@@ -451,7 +451,7 @@ public class Model_Size implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
     
     private void initialize(){
