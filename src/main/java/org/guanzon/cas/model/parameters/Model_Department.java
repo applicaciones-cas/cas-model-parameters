@@ -344,7 +344,7 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Department ID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,14 +354,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Department ID of this record.
      */
     public String getDeptIDxx(){
         return (String) getValue("sDeptIDxx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Department Name of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -371,14 +371,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Department Name of this record. 
      */
     public String getDeptName(){
         return (String) getValue("sDeptName");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Department Head of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -388,14 +388,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Department DeptHead of this record. 
      */
     public String getDeptHead(){
         return (String) getValue("sDeptHead");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Department MobileNo of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,14 +405,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Department MobileNo of this record. 
      */
     public String getMobileNo(){
         return (String) getValue("sMobileNo");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the Department EmailAdd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -422,14 +422,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The Department EmailAdd of this record. 
      */
     public String getEMailAdd(){
         return (String) getValue("sEMailAdd");
     }
     
     /**
-     * Sets the Bank Code of this record.
+     * Sets the Department DeptCode of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -439,14 +439,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Bank Code of this record. 
+     * @return The Department DeptCode of this record. 
      */
     public String getDeptCode(){
         return (String) getValue("sDeptCode");
     }
         
     /**
-     * Sets the Contact Person of this record.
+     * Sets the Department HAssgnID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -456,14 +456,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Contact Person of this record.
+     * @return The Department HAssgnID of this record.
      */
     public String getHAssgnID(){
         return (String) getValue("sHAssgnID");
     }
     
     /**
-     * Sets the Contact Person Address of this record.
+     * Sets the Department AssgnID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -473,14 +473,14 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Contact Person Address of this record.
+     * @return The Department AssgnID of this record.
      */
     public String getSAssgnID(){
         return (String) getValue("sSAssgnID");
     }
     
     /**
-     * Sets the Contact Person Address Town ID of this record.
+     * Sets the Department RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -490,7 +490,7 @@ public class Model_Department implements GEntity{
     }
     
     /**
-     * @return The Contact Person Address Town ID of this record.
+     * @return The Department RecdStat of this record.
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

@@ -195,7 +195,7 @@ public class Model_Model implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setModelCde(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setModelCode(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Model implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setModelCde(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setModelCode(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Model implements GEntity{
                 Model_Model loOldEntity = new Model_Model(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getModelCde());
+                JSONObject loJSON = loOldEntity.openRecord(this.getModelCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sModelCde = " + SQLUtil.toSQL(this.getModelCde()), "xBrandNme");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sModelCde = " + SQLUtil.toSQL(this.getModelCode()), "xBrandNme");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,126 +344,126 @@ public class Model_Model implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Description: Sets the sModelCde of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setModelCde(String fsValue){
+    public JSONObject setModelCode(String fsValue){
         return setValue("sModelCde", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The sModelCde of this record.
      */
-    public String getModelCde(){
+    public String getModelCode(){
         return (String) getValue("sModelCde");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Description: Sets the sCategrCd of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCategrCd(String fsValue){
+    public JSONObject setCategoryCode(String fsValue){
         return setValue("sCategrCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The sCategrCd of this record. 
      */
-    public String getCategrCd(){
+    public String getCategoryCode(){
         return (String) getValue("sCategrCd");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Description: Sets the sModelNme of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setModelNme(String fsValue){
+    public JSONObject setModelName(String fsValue){
         return setValue("sModelNme", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The sModelNme of this record. 
      */
-    public String getModelNme(){
+    public String getModelName(){
         return (String) getValue("sModelNme");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Description: Sets the sDescript of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The sDescript of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Description: Sets the sBriefDsc of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBriefDsc(String fsValue){
+    public JSONObject setBriefDescription(String fsValue){
         return setValue("sBriefDsc", fsValue);
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The sBriefDsc of this record. 
      */
-    public String getBriefDsc(){
+    public String getBriefDescription(){
         return (String) getValue("sBriefDsc");
     }
     
     /**
-     * Sets the Bank Code of this record.
+     * Description: Sets the sBrandCde of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBrandCde(String fsValue){
+    public JSONObject setBrandCode(String fsValue){
         return setValue("sBrandCde", fsValue);
     }
     
     /**
-     * @return The Bank Code of this record. 
+     * @return The sBrandCde of this record. 
      */
-    public String getBrandCde(){
+    public String getBrandCode(){
         return (String) getValue("sBrandCde");
     }
         
     /**
-     * Sets the Contact Person of this record.
+     * Description: Sets the cEndOfLfe of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setEndOfLfe(String fsValue){
+    public JSONObject setEndOfLife(String fsValue){
         return setValue("cEndOfLfe", fsValue);
     }
     
     /**
-     * @return The Contact Person of this record.
+     * @return The cEndOfLfe of this record.
      */
-    public String getEndOfLfe(){
+    public String getEndOfLife(){
         return (String) getValue("cEndOfLfe");
     }
     
     /**
-     * Sets the Contact Person Address of this record.
+     * Description: Sets the cRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -473,7 +473,7 @@ public class Model_Model implements GEntity{
     }
     
     /**
-     * @return The Contact Person Address of this record.
+     * @return The cRecdStat of this record.
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

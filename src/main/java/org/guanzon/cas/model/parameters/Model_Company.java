@@ -274,11 +274,11 @@ public class Model_Company implements GEntity{
                 Model_Company loOldEntity = new Model_Company(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getCompnyID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getCompanyID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCompnyID = " + SQLUtil.toSQL(this.getCompnyID()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCompnyID = " + SQLUtil.toSQL(this.getCompanyID()), "xBankName»xBankCode»xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,7 +344,7 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Company ID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,65 +354,65 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Company ID of this record.
      */
-    public String getCompnyID(){
+    public String getCompanyID(){
         return (String) getValue("sCompnyID");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Company Name of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCompnyNm(String fsValue){
+    public JSONObject setCompanyName(String fsValue){
         return setValue("sCompnyNm", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Company Name of this record. 
      */
-    public String getCompnyNm(){
+    public String getCompanyName(){
         return (String) getValue("sCompnyNm");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Company Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCompnyCd(String fsValue){
+    public JSONObject setCompanyCode(String fsValue){
         return setValue("sCompnyCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Company Code of this record. 
      */
-    public String getCompnyCd(){
+    public String getCompanyCode(){
         return (String) getValue("sCompnyCd");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Employee No of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setEmplyrNo(String fsValue){
+    public JSONObject setEmployerNumber(String fsValue){
         return setValue("sEmplyrNo", fsValue);
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Employee No of this record. 
      */
-    public String getEmplyrNo(){
+    public String getEmployerNumber(){
         return (String) getValue("sEmplyrNo");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the Company RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -422,7 +422,7 @@ public class Model_Company implements GEntity{
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The Company RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

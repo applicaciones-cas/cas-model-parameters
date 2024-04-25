@@ -195,7 +195,7 @@ public class Model_Barangay implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBrgyIDxx(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Barangay implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBrgyIDxx(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Barangay implements GEntity{
                 Model_Banks_Branches loOldEntity = new Model_Banks_Branches(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBrgyIDxx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBarangayID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrgyIDxx = " + SQLUtil.toSQL(this.getBrgyIDxx()), "xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrgyIDxx = " + SQLUtil.toSQL(this.getBarangayID()), "xTownName");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Barangay implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the BarangayID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBrgyIDxx(String fsValue){
+    public JSONObject setBarangayID(String fsValue){
         return setValue("sBrgyIDxx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The BarangayID of this record.
      */
-    public String getBrgyIDxx(){
+    public String getBarangayID(){
         return (String) getValue("sBrgyIDxx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the BarangayName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBrgyName(String fsValue){
+    public JSONObject setBarangayName(String fsValue){
         return setValue("sBrgyName", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The BarangayName of this record. 
      */
-    public String getBrgyName(){
+    public String getBarangayName(){
         return (String) getValue("sBrgyName");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the TownID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setTownIDxx(String fsValue){
+    public JSONObject setTownID(String fsValue){
         return setValue("sTownIDxx", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The TownID of this record. 
      */
-    public String getTownIDxx(){
+    public String getTownID(){
         return (String) getValue("sTownIDxx");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the BarangayHasRoute of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,31 +405,31 @@ public class Model_Barangay implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The BarangayHasRoute of this record. 
      */
     public String getHasRoute(){
         return (String) getValue("cHasRoute");
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the BarangayBlackLst of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBlackLst(String fsValue){
+    public JSONObject setBlackList(String fsValue){
         return setValue("cBlackLst", fsValue);
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @return The BarangayBlackLst of this record. 
      */
-    public String getBlackLst(){
+    public String getBlackList(){
         return (String) getValue("cBlackLst");
     }
     
     /**
-     * Sets the Bank Code of this record.
+     * Sets the BarangayRecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -439,7 +439,7 @@ public class Model_Barangay implements GEntity{
     }
     
     /**
-     * @return The Bank Code of this record. 
+     * @return The BarangayRecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

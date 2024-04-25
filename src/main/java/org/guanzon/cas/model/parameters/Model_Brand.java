@@ -195,7 +195,7 @@ public class Model_Brand implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBrandCde(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Brand implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBrandCde(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Brand implements GEntity{
                 Model_Brand loOldEntity = new Model_Brand(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBrandCde());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBrandCode());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandCde = " + SQLUtil.toSQL(this.getBrandCde()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandCde = " + SQLUtil.toSQL(this.getBrandCode()), "xCategrNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Brand implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Brand Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setBrandCde(String fsValue){
+    public JSONObject setBrandCode(String fsValue){
         return setValue("sBrandCde", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Brand Code of this record.
      */
-    public String getBrandCde(){
+    public String getBrandCode(){
         return (String) getValue("sBrandCde");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Bank BrandDescript of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The BrandDescript of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Bank Category Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setCategrCd(String fsValue){
+    public JSONObject setCategoryCode(String fsValue){
         return setValue("sCategrCd", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Category Code of this record. 
      */
-    public String getCategrCd(){
+    public String getCategrCode(){
         return (String) getValue("sCategrCd");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Brand RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Brand implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Brand RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");

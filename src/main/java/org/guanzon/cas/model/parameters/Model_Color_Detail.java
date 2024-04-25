@@ -195,7 +195,7 @@ public class Model_Color_Detail implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setColorIDx(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Color_Detail implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setColorIDx(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Color_Detail implements GEntity{
                 Model_Color_Detail loOldEntity = new Model_Color_Detail(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getColorIDx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getColorID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorIDx = " + SQLUtil.toSQL(this.getColorIDx()), "xMnColorx");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorIDx = " + SQLUtil.toSQL(this.getColorID()), "xMnColorx");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,58 +344,58 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the Color Detail ID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColorIDx(String fsValue){
+    public JSONObject setColorID(String fsValue){
         return setValue("sColorIDx", fsValue);
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The Color Detail ID of this record.
      */
-    public String getColorIDx(){
+    public String getColorID(){
         return (String) getValue("sColorIDx");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the Color Detail Desc of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue){
+    public JSONObject setDescription(String fsValue){
         return setValue("sDescript", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The Color Detail Desc of this record. 
      */
-    public String getDescript(){
+    public String getDescription(){
         return (String) getValue("sDescript");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the Color Detail Code of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setColorCde(String fsValue){
+    public JSONObject setColorCode(String fsValue){
         return setValue("sColorCde", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The Color Detail Code of this record. 
      */
-    public String getColorCde(){
+    public String getColorCode(){
         return (String) getValue("sColorCde");
     }
     
     /**
-     * Sets the Bank ID of this record.
+     * Sets the Color Detail RecdStat of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -405,7 +405,7 @@ public class Model_Color_Detail implements GEntity{
     }
     
     /**
-     * @return The Bank ID of this record. 
+     * @return The Color Detail RecdStat of this record. 
      */
     public String getRecdStat(){
         return (String) getValue("cRecdStat");
