@@ -195,7 +195,7 @@ public class Model_Department implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
+        setDepartmentID(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,7 @@ public class Model_Department implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setDeptIDxx(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
+                setDepartmentID(MiscUtil.getNextCode(getTable(), "sDeptIDxx", false, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 
@@ -274,11 +274,11 @@ public class Model_Department implements GEntity{
                 Model_Department loOldEntity = new Model_Department(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getDeptIDxx());
+                JSONObject loJSON = loOldEntity.openRecord(this.getDepartmentID());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sDeptIDxx = " + SQLUtil.toSQL(this.getDeptIDxx()), "xDeptHead»xHAssgnNm»xSAssgnNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sDeptIDxx = " + SQLUtil.toSQL(this.getDepartmentID()), "xDeptHead»xHAssgnNm»xSAssgnNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -349,14 +349,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDeptIDxx(String fsValue){
+    public JSONObject setDepartmentID(String fsValue){
         return setValue("sDeptIDxx", fsValue);
     }
     
     /**
      * @return The Department ID of this record.
      */
-    public String getDeptIDxx(){
+    public String getDepartmentID(){
         return (String) getValue("sDeptIDxx");
     }
     
@@ -366,14 +366,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDeptName(String fsValue){
+    public JSONObject setDepartmentName(String fsValue){
         return setValue("sDeptName", fsValue);
     }
     
     /**
      * @return The Department Name of this record. 
      */
-    public String getDeptName(){
+    public String getDepartmentName(){
         return (String) getValue("sDeptName");
     }
     
@@ -383,14 +383,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDeptHead(String fsValue){
+    public JSONObject setDepartmentHead(String fsValue){
         return setValue("sDeptHead", fsValue);
     }
     
     /**
      * @return The Department DeptHead of this record. 
      */
-    public String getDeptHead(){
+    public String getDepartmentHead(){
         return (String) getValue("sDeptHead");
     }
     
@@ -400,14 +400,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMobileNo(String fsValue){
+    public JSONObject setMobileNumber(String fsValue){
         return setValue("sMobileNo", fsValue);
     }
     
     /**
      * @return The Department MobileNo of this record. 
      */
-    public String getMobileNo(){
+    public String getMobileNumber(){
         return (String) getValue("sMobileNo");
     }
     
@@ -417,14 +417,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setEMailAdd(String fsValue){
+    public JSONObject setEmailAddress(String fsValue){
         return setValue("sEMailAdd", fsValue);
     }
     
     /**
      * @return The Department EmailAdd of this record. 
      */
-    public String getEMailAdd(){
+    public String getEmailAddress(){
         return (String) getValue("sEMailAdd");
     }
     
@@ -434,14 +434,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setDeptCode(String fsValue){
+    public JSONObject setDepartmentCode(String fsValue){
         return setValue("sDeptCode", fsValue);
     }
     
     /**
      * @return The Department DeptCode of this record. 
      */
-    public String getDeptCode(){
+    public String getDepartmentCode(){
         return (String) getValue("sDeptCode");
     }
         
@@ -451,14 +451,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setHAssgnID(String fsValue){
+    public JSONObject setHeadAssignID(String fsValue){
         return setValue("sHAssgnID", fsValue);
     }
     
     /**
      * @return The Department HAssgnID of this record.
      */
-    public String getHAssgnID(){
+    public String getHeadAssignID(){
         return (String) getValue("sHAssgnID");
     }
     
@@ -468,14 +468,14 @@ public class Model_Department implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSAssgnID(String fsValue){
+    public JSONObject setSupervisorAssignID(String fsValue){
         return setValue("sSAssgnID", fsValue);
     }
     
     /**
      * @return The Department AssgnID of this record.
      */
-    public String getSAssgnID(){
+    public String getSupervisorAssignID(){
         return (String) getValue("sSAssgnID");
     }
     
