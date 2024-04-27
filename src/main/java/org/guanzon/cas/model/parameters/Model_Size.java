@@ -215,7 +215,7 @@ public class Model_Size implements GEntity{
         String lsSQL = MiscUtil.makeSelect(this);
         
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
+        lsSQL = MiscUtil.addCondition(lsSQL, "sSizeIDxx = "+SQLUtil.toSQL(fsCondition));
         
         ResultSet loRS = poGRider.executeQuery(lsSQL);
         
@@ -453,6 +453,17 @@ public class Model_Size implements GEntity{
     public String makeSQL(){
         return MiscUtil.makeSQL(this);
     }
+    
+    /**
+     * Gets the SQL Select statement for this entity.
+     * 
+     * @return SelectSQL Statement
+     */
+    public String makeSelectSQL(){
+        return MiscUtil.makeSelect(this);
+    }
+    
+    
     
     private void initialize(){
         try {
