@@ -1,6 +1,7 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -18,8 +19,8 @@ import org.json.simple.JSONObject;
 /**
  * @author Michael Cuison
  */
-public class Model_Size implements GEntity{
-    final String XML = "Model_Size.xml";
+public class Model_PO_Quotation_Master implements GEntity{
+    final String XML = "Model_PO_Quotation_Master.xml";
     
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
@@ -31,7 +32,7 @@ public class Model_Size implements GEntity{
      * 
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Size(GRider foValue){
+    public Model_PO_Quotation_Master(GRider foValue){
         if (foValue == null){
             System.err.println("Application Driver is not set.");
             System.exit(1);
@@ -101,7 +102,7 @@ public class Model_Size implements GEntity{
      */
     @Override
     public String getTable() {
-        return "Size";
+        return "Made";
     }
     
     /**
@@ -195,7 +196,7 @@ public class Model_Size implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setTransactionNumber(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -212,7 +213,7 @@ public class Model_Size implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this, "xSupplier»xAddressx»xCPerson1»xCPPosit1»xCPMobil1»xTermName»xCategrNm»xInvTypNm");
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -254,7 +255,7 @@ public class Model_Size implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setTransactionNumber(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -271,14 +272,14 @@ public class Model_Size implements GEntity{
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Size loOldEntity = new Model_Size(poGRider);
+                Model_PO_Quotation_Master loOldEntity = new Model_PO_Quotation_Master(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getSizeID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getTransactionNumber());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getSizeID()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sMadeIDxx = " + SQLUtil.toSQL(this.getTransactionNumber()), "xSupplier»xAddressx»xCPerson1»xCPPosit1»xCPMobil1»xTermName»xCategrNm»xInvTypNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,56 +345,430 @@ public class Model_Size implements GEntity{
     }
     
     /**
-     * Sets the Size ID of this record.
+     * Sets the TransactionNumber of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSizeID(String fsValue){
-        return setValue("sSizeIDxx", fsValue);
+    public JSONObject setTransactionNumber(String fsValue){
+        return setValue("sTransNox", fsValue);
     }
     
     /**
-     * @return The SizeID of this record.
+     * @return The TransactionNumber of this record.
      */
-    public String getSizeID(){
-        return (String) getValue("sSizeIDxx");
+    public String getTransactionNumber(){
+        return (String) getValue("sTransNox");
     }
     
     /**
-     * Sets the SizeName of this record.
+     * Sets the ReferenceNumber of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSizeName(String fsValue){
-        return setValue("sSizeName", fsValue);
+    public JSONObject setReferenceNumber(String fsValue){
+        return setValue("sReferNox", fsValue);
     }
     
     /**
-     * @return The SizeName of this record. 
+     * @return The ReferenceNumber of this record. 
      */
-    public String getSizeName(){
-        return (String) getValue("sSizeName");
+    public String getReferenceNumber(){
+        return (String) getValue("sReferNox");
     }
     
-    /**
-     * Sets the RecordStatus of this record.
+     /**
+     * Sets the Supplier of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setRecordStatus(String fsValue){
+    public JSONObject setSupplier(String fsValue){
+        return setValue("sSupplier", fsValue);
+    }
+    
+    /**
+     * @return The Supplier of this record. 
+     */
+    public String getSupplier(){
+        return (String) getValue("sSupplier");
+    }
+    
+     /**
+     * Sets the AddressID of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setAddressID(String fsValue){
+        return setValue("sAddrssID", fsValue);
+    }
+    
+    /**
+     * @return The AddressID of this record. 
+     */
+    public String getAddressID(){
+        return (String) getValue("sAddrssID");
+    }
+    
+     /**
+     * Sets the ContactID of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setContactID(String fsValue){
+        return setValue("sContctID", fsValue);
+    }
+    
+    /**
+     * @return The ContactID of this record. 
+     */
+    public String getContactID(){
+        return (String) getValue("sContctID");
+    }
+    
+    /**
+     * Sets the Transaction of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTransaction(Date fdValue){
+        return setValue("dTransact", fdValue);
+    }
+    
+    /**
+     * @return The Transaction of this record. 
+     */
+    public Date getTransaction(){
+        return (Date) getValue("dTransact");
+    }
+    
+    /**
+     * Sets the ReferenceDate of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setReferenceDate(Date fdValue){
+        return setValue("dReferDte", fdValue);
+    }
+    
+    /**
+     * @return The ReferenceDate of this record. 
+     */
+    public Date getReferenceDate(){
+        return (Date) getValue("dReferDte");
+    }
+    
+    /**
+     * Sets the TermCode of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTermCode(String fsValue){
+        return setValue("sTermCode", fsValue);
+    }
+    
+    /**
+     * @return The TermCode of this record. 
+     */
+    public String getTermCode(){
+        return (String) getValue("sTermCode");
+    }
+    
+    /**
+     * Sets the Validity of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setValidity(Date fdValue){
+        return setValue("dValidity", fdValue);
+    }
+    
+    /**
+     * @return The Validity of this record. 
+     */
+    public Date getValidity(){
+        return (Date) getValue("dValidity");
+    }
+    
+    /**
+     * Sets the GrossAmount of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setGrossAmount(BigDecimal fnValue){
+        return setValue("nGrossAmt", fnValue);
+    }
+    
+    /**
+     * @return The GrossAmount of this record. 
+     */
+    public BigDecimal getGrossAmount(){
+        return (BigDecimal) getValue("nGrossAmt");
+    }
+    
+    /**
+     * Sets the Discount of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setDiscount(BigDecimal fnValue){
+        return setValue("nDiscount", fnValue);
+    }
+    
+    /**
+     * @return The Discount of this record. 
+     */
+    public BigDecimal getDiscount(){
+        return (BigDecimal) getValue("nDiscount");
+    }
+    
+    /**
+     * Sets the AddDiscx of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setAddDiscx(BigDecimal fnValue){
+        return setValue("nAddDiscx", fnValue);
+    }
+    
+    /**
+     * @return The AddDiscx of this record. 
+     */
+    public BigDecimal getAddDiscx(){
+        return (BigDecimal) getValue("nAddDiscx");
+    }
+    
+    /**
+     * Sets the VatRatex of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setVatRatex(BigDecimal fnValue){
+        return setValue("nVatRatex", fnValue);
+    }
+    
+    /**
+     * @return The VatRatex of this record. 
+     */
+    public BigDecimal getVatRatex(){
+        return (BigDecimal) getValue("nVatRatex");
+    }
+    
+    /**
+     * Sets the VatAmtxx of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setVatAmtxx(BigDecimal fnValue){
+        return setValue("nVatAmtxx", fnValue);
+    }
+    
+    /**
+     * @return The VatAmtxx of this record. 
+     */
+    public BigDecimal getVatAmtxx(){
+        return (BigDecimal) getValue("nVatAmtxx");
+    }
+    
+    /**
+     * Sets the VATAdded of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setVATAdded(String fsValue){
+        return setValue("cVATAdded", fsValue);
+    }
+    
+    /**
+     * @return The VATAdded of this record. 
+     */
+    public String getVATAdded(){
+        return (String) getValue("cVATAdded");
+    }
+    
+    /**
+     * Sets the TWithHld of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTWithHld(BigDecimal fnValue){
+        return setValue("nTWithHld", fnValue);
+    }
+    
+    /**
+     * @return The TWithHld of this record. 
+     */
+    public BigDecimal getTWithHld(){
+        return (BigDecimal) getValue("nTWithHld");
+    }
+    
+    /**
+     * Sets the Freight of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setFreightx(BigDecimal fnValue){
+        return setValue("nFreightx", fnValue);
+    }
+    
+    /**
+     * @return The Freight of this record. 
+     */
+    public BigDecimal getFreightx(){
+        return (BigDecimal) getValue("nFreightx");
+    }
+    
+    /**
+     * Sets the TransactionTotal of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTransactionTotal(BigDecimal fnValue){
+        return setValue("nTranTotl", fnValue);
+    }
+    
+    /**
+     * @return The TransactionTotal of this record. 
+     */
+    public BigDecimal getTransactionTotal(){
+        return (BigDecimal) getValue("nTranTotl");
+    }
+    
+    /**
+     * Sets the Remarks of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setRemarks(String fsValue){
+        return setValue("sRemarksx", fsValue);
+    }
+    
+    /**
+     * @return The Remarks of this record. 
+     */
+    public String getRemarks(){
+        return (String) getValue("sRemarksx");
+    }
+    
+    /**
+     * Sets the EntryNumber of this record.
+     * 
+     * @param fnValue 
+     * @return result as success/failed
+     */
+    public JSONObject setEntryNumber(Integer fnValue){
+        return setValue("nEntryNox", fnValue);
+    }
+    
+    /**
+     * @return The EntryNumber of this record. 
+     */
+    public Integer getEntryNumber(){
+        return (Integer) getValue("nEntryNox");
+    }
+    
+    /**
+     * Sets the CategoryCode of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setCategoryCode(String fsValue){
+        return setValue("sCategrCd", fsValue);
+    }
+    
+    /**
+     * @return The CategoryCode of this record. 
+     */
+    public String getCategoryCode(){
+        return (String) getValue("sCategrCd");
+    }
+    
+     /**
+     * Sets the TransactionStatus of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTransactionStatus(String fsValue){
+        return setValue("cTranStat", fsValue);
+    }
+    
+    /**
+     * @return The TransactionStatus of this record. 
+     */
+    public String getTransactionStatus(){
+        return (String) getValue("cTranStat");
+    }
+    
+     /**
+     * Sets the Prepared of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setPrepared(String fsValue){
+        return setValue("sPrepared", fsValue);
+    }
+    
+    /**
+     * @return The Prepared of this record. 
+     */
+    public String getPrepared(){
+        return (String) getValue("sPrepared");
+    }
+    
+    /**
+     * Sets the Prepared of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setPreparedDate(Date fdValue){
+        return setValue("dPrepared", fdValue);
+    }
+    
+    /**
+     * @return The Prepared of this record. 
+     */
+    public Date getPreparedDate(){
+        return (Date) getValue("dPrepared");
+    }
+   
+    /**
+     * Sets the RecorddStatus of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setRecorddStatus(String fsValue){
         return setValue("cRecdStat", fsValue);
     }
     
     /**
-     * @return The RecordStatus of this record. 
+     * @return The RecorddStatus of this record. 
      */
-    public String getRecordStatus(){
+    public String getRecorddStatus(){
         return (String) getValue("cRecdStat");
     }
-
+    
     /**
      * Sets record as active.
      * 
@@ -451,7 +826,7 @@ public class Model_Size implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this, "xSupplier»xAddressx»xCPerson1»xCPPosit1»xCPMobil1»xTermName»xCategrNm»xInvTypNm");
     }
     
     private void initialize(){

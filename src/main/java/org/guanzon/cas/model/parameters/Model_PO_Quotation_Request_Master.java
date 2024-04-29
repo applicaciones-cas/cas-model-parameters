@@ -18,8 +18,8 @@ import org.json.simple.JSONObject;
 /**
  * @author Michael Cuison
  */
-public class Model_Size implements GEntity{
-    final String XML = "Model_Size.xml";
+public class Model_PO_Quotation_Request_Master implements GEntity{
+    final String XML = "Model_PO_Quotation_Request_Master.xml";
     
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
@@ -31,7 +31,7 @@ public class Model_Size implements GEntity{
      * 
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Size(GRider foValue){
+    public Model_PO_Quotation_Request_Master(GRider foValue){
         if (foValue == null){
             System.err.println("Application Driver is not set.");
             System.exit(1);
@@ -101,7 +101,7 @@ public class Model_Size implements GEntity{
      */
     @Override
     public String getTable() {
-        return "Size";
+        return "Made";
     }
     
     /**
@@ -195,7 +195,7 @@ public class Model_Size implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setTransactionNumber(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -212,7 +212,7 @@ public class Model_Size implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
         
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this, "xBranchNm»xDestinat»xCategrNm»xInvTypNm");
         
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -254,7 +254,7 @@ public class Model_Size implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setTransactionNumber(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
                 lsSQL = makeSQL();
                 
@@ -271,14 +271,14 @@ public class Model_Size implements GEntity{
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Size loOldEntity = new Model_Size(poGRider);
+                Model_PO_Quotation_Request_Master loOldEntity = new Model_PO_Quotation_Request_Master(poGRider);
                 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getSizeID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getTransactionNumber());
                 
                 if ("success".equals((String) loJSON.get("result"))){
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getSizeID()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sMadeIDxx = " + SQLUtil.toSQL(this.getTransactionNumber()), "xBranchNm»xDestinat»xCategrNm»xInvTypNm");
                     
                     if (!lsSQL.isEmpty()){
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
@@ -344,56 +344,226 @@ public class Model_Size implements GEntity{
     }
     
     /**
-     * Sets the Size ID of this record.
+     * Sets the TransactionNumber of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSizeID(String fsValue){
-        return setValue("sSizeIDxx", fsValue);
+    public JSONObject setTransactionNumber(String fsValue){
+        return setValue("sTransNox", fsValue);
     }
     
     /**
-     * @return The SizeID of this record.
+     * @return The TransactionNumber of this record.
      */
-    public String getSizeID(){
-        return (String) getValue("sSizeIDxx");
+    public String getTransactionNumber(){
+        return (String) getValue("sTransNox");
     }
     
     /**
-     * Sets the SizeName of this record.
+     * Sets the BranchCode of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setSizeName(String fsValue){
-        return setValue("sSizeName", fsValue);
+    public JSONObject setBranchCode(String fsValue){
+        return setValue("sBranchCd", fsValue);
     }
     
     /**
-     * @return The SizeName of this record. 
+     * @return The BranchCode of this record. 
      */
-    public String getSizeName(){
-        return (String) getValue("sSizeName");
+    public String getBranchCode(){
+        return (String) getValue("sBranchCd");
+    }
+    
+     /**
+     * Sets the Transaction of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTransaction(Date fdValue){
+        return setValue("dTransact", fdValue);
     }
     
     /**
-     * Sets the RecordStatus of this record.
+     * @return The Transaction of this record. 
+     */
+    public Date getTransaction(){
+        return (Date) getValue("dTransact");
+    }
+    
+     /**
+     * Sets the Destination of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setRecordStatus(String fsValue){
+    public JSONObject setDestination(String fsValue){
+        return setValue("sDestinat", fsValue);
+    }
+    
+    /**
+     * @return The Destination of this record. 
+     */
+    public String getDestination(){
+        return (String) getValue("sDestinat");
+    }
+    
+     /**
+     * Sets the ReferenceNumber of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setReferenceNumber(String fsValue){
+        return setValue("sReferNox", fsValue);
+    }
+    
+    /**
+     * @return The ReferenceNumber of this record. 
+     */
+    public String getReferenceNumber(){
+        return (String) getValue("sReferNox");
+    }
+    
+    /**
+     * Sets the Remarks of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setRemarks(String fsValue){
+        return setValue("sRemarksx", fsValue);
+    }
+    
+    /**
+     * @return The Remarks of this record. 
+     */
+    public String getRemarks(){
+        return (String) getValue("sRemarksx");
+    }
+    
+    /**
+     * Sets the ExpiredPurchase of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setExpiredPurchase(Date fdValue){
+        return setValue("dExpPurch", fdValue);
+    }
+    
+    /**
+     * @return The ExpiredPurchase of this record. 
+     */
+    public Date getExpiredPurchase(){
+        return (Date) getValue("dExpPurch");
+    }
+    
+    /**
+     * Sets the EntryNumber of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setEntryNumber(Integer fnValue){
+        return setValue("nEntryNox", fnValue);
+    }
+    
+    /**
+     * @return The EntryNumber of this record. 
+     */
+    public Integer getEntryNumber(){
+        return (Integer) getValue("nEntryNox");
+    }
+    
+    /**
+     * Sets the CategoryCode of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setCategoryCode(String fsValue){
+        return setValue("sCategrCd", fsValue);
+    }
+    
+    /**
+     * @return The CategoryCode of this record. 
+     */
+    public String getCategoryCode(){
+        return (String) getValue("sCategrCd");
+    }
+    
+    /**
+     * Sets the TransactionStatus of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTransactionStatus(String fsValue){
+        return setValue("cTranStat", fsValue);
+    }
+    
+    /**
+     * @return The TransactionStatus of this record. 
+     */
+    public String getTransactionStatus(){
+        return (String) getValue("cTranStat");
+    }
+    
+    /**
+     * Sets the Prepared of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setPrepared(String fsValue){
+        return setValue("sPrepared", fsValue);
+    }
+    
+    /**
+     * @return The Prepared of this record. 
+     */
+    public String getPrepared(){
+        return (String) getValue("sPrepared");
+    }
+    
+    /**
+     * Sets the Prepared of this record.
+     * 
+     * @param fdValue 
+     * @return result as success/failed
+     */
+    public JSONObject setPreparedDate(Date fdValue){
+        return setValue("dPrepared", fdValue);
+    }
+    
+    /**
+     * @return The Prepared of this record. 
+     */
+    public Date getPreparedDate(){
+        return (Date) getValue("dPrepared");
+    }
+    
+    /**
+     * Sets the RecorddStatus of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setRecorddStatus(String fsValue){
         return setValue("cRecdStat", fsValue);
     }
     
     /**
-     * @return The RecordStatus of this record. 
+     * @return The RecorddStatus of this record. 
      */
-    public String getRecordStatus(){
+    public String getRecorddStatus(){
         return (String) getValue("cRecdStat");
     }
-
+    
     /**
      * Sets record as active.
      * 
@@ -451,7 +621,7 @@ public class Model_Size implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this, "xBranchNm»xDestinat»xCategrNm»xInvTypNm");
     }
     
     private void initialize(){

@@ -344,7 +344,7 @@ public class Model_Region implements GEntity{
     }
     
     /**
-     * Sets the Bank Branch ID of this record.
+     * Sets the RegionID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -354,43 +354,43 @@ public class Model_Region implements GEntity{
     }
     
     /**
-     * @return The Bank Branch ID of this record.
+     * @return The RegionID of this record.
      */
     public String getRegionID(){
         return (String) getValue("sRegionID");
     }
     
     /**
-     * Sets the Bank Branch Name of this record.
+     * Sets the RegionName of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setRegionNm(String fsValue){
+    public JSONObject setRegionName(String fsValue){
         return setValue("sRegionNm", fsValue);
     }
     
     /**
-     * @return The Bank Branch Name of this record. 
+     * @return The RegionName of this record. 
      */
-    public String getRegionNm(){
+    public String getRegionName(){
         return (String) getValue("sRegionNm");
     }
     
     /**
-     * Sets the Bank Branch Code of this record.
+     * Sets the MinimumWages of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMinWages(Object fsValue){
+    public JSONObject setMinimumWages(Object fsValue){
         return setValue("nMinWages", fsValue);
     }
     
     /**
-     * @return The Bank Branch Code of this record. 
+     * @return The MinimumWages of this record. 
      */
-    public String getMinWages(){
+    public String getMinimumWages(){
         return (String) getValue("nMinWages");
     }
     
@@ -412,19 +412,19 @@ public class Model_Region implements GEntity{
     }
     
     /**
-     * Sets the Bank Name of this record.
+     * Sets the MinimumWage2 of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setMinWage2(Object fsValue){
+    public JSONObject setMinimumWage2(Object fsValue){
         return setValue("nMinWage2", fsValue);
     }
     
     /**
-     * @return The Bank Name of this record. 
+     * @returnMinimumWage2 of this record. 
      */
-    public String getMinWage2(){
+    public String getMinimumWage2(){
         return (String) getValue("nMinWage2");
     }
     
@@ -446,19 +446,19 @@ public class Model_Region implements GEntity{
     }
         
     /**
-     * Sets the Contact Person of this record.
+     * Sets the RecordStatus of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setRecdStat(String fsValue){
+    public JSONObject setRecordStatus(String fsValue){
         return setValue("cRecdStat", fsValue);
     }
     
     /**
-     * @return The Contact Person of this record.
+     * @return The RecordStatus of this record.
      */
-    public String getRecdStat(){
+    public String getRecordStatus(){
         return (String) getValue("cRecdStat");
     }
     
