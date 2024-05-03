@@ -195,7 +195,7 @@ public class Model_Barangay implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +254,8 @@ public class Model_Barangay implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), ""));
+                
                 
                 lsSQL = makeSQL();
                 
@@ -394,6 +395,23 @@ public class Model_Barangay implements GEntity{
         return (String) getValue("sTownIDxx");
     }
     
+        /**
+     * Sets the xTownName of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTownName(String fsValue){
+        return setValue("xTownName", fsValue);
+    }
+    
+    /**
+     * @return The xTownName of this record. 
+     */
+    public String getTownName(){
+        return (String) getValue("xTownName");
+    }
+    
     /**
      * Sets the BarangayHasRoute of this record.
      * 
@@ -526,4 +544,8 @@ public class Model_Barangay implements GEntity{
             System.exit(1);
         }
     } 
+
+    public String makeSelectSQL() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
