@@ -195,7 +195,7 @@ public class Model_Company implements GEntity{
         pnEditMode = EditMode.ADDNEW;
         
         //replace with the primary key column info
-        setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", true, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -485,6 +485,14 @@ public class Model_Company implements GEntity{
      * @return SQL Statement
      */
     public String makeSQL(){
+        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+    }
+    /**
+     * Gets the SQL statement for this entity.
+     * 
+     * @return SQL Statement
+     */
+    public String makeSelectSQL(){
         return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
     }
     
