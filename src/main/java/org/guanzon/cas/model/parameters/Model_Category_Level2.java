@@ -202,7 +202,7 @@ public class Model_Category_Level2 implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,7 +261,7 @@ public class Model_Category_Level2 implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -351,7 +351,7 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * Sets the Category_Level2 Code of this record.
+     * Sets the sCategrCd of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -361,14 +361,14 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 Code of this record.
+     * @return ThesCategrCd of this record.
      */
     public String getCategoryCode() {
         return (String) getValue("sCategrCd");
     }
 
     /**
-     * Sets the Category_Level2 Desc of this record.
+     * Sets the sDescript of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -378,14 +378,14 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 Desc of this record.
+     * @return The sDescript of this record.
      */
     public String getDescription() {
         return (String) getValue("sDescript");
     }
 
     /**
-     * Sets the Category_Level2 InvTypCode of this record.
+     * Sets the sInvTypCd of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -395,14 +395,31 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 InvTypCode of this record.
+     * @return The sInvTypCd of this record.
      */
     public String getInvenTorypCode() {
         return (String) getValue("sInvTypCd");
     }
 
     /**
-     * Sets the Category_Level2 MainCatx of this record.
+     * Sets the sInvTypCd of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setDescript(String fsValue) {
+        return setValue("xInvTypNm", fsValue);
+    }
+
+    /**
+     * @return The sInvTypCd of this record.
+     */
+    public String getDescript() {
+        return (String) getValue("xInvTypNm");
+    }
+
+    /**
+     * Sets the MainCatx of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -412,7 +429,7 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 MainCatx of this record.
+     * @return The MainCatx of this record.
      */
     public String getMainCategory() {
         return (String) getValue("sMainCatx");
@@ -492,6 +509,15 @@ public class Model_Category_Level2 implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
+        return MiscUtil.makeSQL(this, "xInvTypNm»xMainCatx");
+    }
+
+    /**
+     * Gets the SQL statement for this entity.
+     *
+     * @return SQL Statement
+     */
+    public String makeSelectSQL() {
         return MiscUtil.makeSQL(this, "xInvTypNm»xMainCatx");
     }
 
