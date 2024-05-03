@@ -1,6 +1,7 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -390,7 +391,7 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setMinimumWages(Object fsValue) {
+    public JSONObject setMinimumWages(BigDecimal fsValue) {
         return setValue("nMinWages", fsValue);
     }
 
@@ -407,7 +408,7 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setColaAmount(Object fsValue) {
+    public JSONObject setColaAmount(BigDecimal fsValue) {
         return setValue("nColaAmtx", fsValue);
     }
 
@@ -424,7 +425,7 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setMinimumWage2(Object fsValue) {
+    public JSONObject setMinimumWage2(BigDecimal fsValue) {
         return setValue("nMinWage2", fsValue);
     }
 
@@ -441,7 +442,7 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setColaAmount2(Object fsValue) {
+    public JSONObject setColaAmount2(BigDecimal fsValue) {
         return setValue("nColaAmt2", fsValue);
     }
 
