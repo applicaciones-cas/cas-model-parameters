@@ -470,6 +470,23 @@ public class Model_Province implements GEntity {
     }
 
     /**
+     * Description: Sets the xRegionNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setRegionName(String fsValue) {
+        return setValue("xRegionNm", fsValue);
+    }
+
+    /**
+     * @return The xRegionNm of this record.
+     */
+    public String getRegionName() {
+        return (String) getValue("xRegionNm");
+    }
+
+    /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
