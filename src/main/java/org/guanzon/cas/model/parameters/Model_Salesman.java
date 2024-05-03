@@ -504,6 +504,40 @@ public class Model_Salesman implements GEntity {
     }
 
     /**
+     * Description: Sets the xClientNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setEmployeeName(String fsValue) {
+        return setValue("xClientNm", fsValue);
+    }
+
+    /**
+     * @return The xClientNm of this record.
+     */
+    public String getEmployeeName() {
+        return (String) getValue("xClientNm");
+    }
+
+    /**
+     * Description: Sets the xBranchNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setBranchName(String fsValue) {
+        return setValue("xBranchNm", fsValue);
+    }
+
+    /**
+     * @return The xBranchNm of this record.
+     */
+    public String getBranchName() {
+        return (String) getValue("xBranchNm");
+    }
+
+    /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
