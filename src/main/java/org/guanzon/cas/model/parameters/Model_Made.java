@@ -202,7 +202,7 @@ public class Model_Made implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setMadeID(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setMadeID(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
