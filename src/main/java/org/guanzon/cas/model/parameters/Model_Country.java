@@ -470,6 +470,14 @@ public class Model_Country implements GEntity{
     public String makeSQL(){
         return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
     }
+    /**
+     * Gets the SQL statement for this entity.
+     * 
+     * @return SQL Statement
+     */
+    public String makeSelectSQL(){
+        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+    }
     
     private void initialize(){
         try {
