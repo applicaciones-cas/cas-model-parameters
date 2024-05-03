@@ -1,6 +1,7 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -390,7 +391,7 @@ public class Model_Labor_Category implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setAmount(Object fsValue) {
+    public JSONObject setAmount(BigDecimal fsValue) {
         return setValue("nAmountxx", fsValue);
     }
 
@@ -467,6 +468,23 @@ public class Model_Labor_Category implements GEntity {
      */
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
+    }
+    
+        /**
+     * Description: Sets the xCategrNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setCategoryName(String fsValue) {
+        return setValue("xCategrNm", fsValue);
+    }
+
+    /**
+     * @return The xCategrNm of this record.
+     */
+    public String getCategoryName() {
+        return (String) getValue("xCategrNm");
     }
 
     /**
