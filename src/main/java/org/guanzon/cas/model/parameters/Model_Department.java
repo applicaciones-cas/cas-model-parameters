@@ -555,6 +555,40 @@ public class Model_Department implements GEntity {
     }
 
     /**
+     * Sets the Department xHAssgnNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setHeadAssign(String fsValue) {
+        return setValue("xHAssgnNm", fsValue);
+    }
+
+    /**
+     * @return The Department xHAssgnNm of this record.
+     */
+    public String getHeadAssign() {
+        return (String) getValue("xHAssgnNm");
+    }
+
+    /**
+     * Sets the Department xSAssgnNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setSupervisorAssign(String fsValue) {
+        return setValue("xSAssgnNm", fsValue);
+    }
+
+    /**
+     * @return The Department xSAssgnNm of this record.
+     */
+    public String getSupervisorAssign() {
+        return (String) getValue("xSAssgnNm");
+    }
+
+    /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
