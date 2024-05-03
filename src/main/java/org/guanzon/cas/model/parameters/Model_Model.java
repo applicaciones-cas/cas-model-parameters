@@ -538,12 +538,29 @@ public class Model_Model implements GEntity {
     }
 
     /**
+     * Description: Sets the xBrandNme of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setBrandName(String fsValue) {
+        return setValue("xBrandNme", fsValue);
+    }
+
+    /**
+     * @return The xBrandNme of this record.
+     */
+    public String getBrandName() {
+        return (String) getValue("xBrandNme");
+    }
+
+    /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSQL(this, "xBrandNme");
     }
 
     /**
@@ -552,7 +569,7 @@ public class Model_Model implements GEntity {
      * @return SQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSQL(this, "xBrandNme");
     }
 
     private void initialize() {
