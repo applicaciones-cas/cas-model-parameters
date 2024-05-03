@@ -1,6 +1,7 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -390,7 +391,7 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel1(Object fsValue) {
+    public JSONObject setPriceLevel1(BigDecimal fsValue) {
         return setValue("nPriceLv1", fsValue);
     }
 
@@ -407,7 +408,7 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel2(Object fsValue) {
+    public JSONObject setPriceLevel2(BigDecimal fsValue) {
         return setValue("nPriceLv2", fsValue);
     }
 
@@ -424,7 +425,7 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel3(Object fsValue) {
+    public JSONObject setPriceLevel3(BigDecimal fsValue) {
         return setValue("nPriceLv3", fsValue);
     }
 
