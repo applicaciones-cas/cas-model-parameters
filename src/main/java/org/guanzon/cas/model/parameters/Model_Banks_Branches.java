@@ -196,6 +196,7 @@ public class Model_Banks_Branches implements GEntity{
         
         //replace with the primary key column info
         setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBanksID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), ""));
         
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -254,7 +255,7 @@ public class Model_Banks_Branches implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW){
                 //replace with the primary key column info
-                setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), ""));
                 
                 lsSQL = makeSQL();
                 
@@ -417,14 +418,14 @@ public class Model_Banks_Branches implements GEntity{
      * @param fsValue 
      * @return result as success/failed
      */
-    public JSONObject setContactP(String fsValue){
+    public JSONObject setContactPerson(String fsValue){
         return setValue("sContactP", fsValue);
     }
     
     /**
      * @return The Banks Branches Contact of this record. 
      */
-    public String getContactP(){
+    public String getContactPerson(){
         return (String) getValue("sContactP");
     }
     
@@ -446,7 +447,7 @@ public class Model_Banks_Branches implements GEntity{
     }
         
     /**
-     * Sets the Banks Branches Town of this record.
+     * Sets the TownID of this record.
      * 
      * @param fsValue 
      * @return result as success/failed
@@ -456,10 +457,27 @@ public class Model_Banks_Branches implements GEntity{
     }
     
     /**
-     * @return The Town of this record.
+     * @return The TownID of this record.
      */
     public String getTownID(){
         return (String) getValue("sTownIDxx");
+    }
+    
+    /**
+     * Sets the TownName of this record.
+     * 
+     * @param fsValue 
+     * @return result as success/failed
+     */
+    public JSONObject setTownName(String fsValue){
+        return setValue("xTownName", fsValue);
+    }
+    
+    /**
+     * @return The TownID of this record.
+     */
+    public String getTownName(){
+        return (String) getValue("xTownName");
     }
     
     /**
@@ -593,5 +611,9 @@ public class Model_Banks_Branches implements GEntity{
             e.printStackTrace();
             System.exit(1);
         }
-    } 
+    }
+
+    public String makeSelectSQL() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
