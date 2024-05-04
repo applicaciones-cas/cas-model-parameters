@@ -484,7 +484,7 @@ public class Model_Inv_Location implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

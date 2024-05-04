@@ -399,7 +399,7 @@ public class Model_Labor_Category implements GEntity {
      * @return The nAmountxx of this record.
      */
     public String getAmount() {
-        return (String) getValue("nAmountxx");
+        return getValue("nAmountxx").toString();
     }
 
     /**
@@ -502,7 +502,7 @@ public class Model_Labor_Category implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xCategrNm");
+        return MiscUtil.makeSelect(this, "xCategrNm");
     }
 
     private void initialize() {

@@ -467,7 +467,7 @@ public class Model_Made implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

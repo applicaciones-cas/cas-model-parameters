@@ -484,7 +484,7 @@ public class Model_Country implements GEntity {
      * @return SQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

@@ -501,7 +501,7 @@ public class Model_Province implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xRegionNm");
+        return MiscUtil.makeSelect(this, "xRegionNm");
     }
 
     private void initialize() {

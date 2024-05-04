@@ -552,7 +552,7 @@ public class Model_Salesman implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xClientNm»xBranchNm");
+        return MiscUtil.makeSelect(this, "xClientNm»xBranchNm");
     }
 
     private void initialize() {

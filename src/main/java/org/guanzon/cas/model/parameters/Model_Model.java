@@ -569,7 +569,7 @@ public class Model_Model implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xBrandNme");
+        return MiscUtil.makeSelect(this, "xBrandNme");
     }
 
     private void initialize() {

@@ -399,7 +399,7 @@ public class Model_Region implements GEntity {
      * @return The nMinWages of this record.
      */
     public String getMinimumWages() {
-        return (String) getValue("nMinWages");
+        return  getValue("nMinWages").toString();
     }
 
     /**
@@ -416,7 +416,7 @@ public class Model_Region implements GEntity {
      * @return The nColaAmtx of this record.
      */
     public String getColaAmount() {
-        return (String) getValue("nColaAmtx");
+        return getValue("nColaAmtx").toString();
     }
 
     /**
@@ -433,7 +433,7 @@ public class Model_Region implements GEntity {
      * @return The nMinWage2 of this record.
      */
     public String getMinimumWage2() {
-        return (String) getValue("nMinWage2");
+        return getValue("nMinWage2").toString();
     }
 
     /**
@@ -450,7 +450,7 @@ public class Model_Region implements GEntity {
      * @return The nColaAmt2 of this record.
      */
     public String getColaAmount2() {
-        return (String) getValue("nColaAmt2");
+        return  getValue("nColaAmt2").toString();
     }
 
     /**
@@ -529,7 +529,7 @@ public class Model_Region implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

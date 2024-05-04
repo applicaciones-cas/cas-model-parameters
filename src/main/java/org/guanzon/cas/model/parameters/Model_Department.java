@@ -603,7 +603,7 @@ public class Model_Department implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xDeptHead»xHAssgnNm»xSAssgnNm");
+        return MiscUtil.makeSelect(this, "xDeptHead»xHAssgnNm»xSAssgnNm");
     }
 
     private void initialize() {
