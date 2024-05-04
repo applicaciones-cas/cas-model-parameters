@@ -222,7 +222,7 @@ public class Model_Color_Detail implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this, "xMnColorx");
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
+        lsSQL = MiscUtil.addCondition(lsSQL, " sColorIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 

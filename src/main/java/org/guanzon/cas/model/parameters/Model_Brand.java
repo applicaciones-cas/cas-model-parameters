@@ -222,7 +222,7 @@ public class Model_Brand implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this, "xCategrNm");
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
+        lsSQL = MiscUtil.addCondition(lsSQL, " sBrandCde = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 

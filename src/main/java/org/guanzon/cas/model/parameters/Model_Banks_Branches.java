@@ -223,7 +223,7 @@ public class Model_Banks_Branches implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
+        lsSQL = MiscUtil.addCondition(lsSQL, " sBrBankID = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
