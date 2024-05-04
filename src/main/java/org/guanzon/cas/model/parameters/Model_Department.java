@@ -485,8 +485,8 @@ public class Model_Department implements GEntity {
     public String getSupervisorAssignID() {
         return (String) getValue("sSAssgnID");
     }
-
-    /**
+    
+        /**
      * Sets the Department RecdStat of this record.
      *
      * @param fsValue
@@ -560,14 +560,14 @@ public class Model_Department implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setHeadAssign(String fsValue) {
+    public JSONObject setDeptHeadAssign(String fsValue) {
         return setValue("xHAssgnNm", fsValue);
     }
 
     /**
      * @return The Department xHAssgnNm of this record.
      */
-    public String getHeadAssign() {
+    public String getDeptHeadAssign() {
         return (String) getValue("xHAssgnNm");
     }
 
@@ -598,9 +598,9 @@ public class Model_Department implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
         return MiscUtil.makeSQL(this, "xDeptHead»xHAssgnNm»xSAssgnNm");

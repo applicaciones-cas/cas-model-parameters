@@ -469,8 +469,8 @@ public class Model_Labor_Category implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
-        /**
+
+    /**
      * Description: Sets the xCategrNm of this record.
      *
      * @param fsValue
@@ -497,9 +497,9 @@ public class Model_Labor_Category implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
         return MiscUtil.makeSQL(this, "xCategrNm");

@@ -408,14 +408,14 @@ public class Model_Brand implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue) {
+    public JSONObject setCategoryName(String fsValue) {
         return setValue("xCategrNm", fsValue);
     }
 
     /**
      * @return The xCategrNm of this record.
      */
-    public String getDescript() {
+    public String getCategoryName() {
         return (String) getValue("xCategrNm");
     }
 
@@ -496,6 +496,15 @@ public class Model_Brand implements GEntity {
         return MiscUtil.makeSQL(this, "xCategrNm");
     }
 
+    /**
+     * Gets the SQL Select statement for this entity.
+     *
+     * @return SelectSQL Statement
+     */
+    public String makeSelectSQL() {
+        return MiscUtil.makeSelect(this);
+    }
+
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
@@ -518,7 +527,4 @@ public class Model_Brand implements GEntity {
         }
     }
 
-    public String makeSelectSQL() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

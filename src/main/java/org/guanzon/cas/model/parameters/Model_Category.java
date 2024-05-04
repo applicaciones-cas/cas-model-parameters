@@ -436,6 +436,23 @@ public class Model_Category implements GEntity {
     }
 
     /**
+     * Sets record as classified.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
+    public JSONObject setClassify(boolean fbValue) {
+        return setValue("cClassify", fbValue ? "1" : "0");
+    }
+
+    /**
+     * @return If record is classified.
+     */
+    public boolean isClassify() {
+        return ((String) getValue("cClassify")).equals("1");
+    }
+
+    /**
      * Sets the Category RecdStat of this record.
      *
      * @param fsValue
@@ -513,12 +530,12 @@ public class Model_Category implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xInvTypNm");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

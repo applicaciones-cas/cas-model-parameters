@@ -400,23 +400,23 @@ public class Model_Category_Level4 implements GEntity {
     public String getMainCategory() {
         return (String) getValue("sMainCatx");
     }
+
     /**
      * Sets the sMainCatx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue) {
+    public JSONObject setMainCategoryName(String fsValue) {
         return setValue("xMainCatx", fsValue);
     }
 
     /**
      * @return The sMainCatx of this record.
      */
-    public String getDescript() {
+    public String getMainCategoryName() {
         return (String) getValue("xMainCatx");
     }
-
 
     /**
      * Sets the Category_Level4 RecdStat of this record.
@@ -492,16 +492,16 @@ public class Model_Category_Level4 implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xMainCatx");
+        return MiscUtil.makeSQL(this);
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xMainCatx");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

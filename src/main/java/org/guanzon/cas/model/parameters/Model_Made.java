@@ -458,16 +458,16 @@ public class Model_Made implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xBrandNme");
+        return MiscUtil.makeSQL(this);
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xBrandNme");
+        return MiscUtil.makeSQL(this);
     }
 
     private void initialize() {

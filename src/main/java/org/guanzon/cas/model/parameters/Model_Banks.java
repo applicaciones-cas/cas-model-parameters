@@ -481,7 +481,7 @@ public class Model_Banks implements GEntity {
     /**
      * Gets the SQL Select statement for this entity.
      *
-     * @return SelectSQL Statement
+     * @return SQL Select Statement
      */
     public String makeSelectSQL() {
         return MiscUtil.makeSelect(this);

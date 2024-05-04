@@ -390,36 +390,36 @@ public class Model_Category_Level2 implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setInvenTorypCode(String fsValue) {
+    public JSONObject setInventoryTypeCode(String fsValue) {
         return setValue("sInvTypCd", fsValue);
     }
 
     /**
      * @return The sInvTypCd of this record.
      */
-    public String getInvenTorypCode() {
+    public String getInventoryTypeCode() {
         return (String) getValue("sInvTypCd");
     }
 
     /**
-     * Sets the sInvTypCd of this record.
+     * Sets the xInvTypNm of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue) {
+    public JSONObject setInvTypeName(String fsValue) {
         return setValue("xInvTypNm", fsValue);
     }
 
     /**
-     * @return The sInvTypCd of this record.
+     * @return The xInvTypNm of this record.
      */
-    public String getDescript() {
+    public String getInvTypeName() {
         return (String) getValue("xInvTypNm");
     }
 
     /**
-     * Sets the MainCatx of this record.
+     * Sets the sMainCatx of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -429,10 +429,27 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The MainCatx of this record.
+     * @return The sMainCatx of this record.
      */
     public String getMainCategory() {
         return (String) getValue("sMainCatx");
+    }
+
+    /**
+     * Sets the xMainCatx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setMainCategoryName(String fsValue) {
+        return setValue("xMainCatx", fsValue);
+    }
+
+    /**
+     * @return The xMainCatx of this record.
+     */
+    public String getMainCategoryName() {
+        return (String) getValue("xMainCatx");
     }
 
     /**
@@ -513,12 +530,12 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xInvTypNm»xMainCatx");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

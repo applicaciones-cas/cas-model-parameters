@@ -219,7 +219,7 @@ public class Model_Color implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
@@ -285,7 +285,7 @@ public class Model_Color implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorCde = " + SQLUtil.toSQL(this.getColorCode()), "xBankName»xBankCode»xTownName");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorCde = " + SQLUtil.toSQL(this.getColorCode()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -458,16 +458,16 @@ public class Model_Color implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSQL(this);
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSQL(this, "xBankName»xBankCode»xTownName");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

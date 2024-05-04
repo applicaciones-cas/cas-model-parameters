@@ -20,9 +20,9 @@ import org.json.simple.JSONObject;
  * @author Michael Cuison
  */
 public class Model_Affiliated_Company implements GEntity {
-    
+
     final String XML = "Model_Affiliated_Company.xml";
-    
+
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
     JSONObject poJSON;              //json container
@@ -38,9 +38,9 @@ public class Model_Affiliated_Company implements GEntity {
             System.err.println("Application Driver is not set.");
             System.exit(1);
         }
-        
+
         poGRider = foValue;
-        
+
         initialize();
     }
 
@@ -97,7 +97,7 @@ public class Model_Affiliated_Company implements GEntity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return -1;
     }
 
@@ -157,10 +157,10 @@ public class Model_Affiliated_Company implements GEntity {
             if ("error".equals((String) poJSON.get("result"))) {
                 return poJSON;
             }
-            
+
             poEntity.updateObject(fnColumn, foValue);
             poEntity.updateRow();
-            
+
             poJSON = new JSONObject();
             poJSON.put("result", "success");
             poJSON.put("value", getValue(fnColumn));
@@ -169,7 +169,7 @@ public class Model_Affiliated_Company implements GEntity {
             poJSON.put("result", "error");
             poJSON.put("message", e.getMessage());
         }
-        
+
         return poJSON;
     }
 
@@ -183,7 +183,7 @@ public class Model_Affiliated_Company implements GEntity {
     @Override
     public JSONObject setValue(String fsColumn, Object foValue) {
         poJSON = new JSONObject();
-        
+
         try {
             return setValue(MiscUtil.getColumnIndex(poEntity, fsColumn), foValue);
         } catch (SQLException e) {
@@ -203,18 +203,18 @@ public class Model_Affiliated_Company implements GEntity {
     public JSONObject newRecord() {
         try {
             pnEditMode = EditMode.ADDNEW;
-            
+
             //replace with the primary key column info
             setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
-            
+
             poJSON = new JSONObject();
-            
+
             poEntity.updateObject("dAffiliat", poGRider.getServerDate());
             poJSON.put("result", "success");
             return poJSON;
         } catch (SQLException ex) {
-           poJSON.put("result", "error");
-            return poJSON; 
+            poJSON.put("result", "error");
+            return poJSON;
         }
     }
 
@@ -227,22 +227,22 @@ public class Model_Affiliated_Company implements GEntity {
     @Override
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
-        
+
         String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, "sCompnyCd =" + SQLUtil.toSQL(fsCondition));
-        
+
         ResultSet loRS = poGRider.executeQuery(lsSQL);
-        
+
         try {
             if (loRS.next()) {
                 for (int lnCtr = 1; lnCtr <= loRS.getMetaData().getColumnCount(); lnCtr++) {
                     setValue(lnCtr, loRS.getObject(lnCtr));
                 }
-                
+
                 pnEditMode = EditMode.UPDATE;
-                
+
                 poJSON.put("result", "success");
                 poJSON.put("message", "Record loaded successfully.");
             } else {
@@ -253,7 +253,7 @@ public class Model_Affiliated_Company implements GEntity {
             poJSON.put("result", "error");
             poJSON.put("message", e.getMessage());
         }
-        
+
         return poJSON;
     }
 
@@ -265,15 +265,15 @@ public class Model_Affiliated_Company implements GEntity {
     @Override
     public JSONObject saveRecord() {
         poJSON = new JSONObject();
-        
+
         if (pnEditMode == EditMode.ADDNEW || pnEditMode == EditMode.UPDATE) {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
                 setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
-                
+
                 lsSQL = makeSQL();
-                
+
                 if (!lsSQL.isEmpty()) {
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
                         poJSON.put("result", "success");
@@ -291,11 +291,11 @@ public class Model_Affiliated_Company implements GEntity {
 
                 //replace with the primary key column info
                 JSONObject loJSON = loOldEntity.openRecord(this.getCompanyCode());
-                
+
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
                     lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCompnyCd = " + SQLUtil.toSQL(this.getCompanyCode()));
-                    
+
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
                             poJSON.put("result", "success");
@@ -318,7 +318,7 @@ public class Model_Affiliated_Company implements GEntity {
             poJSON.put("message", "Invalid update mode. Unable to save record.");
             return poJSON;
         }
-        
+
         return poJSON;
     }
 
@@ -329,34 +329,34 @@ public class Model_Affiliated_Company implements GEntity {
     @Override
     public void list() {
         Method[] methods = this.getClass().getMethods();
-        
+
         System.out.println("--------------------------------------------------------------------");
         System.out.println("LIST OF PUBLIC METHODS FOR " + this.getClass().getName() + ":");
         System.out.println("--------------------------------------------------------------------");
         for (Method method : methods) {
             System.out.println(method.getName());
         }
-        
+
         try {
             int lnRow = poEntity.getMetaData().getColumnCount();
-            
+
             System.out.println("--------------------------------------------------------------------");
             System.out.println("ENTITY COLUMN INFO");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Total number of columns: " + lnRow);
             System.out.println("--------------------------------------------------------------------");
-            
+
             for (int lnCtr = 1; lnCtr <= lnRow; lnCtr++) {
                 System.out.println("Column index: " + (lnCtr) + " --> Label: " + poEntity.getMetaData().getColumnLabel(lnCtr));
                 if (poEntity.getMetaData().getColumnType(lnCtr) == Types.CHAR
                         || poEntity.getMetaData().getColumnType(lnCtr) == Types.VARCHAR) {
-                    
+
                     System.out.println("Column index: " + (lnCtr) + " --> Size: " + poEntity.getMetaData().getColumnDisplaySize(lnCtr));
                 }
             }
         } catch (SQLException e) {
         }
-        
+
     }
 
     /**
@@ -488,28 +488,28 @@ public class Model_Affiliated_Company implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SQL Select Statement
      */
     public String makeSelectSQL() {
         return MiscUtil.makeSelect(this);
     }
-    
+
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
-            
+
             poEntity.last();
             poEntity.moveToInsertRow();
-            
+
             MiscUtil.initRowSet(poEntity);
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
             poEntity.insertRow();
             poEntity.moveToCurrentRow();
-            
+
             poEntity.absolute(1);
-            
+
             pnEditMode = EditMode.UNKNOWN;
         } catch (SQLException e) {
             e.printStackTrace();

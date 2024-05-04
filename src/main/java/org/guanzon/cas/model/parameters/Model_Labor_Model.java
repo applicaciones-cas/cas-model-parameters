@@ -497,9 +497,9 @@ public class Model_Labor_Model implements GEntity {
     }
 
     /**
-     * Gets the SQL statement for this entity.
+     * Gets the SQL Select statement for this entity.
      *
-     * @return SQL Statement
+     * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
         return MiscUtil.makeSQL(this, "xModelNme");
