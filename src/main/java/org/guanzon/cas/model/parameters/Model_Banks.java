@@ -202,7 +202,7 @@ public class Model_Banks implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), ""));
+        setBankID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");

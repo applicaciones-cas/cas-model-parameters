@@ -202,8 +202,7 @@ public class Model_Category implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), ""));
-        setInvenTorypCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), ""));
+        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
         poJSON = new JSONObject();
         poJSON.put("result", "success");
         return poJSON;

@@ -261,7 +261,7 @@ public class Model_Made implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setMadeID(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setMadeID(MiscUtil.getNextCode(getTable(), "sMadeIDxx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 

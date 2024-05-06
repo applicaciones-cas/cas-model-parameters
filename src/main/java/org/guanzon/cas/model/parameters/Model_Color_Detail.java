@@ -261,7 +261,7 @@ public class Model_Color_Detail implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 

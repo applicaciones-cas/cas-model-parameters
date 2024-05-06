@@ -203,7 +203,6 @@ public class Model_Banks_Branches implements GEntity {
 
         //replace with the primary key column info
         setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
-        setBanksID(MiscUtil.getNextCode(getTable(), "sBankIDxx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -262,7 +261,7 @@ public class Model_Banks_Branches implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), ""));
+                setBranchesBanksID(MiscUtil.getNextCode(getTable(), "sBrBankID", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
                 lsSQL = makeSQL();
 

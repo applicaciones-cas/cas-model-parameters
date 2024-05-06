@@ -202,7 +202,7 @@ public class Model_Size implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,7 +261,7 @@ public class Model_Size implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 

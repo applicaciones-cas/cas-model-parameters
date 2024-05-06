@@ -202,7 +202,7 @@ public class Model_Company implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", true, poGRider.getConnection(), ""));
+        setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", false, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,7 +261,7 @@ public class Model_Company implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCompnyID(MiscUtil.getNextCode(getTable(), "sCompnyID", false, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 

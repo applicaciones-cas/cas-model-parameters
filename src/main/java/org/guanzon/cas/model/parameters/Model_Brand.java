@@ -202,7 +202,7 @@ public class Model_Brand implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
+        setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,8 +261,8 @@ public class Model_Brand implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
-                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), ""));
+                setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                
 
                 lsSQL = makeSQL();
 

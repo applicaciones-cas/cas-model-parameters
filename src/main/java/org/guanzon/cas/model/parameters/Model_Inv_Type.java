@@ -202,7 +202,7 @@ public class Model_Inv_Type implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), ""));
+        setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", false, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,7 +261,7 @@ public class Model_Inv_Type implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setInventoryTypeCode(MiscUtil.getNextCode(getTable(), "sInvTypCd", false, poGRider.getConnection(), poGRider.getBranchCode()));
 
                 lsSQL = makeSQL();
 
