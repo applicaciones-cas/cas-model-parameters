@@ -502,7 +502,7 @@ public class Model_Brand implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this,"xCategrNm");
     }
 
     private void initialize() {

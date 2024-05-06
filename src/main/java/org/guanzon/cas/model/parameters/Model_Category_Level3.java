@@ -470,21 +470,23 @@ public class Model_Category_Level3 implements GEntity {
     }
 
     /**
-     * @return The Category_Level3 MainCatx of this record.
-     */
-    public String setMainCategoryName() {
-        return (String) getValue("xMainCatx");
-    }
-
-    /**
      * Sets the sMainCatx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject getMainCategoryName(String fsValue) {
+    public JSONObject setMainCategoryName(String fsValue) {
         return setValue("xMainCatx", fsValue);
     }
+    
+    
+    /**
+     * @return The Category_Level3 MainCatx of this record.
+     */
+    public String getMainCategoryName() {
+        return (String) getValue("xMainCatx");
+    }
+
 
     /**
      * Gets the SQL statement for this entity.

@@ -278,7 +278,7 @@ public class Model_Barangay implements GEntity {
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Banks_Branches loOldEntity = new Model_Banks_Branches(poGRider);
+                Model_Barangay loOldEntity = new Model_Barangay(poGRider);
 
                 //replace with the primary key column info
                 JSONObject loJSON = loOldEntity.openRecord(this.getBarangayID());
@@ -581,6 +581,10 @@ public class Model_Barangay implements GEntity {
 
             MiscUtil.initRowSet(poEntity);
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
+            
+            poEntity.updateString("cBlackLst", RecordStatus.INACTIVE);
+            poEntity.updateString("cHasRoute", RecordStatus.INACTIVE);
+                    
 
             poEntity.insertRow();
             poEntity.moveToCurrentRow();

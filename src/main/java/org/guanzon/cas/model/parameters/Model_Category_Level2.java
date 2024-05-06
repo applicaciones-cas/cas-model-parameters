@@ -535,7 +535,7 @@ public class Model_Category_Level2 implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this,"xInvTypNm»xMainCatx");
     }
 
     private void initialize() {

@@ -390,14 +390,14 @@ public class Model_Banks_Branches implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBranchesBanksCoDe(String fsValue) {
+    public JSONObject setBranchesBanksCode(String fsValue) {
         return setValue("sBrBankCD", fsValue);
     }
 
     /**
      * @return The Banks Branches Code of this record.
      */
-    public String getBranchesBanksCoDe() {
+    public String getBranchesBanksCode() {
         return (String) getValue("sBrBankCD");
     }
 
