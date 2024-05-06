@@ -492,7 +492,7 @@ public class Model_Category_Level4 implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSQL(this,"xMainCatx");
     }
 
     /**
@@ -501,7 +501,7 @@ public class Model_Category_Level4 implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this,"xMainCatx");
     }
 
     private void initialize() {

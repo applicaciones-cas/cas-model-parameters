@@ -395,27 +395,10 @@ public class Model_Category_Level3 implements GEntity {
     }
 
     /**
-     * @return The Category_Level3 MainCatx of this record.
+     * @return The sMainCatx of this record.
      */
     public String getMainCategory() {
         return (String) getValue("sMainCatx");
-    }
-
-    /**
-     * Sets the sMainCatx of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setMainCategoryName(String fsValue) {
-        return setValue("xMainCatx", fsValue);
-    }
-
-    /**
-     * @return The sMainCatx of this record.
-     */
-    public String getMainCategoryName() {
-        return (String) getValue("xMainCatx");
     }
 
     /**
@@ -487,12 +470,29 @@ public class Model_Category_Level3 implements GEntity {
     }
 
     /**
+     * @return The Category_Level3 MainCatx of this record.
+     */
+    public String setMainCategoryName() {
+        return (String) getValue("xMainCatx");
+    }
+
+    /**
+     * Sets the sMainCatx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject getMainCategoryName(String fsValue) {
+        return setValue("xMainCatx", fsValue);
+    }
+
+    /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSQL(this,"xMainCatx");
     }
 
     /**
@@ -501,7 +501,7 @@ public class Model_Category_Level3 implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this, "xMainCatx");
     }
 
     private void initialize() {

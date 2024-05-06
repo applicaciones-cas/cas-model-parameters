@@ -406,14 +406,14 @@ public class Model_Category implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue) {
+    public JSONObject setInvTypeName(String fsValue) {
         return setValue("xInvTypNm", fsValue);
     }
 
     /**
      * @return The xInvTypNm Code of this record.
      */
-    public String getDescript() {
+    public String getInvTypeName() {
         return (String) getValue("xInvTypNm");
     }
 
@@ -534,7 +534,7 @@ public class Model_Category implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this,"xInvTypNm");
     }
 
     private void initialize() {
