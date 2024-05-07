@@ -14,52 +14,54 @@ import org.guanzon.appdriver.constant.EditMode;
 import org.guanzon.appdriver.iface.GEntity;
 import org.json.simple.JSONObject;
 
-
 /**
  * @author Michael Cuison
  */
-public class Model_Barangay implements GEntity{
+public class Model_Barangay implements GEntity {
+
     final String XML = "Model_Barangay.xml";
-    
+
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
     JSONObject poJSON;              //json container
     int pnEditMode;                 //edit mode
-    
+
     /**
      * Entity constructor
-     * 
+     *
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Barangay(GRider foValue){
-        if (foValue == null){
+    public Model_Barangay(GRider foValue) {
+        if (foValue == null) {
             System.err.println("Application Driver is not set.");
             System.exit(1);
         }
-        
+
         poGRider = foValue;
-        
+
         initialize();
     }
-    
+
     /**
      * Gets edit mode of the record
+     *
      * @return edit mode
      */
     @Override
     public int getEditMode() {
         return pnEditMode;
     }
-    
+
     /**
      * Gets the column index name.
+     *
      * @param fnValue - column index number
      * @return column index name
      */
     @Override
     public String getColumn(int fnValue) {
         try {
-            return poEntity.getMetaData().getColumnLabel(fnValue); 
+            return poEntity.getMetaData().getColumnLabel(fnValue);
         } catch (SQLException e) {
         }
         return "";
@@ -67,6 +69,7 @@ public class Model_Barangay implements GEntity{
 
     /**
      * Gets the column index number.
+     *
      * @param fsValue - column index name
      * @return column index number
      */
@@ -82,31 +85,33 @@ public class Model_Barangay implements GEntity{
 
     /**
      * Gets the total number of column.
+     *
      * @return total number of column
      */
     @Override
     public int getColumnCount() {
         try {
-            return poEntity.getMetaData().getColumnCount(); 
+            return poEntity.getMetaData().getColumnCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return -1;
     }
 
     /**
      * Gets the table name.
+     *
      * @return table name
      */
     @Override
     public String getTable() {
         return "Barangay";
     }
-    
+
     /**
      * Gets the value of a column index number.
-     * 
+     *
      * @param fnColumn - column index number
      * @return object value
      */
@@ -122,7 +127,7 @@ public class Model_Barangay implements GEntity{
 
     /**
      * Gets the value of a column index name.
-     * 
+     *
      * @param fsColumn - column index name
      * @return object value
      */
@@ -135,23 +140,25 @@ public class Model_Barangay implements GEntity{
         }
         return null;
     }
-    
+
     /**
      * Sets column value.
-     * 
+     *
      * @param fnColumn - column index number
      * @param foValue - value
      * @return result as success/failed
      */
     @Override
     public JSONObject setValue(int fnColumn, Object foValue) {
-        try {  
+        try {
             poJSON = MiscUtil.validateColumnValue(System.getProperty("sys.default.path.metadata") + XML, MiscUtil.getColumnLabel(poEntity, fnColumn), foValue);
-            if ("error".equals((String) poJSON.get("result"))) return poJSON;
-            
+            if ("error".equals((String) poJSON.get("result"))) {
+                return poJSON;
+            }
+
             poEntity.updateObject(fnColumn, foValue);
             poEntity.updateRow();
-            
+
             poJSON = new JSONObject();
             poJSON.put("result", "success");
             poJSON.put("value", getValue(fnColumn));
@@ -160,13 +167,13 @@ public class Model_Barangay implements GEntity{
             poJSON.put("result", "error");
             poJSON.put("message", e.getMessage());
         }
-        
+
         return poJSON;
     }
 
     /**
      * Sets column value.
-     * 
+     *
      * @param fsColumn - column index name
      * @param foValue - value
      * @return result as success/failed
@@ -174,7 +181,7 @@ public class Model_Barangay implements GEntity{
     @Override
     public JSONObject setValue(String fsColumn, Object foValue) {
         poJSON = new JSONObject();
-        
+
         try {
             return setValue(MiscUtil.getColumnIndex(poEntity, fsColumn), foValue);
         } catch (SQLException e) {
@@ -184,19 +191,19 @@ public class Model_Barangay implements GEntity{
         }
         return poJSON;
     }
-    
+
     /**
      * Set the edit mode of the entity to new.
-     * 
+     *
      * @return result as success/failed
      */
     @Override
     public JSONObject newRecord() {
         pnEditMode = EditMode.ADDNEW;
-        
+
         //replace with the primary key column info
-        setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
-        
+        setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), ""));
+
         poJSON = new JSONObject();
         poJSON.put("result", "success");
         return poJSON;
@@ -204,29 +211,29 @@ public class Model_Barangay implements GEntity{
 
     /**
      * Opens a record.
-     * 
+     *
      * @param fsCondition - filter values
      * @return result as success/failed
      */
     @Override
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
-        
+
         String lsSQL = MiscUtil.makeSelect(this, "xTownName");
-        
+
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
-        
+        lsSQL = MiscUtil.addCondition(lsSQL, " sBrgyIDxx = " + SQLUtil.toSQL(fsCondition));
+
         ResultSet loRS = poGRider.executeQuery(lsSQL);
-        
+
         try {
-            if (loRS.next()){
-                for (int lnCtr = 1; lnCtr <= loRS.getMetaData().getColumnCount(); lnCtr++){
+            if (loRS.next()) {
+                for (int lnCtr = 1; lnCtr <= loRS.getMetaData().getColumnCount(); lnCtr++) {
                     setValue(lnCtr, loRS.getObject(lnCtr));
                 }
-                
+
                 pnEditMode = EditMode.UPDATE;
-                
+
                 poJSON.put("result", "success");
                 poJSON.put("message", "Record loaded successfully.");
             } else {
@@ -237,29 +244,29 @@ public class Model_Barangay implements GEntity{
             poJSON.put("result", "error");
             poJSON.put("message", e.getMessage());
         }
-        
+
         return poJSON;
     }
 
     /**
      * Save the entity.
-     * 
+     *
      * @return result as success/failed
      */
     @Override
     public JSONObject saveRecord() {
         poJSON = new JSONObject();
-        
-        if (pnEditMode == EditMode.ADDNEW || pnEditMode == EditMode.UPDATE){
+
+        if (pnEditMode == EditMode.ADDNEW || pnEditMode == EditMode.UPDATE) {
             String lsSQL;
-            if (pnEditMode == EditMode.ADDNEW){
+            if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
-                
+                setBarangayID(MiscUtil.getNextCode(getTable(), "sBrgyIDxx", true, poGRider.getConnection(), ""));
+
                 lsSQL = makeSQL();
-                
-                if (!lsSQL.isEmpty()){
-                    if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
+
+                if (!lsSQL.isEmpty()) {
+                    if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
                         poJSON.put("result", "success");
                         poJSON.put("message", "Record saved successfully.");
                     } else {
@@ -271,17 +278,17 @@ public class Model_Barangay implements GEntity{
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Banks_Branches loOldEntity = new Model_Banks_Branches(poGRider);
-                
+                Model_Barangay loOldEntity = new Model_Barangay(poGRider);
+
                 //replace with the primary key column info
                 JSONObject loJSON = loOldEntity.openRecord(this.getBarangayID());
-                
-                if ("success".equals((String) loJSON.get("result"))){
+
+                if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
                     lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrgyIDxx = " + SQLUtil.toSQL(this.getBarangayID()), "xTownName");
-                    
-                    if (!lsSQL.isEmpty()){
-                        if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0){
+
+                    if (!lsSQL.isEmpty()) {
+                        if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
                             poJSON.put("result", "success");
                             poJSON.put("message", "Record saved successfully.");
                         } else {
@@ -302,10 +309,10 @@ public class Model_Barangay implements GEntity{
             poJSON.put("message", "Invalid update mode. Unable to save record.");
             return poJSON;
         }
-        
+
         return poJSON;
     }
-    
+
     /**
      * Prints all the public methods used<br>
      * and prints the column names of this entity.
@@ -313,217 +320,282 @@ public class Model_Barangay implements GEntity{
     @Override
     public void list() {
         Method[] methods = this.getClass().getMethods();
-        
+
         System.out.println("--------------------------------------------------------------------");
         System.out.println("LIST OF PUBLIC METHODS FOR " + this.getClass().getName() + ":");
         System.out.println("--------------------------------------------------------------------");
         for (Method method : methods) {
             System.out.println(method.getName());
         }
-        
+
         try {
             int lnRow = poEntity.getMetaData().getColumnCount();
-        
+
             System.out.println("--------------------------------------------------------------------");
             System.out.println("ENTITY COLUMN INFO");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Total number of columns: " + lnRow);
             System.out.println("--------------------------------------------------------------------");
 
-            for (int lnCtr = 1; lnCtr <= lnRow; lnCtr++){
+            for (int lnCtr = 1; lnCtr <= lnRow; lnCtr++) {
                 System.out.println("Column index: " + (lnCtr) + " --> Label: " + poEntity.getMetaData().getColumnLabel(lnCtr));
-                if (poEntity.getMetaData().getColumnType(lnCtr) == Types.CHAR ||
-                    poEntity.getMetaData().getColumnType(lnCtr) == Types.VARCHAR){
+                if (poEntity.getMetaData().getColumnType(lnCtr) == Types.CHAR
+                        || poEntity.getMetaData().getColumnType(lnCtr) == Types.VARCHAR) {
 
                     System.out.println("Column index: " + (lnCtr) + " --> Size: " + poEntity.getMetaData().getColumnDisplaySize(lnCtr));
                 }
             }
         } catch (SQLException e) {
         }
-        
+
     }
-    
+
     /**
      * Sets the BarangayID of this record.
-     * 
-     * @param fsValue 
+     *
+     * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBarangayID(String fsValue){
+    public JSONObject setBarangayID(String fsValue) {
         return setValue("sBrgyIDxx", fsValue);
     }
-    
+
     /**
      * @return The BarangayID of this record.
      */
-    public String getBarangayID(){
+    public String getBarangayID() {
         return (String) getValue("sBrgyIDxx");
     }
-    
+
     /**
      * Sets the BarangayName of this record.
-     * 
-     * @param fsValue 
+     *
+     * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBarangayName(String fsValue){
+    public JSONObject setBarangayName(String fsValue) {
         return setValue("sBrgyName", fsValue);
     }
-    
+
     /**
-     * @return The BarangayName of this record. 
+     * @return The BarangayName of this record.
      */
-    public String getBarangayName(){
+    public String getBarangayName() {
         return (String) getValue("sBrgyName");
     }
-    
+
     /**
      * Sets the TownID of this record.
-     * 
-     * @param fsValue 
+     *
+     * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setTownID(String fsValue){
+    public JSONObject setTownID(String fsValue) {
         return setValue("sTownIDxx", fsValue);
     }
-    
+
     /**
-     * @return The TownID of this record. 
+     * @return The TownID of this record.
      */
-    public String getTownID(){
+    public String getTownID() {
         return (String) getValue("sTownIDxx");
     }
-    
+
+    /**
+     * Sets the xTownName of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setTownName(String fsValue) {
+        return setValue("xTownName", fsValue);
+    }
+
+    /**
+     * @return The xTownName of this record.
+     */
+    public String getTownName() {
+        return (String) getValue("xTownName");
+    }
+
     /**
      * Sets the BarangayHasRoute of this record.
-     * 
-     * @param fsValue 
+     *
+     * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setHasRoute(String fsValue){
+    public JSONObject setHasRoute(String fsValue) {
         return setValue("cHasRoute", fsValue);
     }
-    
+
     /**
-     * @return The BarangayHasRoute of this record. 
+     * @return The BarangayHasRoute of this record.
      */
-    public String getHasRoute(){
+    public String getHasRoute() {
         return (String) getValue("cHasRoute");
     }
-    
+
     /**
-     * Sets the BarangayBlackLst of this record.
-     * 
-     * @param fsValue 
-     * @return result as success/failed
-     */
-    public JSONObject setBlackList(String fsValue){
-        return setValue("cBlackLst", fsValue);
-    }
-    
-    /**
-     * @return The BarangayBlackLst of this record. 
-     */
-    public String getBlackList(){
-        return (String) getValue("cBlackLst");
-    }
-    
-    /**
-     * Sets the BarangayRecdStat of this record.
-     * 
-     * @param fsValue 
-     * @return result as success/failed
-     */
-    public JSONObject setRecdStat(String fsValue){
-        return setValue("cRecdStat", fsValue);
-    }
-    
-    /**
-     * @return The BarangayRecdStat of this record. 
-     */
-    public String getRecdStat(){
-        return (String) getValue("cRecdStat");
-    }
-        
-    /**
-     * Sets record as active.
-     * 
+     * Sets record as cHasRoute by boolean.
+     *
      * @param fbValue
      * @return result as success/failed
      */
-    public JSONObject setActive(boolean fbValue){
+    public JSONObject setHasRoute(boolean fbValue) {
+        return setValue("cHasRoute", fbValue ? "1" : "0");
+    }
+
+    /**
+     * @return If record is cHasRoute.
+     */
+    public boolean isHasRoute() {
+        return ((String) getValue("cHasRoute")).equals("1");
+    }
+
+    /**
+     * Sets the BarangayBlackLst of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setBlackList(String fsValue) {
+        return setValue("cBlackLst", fsValue);
+    }
+
+    /**
+     * @return The BarangayBlackLst of this record.
+     */
+    public String getBlackList() {
+        return (String) getValue("cBlackLst");
+    }
+
+    /**
+     * Sets record as Blacklist by boolean.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
+    public JSONObject setBlackList(boolean fbValue) {
+        return setValue("cBlackLst", fbValue ? "1" : "0");
+    }
+
+    /**
+     * @return If record is blacklist.
+     */
+    public boolean isBlackList() {
+        return ((String) getValue("cBlackLst")).equals("1");
+    }
+
+    /**
+     * Sets the BarangayRecdStat of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setRecdStat(String fsValue) {
+        return setValue("cRecdStat", fsValue);
+    }
+
+    /**
+     * @return The BarangayRecdStat of this record.
+     */
+    public String getRecdStat() {
+        return (String) getValue("cRecdStat");
+    }
+
+    /**
+     * Sets record as active.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
+    public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
-    
+
     /**
-     * @return If record is active. 
+     * @return If record is active.
      */
-    public boolean isActive(){
+    public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
-    
+
     /**
      * Sets the user encoded/updated the record.
-     * 
-     * @param fsValue 
+     *
+     * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setModifiedBy(String fsValue){
+    public JSONObject setModifiedBy(String fsValue) {
         return setValue("sModified", fsValue);
     }
-    
+
     /**
-     * @return The user encoded/updated the record 
+     * @return The user encoded/updated the record
      */
-    public String getModifiedBy(){
+    public String getModifiedBy() {
         return (String) getValue("sModified");
     }
-    
+
     /**
      * Sets the date and time the record was modified.
-     * 
-     * @param fdValue 
+     *
+     * @param fdValue
      * @return result as success/failed
      */
-    public JSONObject setModifiedDate(Date fdValue){
+    public JSONObject setModifiedDate(Date fdValue) {
         return setValue("dModified", fdValue);
     }
-    
+
     /**
      * @return The date and time the record was modified.
      */
-    public Date getModifiedDate(){
+    public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
+
     /**
      * Gets the SQL statement for this entity.
-     * 
+     *
      * @return SQL Statement
      */
-    public String makeSQL(){
+    public String makeSQL() {
         return MiscUtil.makeSQL(this, "xTownName");
     }
-    
-    private void initialize(){
+
+    /**
+     * Gets the SQL Select statement for this entity.
+     *
+     * @return SelectSQL Statement
+     */
+    public String makeSelectSQL() {
+        return MiscUtil.makeSelect(this, "xTownName");
+    }
+
+    private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
-            
+
             poEntity.last();
             poEntity.moveToInsertRow();
 
-            MiscUtil.initRowSet(poEntity);      
+            MiscUtil.initRowSet(poEntity);
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
             
+            poEntity.updateString("cBlackLst", RecordStatus.INACTIVE);
+            poEntity.updateString("cHasRoute", RecordStatus.INACTIVE);
+                    
+
             poEntity.insertRow();
             poEntity.moveToCurrentRow();
 
             poEntity.absolute(1);
-            
+
             pnEditMode = EditMode.UNKNOWN;
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(1);
         }
-    } 
+    }
+
 }

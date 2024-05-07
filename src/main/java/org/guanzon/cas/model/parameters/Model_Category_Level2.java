@@ -202,7 +202,7 @@ public class Model_Category_Level2 implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -222,7 +222,7 @@ public class Model_Category_Level2 implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this, "xInvTypNm»xMainCatx");
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, fsCondition);
+        lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +261,7 @@ public class Model_Category_Level2 implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setCategoryCode(MiscUtil.getNextCode(getTable(), "sCategrCd", false, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -351,7 +351,7 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * Sets the Category_Level2 Code of this record.
+     * Sets the sCategrCd of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -361,14 +361,14 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 Code of this record.
+     * @return ThesCategrCd of this record.
      */
     public String getCategoryCode() {
         return (String) getValue("sCategrCd");
     }
 
     /**
-     * Sets the Category_Level2 Desc of this record.
+     * Sets the sDescript of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -378,31 +378,48 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 Desc of this record.
+     * @return The sDescript of this record.
      */
     public String getDescription() {
         return (String) getValue("sDescript");
     }
 
     /**
-     * Sets the Category_Level2 InvTypCode of this record.
+     * Sets the sInvTypCd of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setInvenTorypCode(String fsValue) {
+    public JSONObject setInventoryTypeCode(String fsValue) {
         return setValue("sInvTypCd", fsValue);
     }
 
     /**
-     * @return The Category_Level2 InvTypCode of this record.
+     * @return The sInvTypCd of this record.
      */
-    public String getInvenTorypCode() {
+    public String getInventoryTypeCode() {
         return (String) getValue("sInvTypCd");
     }
 
     /**
-     * Sets the Category_Level2 MainCatx of this record.
+     * Sets the xInvTypNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setInvTypeName(String fsValue) {
+        return setValue("xInvTypNm", fsValue);
+    }
+
+    /**
+     * @return The xInvTypNm of this record.
+     */
+    public String getInvTypeName() {
+        return (String) getValue("xInvTypNm");
+    }
+
+    /**
+     * Sets the sMainCatx of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -412,10 +429,27 @@ public class Model_Category_Level2 implements GEntity {
     }
 
     /**
-     * @return The Category_Level2 MainCatx of this record.
+     * @return The sMainCatx of this record.
      */
     public String getMainCategory() {
         return (String) getValue("sMainCatx");
+    }
+
+    /**
+     * Sets the xMainCatx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setMainCategoryName(String fsValue) {
+        return setValue("xMainCatx", fsValue);
+    }
+
+    /**
+     * @return The xMainCatx of this record.
+     */
+    public String getMainCategoryName() {
+        return (String) getValue("xMainCatx");
     }
 
     /**
@@ -493,6 +527,15 @@ public class Model_Category_Level2 implements GEntity {
      */
     public String makeSQL() {
         return MiscUtil.makeSQL(this, "xInvTypNm»xMainCatx");
+    }
+
+    /**
+     * Gets the SQL Select statement for this entity.
+     *
+     * @return SelectSQL Statement
+     */
+    public String makeSelectSQL() {
+        return MiscUtil.makeSelect(this,"xInvTypNm»xMainCatx");
     }
 
     private void initialize() {
