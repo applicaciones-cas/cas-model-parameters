@@ -203,7 +203,7 @@ public class Model_Term implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setTermCode(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), ""));
+        setTermCode(MiscUtil.getNextCode(getTable(), "sTermCode", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -223,7 +223,7 @@ public class Model_Term implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sSizeIDxx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sTermCode = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -262,7 +262,7 @@ public class Model_Term implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setTermCode(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), ""));
+                setTermCode(MiscUtil.getNextCode(getTable(), "sTermCode", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -351,7 +351,7 @@ public class Model_Term implements GEntity {
 
     }
     /**
-     * Description: Sets the sSizeIDxx of this record.
+     * Description: Sets the sTermCode of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -361,14 +361,14 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return The sSizeIDxx of this record.
+     * @return The sTermCode of this record.
      */
     public String getTermCode() {
         return (String) getValue("sTermCode");
     }
 
     /**
-     * Description: Sets the sSizeName of this record.
+     * Description: Sets the sDescript of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -378,14 +378,14 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return The sSizeName of this record.
+     * @return The sDescript of this record.
      */
     public String getDescription() {
         return (String) getValue("sDescript");
     }
 
     /**
-     * Description: Sets the cRecdStat of this record.
+     * Description: Sets the cCoverage of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -395,7 +395,7 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return The cRecdStat of this record.
+     * @return The cCoverage of this record.
      */
     public String getCoverage() {
         return (String) getValue("cCoverage");
@@ -417,9 +417,13 @@ public class Model_Term implements GEntity {
 //    public boolean isActive() {
 //        return ((String) getValue("cRecdStat")).equals("1");
 //    }
+    
+        public JSONObject setActive(boolean fbValue) {
+        return setValue("cRecdStat", fbValue ? "1" : "0");
+    }
 
     /**
-     * Sets the user encoded/updated the record.
+     * Sets the nTermValx of the record.
      *
      * @param fnValue
      * @return result as success/failed
@@ -429,26 +433,26 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return The user encoded/updated the record
+     * @return The nTermValx of the record
      */
     public BigDecimal getTermValue() {
         return (BigDecimal) getValue("nTermValx");
     }
 
     /**
-     * Sets the date and time the record was modified.
+     * Sets  sRecdStat was modified.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setRecdStat(String fsValue) {
+    public JSONObject setRecordStatus(String fsValue) {
         return setValue("sRecdStat", fsValue);
     }
 
     /**
-     * @return The date and time the record was modified.
+     * @return  sRecdStat was modified.
      */
-    public String getRecdStat() {
+    public String getRecordStatus() {
         return (String) getValue("sRecdStat");
     }
     
@@ -459,15 +463,15 @@ public class Model_Term implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setModified(Date fsValue) {
+    public JSONObject setModified(String fsValue) {
         return setValue("sModified", fsValue);
     }
 
     /**
      * @return The date and time the record was modified.
      */
-    public Date getModified() {
-        return (Date) getValue("sModified");
+    public String getModified() {
+        return (String) getValue("sModified");
     }
         /**
      * Sets the date and time the record was modified.
