@@ -1,6 +1,7 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -106,7 +107,7 @@ public class Model_Warehouse implements GEntity {
      */
     @Override
     public String getTable() {
-        return "Model";
+        return "Warehouse";
     }
 
     /**
@@ -202,7 +203,7 @@ public class Model_Warehouse implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setWareHouseID(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -219,10 +220,10 @@ public class Model_Warehouse implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xBrandNme");
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sModelCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sWHouseID = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +262,7 @@ public class Model_Warehouse implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setWareHouseID(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -281,11 +282,11 @@ public class Model_Warehouse implements GEntity {
                 Model_Warehouse loOldEntity = new Model_Warehouse(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getWareHouseID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getsWHouseID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sModelCde = " + SQLUtil.toSQL(this.getWareHouseID()), "xBrandNme");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sWHouseID = " + SQLUtil.toSQL(this.getsWHouseID()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -349,56 +350,38 @@ public class Model_Warehouse implements GEntity {
         }
 
     }
-
     /**
-     * Description: Sets the WareHouseID of this record.
+     * Description: Sets the sWHouseID of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setWareHouseID(String fsValue) {
+    public JSONObject setsWHouseID(String fsValue) {
         return setValue("sWHouseID", fsValue);
     }
 
     /**
-     * @return The WareHouseID of this record.
+     * @return The sWHouseID of this record.
      */
-    public String getWareHouseID() {
+    public String getsWHouseID() {
         return (String) getValue("sWHouseID");
     }
 
     /**
-     * Description: Sets the WareHouseNumber of this record.
+     * Description: Sets the sWHouseNm of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setWareHouseNumber(String fsValue) {
+    public JSONObject setsWHouseNm(String fsValue) {
         return setValue("sWHouseNm", fsValue);
     }
 
     /**
-     * @return The WareHouseNumber of this record.
+     * @return The sWHouseNm of this record.
      */
-    public String getWareHouseNumber() {
+    public String getsWHouseNm() {
         return (String) getValue("sWHouseNm");
-    }
-    
-    /**
-     * Description: Sets the RecordStatus of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setRecordStatus(String fsValue) {
-        return setValue("cRecdStat", fsValue);
-    }
-
-    /**
-     * @return The RecordStatus of this record.
-     */
-    public String getRecordStatus() {
-        return (String) getValue("cRecdStat");
     }
 
     /**
@@ -407,35 +390,73 @@ public class Model_Warehouse implements GEntity {
      * @param fbValue
      * @return result as success/failed
      */
-    public JSONObject setActive(boolean fbValue) {
+//    public JSONObject setActive(boolean fbValue) {
+//        return setValue("cRecdStat", fbValue ? "1" : "0");
+//    }
+//
+//    /**
+//     * @return If record is active.
+//     */
+//    public boolean isActive() {
+//        return ((String) getValue("cRecdStat")).equals("1");
+//    }
+    
+        public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
 
     /**
-     * @return If record is active.
+     * Sets the nTermValx of the record.
+     *
+     * @param fnValue
+     * @return result as success/failed
      */
-    public boolean isActive() {
-        return ((String) getValue("cRecdStat")).equals("1");
+    public JSONObject setTermValue(BigDecimal fnValue) {
+        return setValue("nTermValx", fnValue);
     }
 
     /**
-     * Sets the user encoded/updated the record.
+     * @return The nTermValx of the record
+     */
+    public BigDecimal getTermValue() {
+        return (BigDecimal) getValue("nTermValx");
+    }
+
+    /**
+     * Sets  sRecdStat was modified.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setModifiedBy(String fsValue) {
+    public JSONObject setRecordStatus(String fsValue) {
+        return setValue("sRecdStat", fsValue);
+    }
+
+    /**
+     * @return  sRecdStat was modified.
+     */
+    public String getRecordStatus() {
+        return (String) getValue("sRecdStat");
+    }
+    
+    
+        /**
+     * Sets the date and time the record was modified.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setModified(String fsValue) {
         return setValue("sModified", fsValue);
     }
 
     /**
-     * @return The user encoded/updated the record
+     * @return The date and time the record was modified.
      */
-    public String getModifiedBy() {
+    public String getModified() {
         return (String) getValue("sModified");
     }
-
-    /**
+        /**
      * Sets the date and time the record was modified.
      *
      * @param fdValue
@@ -451,31 +472,15 @@ public class Model_Warehouse implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-
-    /**
-     * Description: Sets the xBrandNme of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setBrandName(String fsValue) {
-        return setValue("xBrandNme", fsValue);
-    }
-
-    /**
-     * @return The xBrandNme of this record.
-     */
-    public String getBrandName() {
-        return (String) getValue("xBrandNme");
-    }
-
+    
+    
     /**
      * Gets the SQL statement for this entity.
      *
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xBrandNme");
+        return MiscUtil.makeSQL(this);
     }
 
     /**
@@ -484,7 +489,7 @@ public class Model_Warehouse implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this, "xBrandNme");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {
