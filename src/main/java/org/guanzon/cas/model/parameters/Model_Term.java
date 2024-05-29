@@ -407,21 +407,18 @@ public class Model_Term implements GEntity {
      * @param fbValue
      * @return result as success/failed
      */
-//    public JSONObject setActive(boolean fbValue) {
-//        return setValue("cRecdStat", fbValue ? "1" : "0");
-//    }
-//
-//    /**
-//     * @return If record is active.
-//     */
-//    public boolean isActive() {
-//        return ((String) getValue("cRecdStat")).equals("1");
-//    }
-    
-        public JSONObject setActive(boolean fbValue) {
+    public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
 
+    /**
+     * @return If record is active.
+     */
+    public boolean isActive() {
+        return ((String) getValue("cRecdStat")).equals("1");
+    }
+    
+  
     /**
      * Sets the nTermValx of the record.
      *
