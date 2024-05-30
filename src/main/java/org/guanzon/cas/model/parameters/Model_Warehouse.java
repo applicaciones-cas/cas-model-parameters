@@ -1,7 +1,6 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -350,6 +349,7 @@ public class Model_Warehouse implements GEntity {
         }
 
     }
+
     /**
      * Description: Sets the sWHouseID of this record.
      *
@@ -385,6 +385,23 @@ public class Model_Warehouse implements GEntity {
     }
 
     /**
+     * Description: Sets the cRecdStat of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setRecdStat(String fsValue) {
+        return setValue("cRecdStat", fsValue);
+    }
+
+    /**
+     * @return The cRecdStat of this record.
+     */
+    public String getRecdStat() {
+        return (String) getValue("cRecdStat");
+    }
+
+    /**
      * Sets record as active.
      *
      * @param fbValue
@@ -400,48 +417,9 @@ public class Model_Warehouse implements GEntity {
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
-    
-//        public JSONObject setActive(boolean fbValue) {
-//        return setValue("cRecdStat", fbValue ? "1" : "0");
-//    }
 
     /**
-     * Sets the nTermValx of the record.
-     *
-     * @param fnValue
-     * @return result as success/failed
-     */
-//    public JSONObject setTermValue(BigDecimal fnValue) {
-//        return setValue("nTermValx", fnValue);
-//    }
-//
-//    /**
-//     * @return The nTermValx of the record
-//     */
-//    public BigDecimal getTermValue() {
-//        return (BigDecimal) getValue("nTermValx");
-//    }
-
-    /**
-     * Sets  sRecdStat was modified.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setRecordStatus(String fsValue) {
-        return setValue("sRecdStat", fsValue);
-    }
-
-    /**
-     * @return  sRecdStat was modified.
-     */
-    public String getRecordStatus() {
-        return (String) getValue("sRecdStat");
-    }
-    
-    
-        /**
-     * Sets the date and time the record was modified.
+     * Sets the user encoded/updated the record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -451,12 +429,13 @@ public class Model_Warehouse implements GEntity {
     }
 
     /**
-     * @return The date and time the record was modified.
+     * @return The user encoded/updated the record
      */
     public String getModified() {
         return (String) getValue("sModified");
     }
-        /**
+
+    /**
      * Sets the date and time the record was modified.
      *
      * @param fdValue
@@ -472,8 +451,7 @@ public class Model_Warehouse implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
-    
+
     /**
      * Gets the SQL statement for this entity.
      *
