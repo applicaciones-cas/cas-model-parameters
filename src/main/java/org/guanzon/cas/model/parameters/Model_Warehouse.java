@@ -390,20 +390,20 @@ public class Model_Warehouse implements GEntity {
      * @param fbValue
      * @return result as success/failed
      */
-//    public JSONObject setActive(boolean fbValue) {
-//        return setValue("cRecdStat", fbValue ? "1" : "0");
-//    }
-//
-//    /**
-//     * @return If record is active.
-//     */
-//    public boolean isActive() {
-//        return ((String) getValue("cRecdStat")).equals("1");
-//    }
-    
-        public JSONObject setActive(boolean fbValue) {
+    public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
+
+    /**
+     * @return If record is active.
+     */
+    public boolean isActive() {
+        return ((String) getValue("cRecdStat")).equals("1");
+    }
+    
+//        public JSONObject setActive(boolean fbValue) {
+//        return setValue("cRecdStat", fbValue ? "1" : "0");
+//    }
 
     /**
      * Sets the nTermValx of the record.
@@ -411,16 +411,16 @@ public class Model_Warehouse implements GEntity {
      * @param fnValue
      * @return result as success/failed
      */
-    public JSONObject setTermValue(BigDecimal fnValue) {
-        return setValue("nTermValx", fnValue);
-    }
-
-    /**
-     * @return The nTermValx of the record
-     */
-    public BigDecimal getTermValue() {
-        return (BigDecimal) getValue("nTermValx");
-    }
+//    public JSONObject setTermValue(BigDecimal fnValue) {
+//        return setValue("nTermValx", fnValue);
+//    }
+//
+//    /**
+//     * @return The nTermValx of the record
+//     */
+//    public BigDecimal getTermValue() {
+//        return (BigDecimal) getValue("nTermValx");
+//    }
 
     /**
      * Sets  sRecdStat was modified.
