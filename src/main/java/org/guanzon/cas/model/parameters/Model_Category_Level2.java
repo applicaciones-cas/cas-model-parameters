@@ -444,6 +444,40 @@ public class Model_Category_Level2 implements GEntity {
     public JSONObject setMainCategoryName(String fsValue) {
         return setValue("xMainCatx", fsValue);
     }
+    
+    /**
+     * Sets the cClassify of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setClassify(String fsValue) {
+        return setValue("cClassify", fsValue);
+    }
+
+    /**
+     * @return The cClassify of this record.
+     */
+    public String getClassify() {
+        return (String) getValue("cClassify");
+    }
+
+    /**
+     * Sets record as classified.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
+    public JSONObject setClassify(boolean fbValue) {
+        return setValue("cClassify", fbValue ? "1" : "0");
+    }
+
+    /**
+     * @return If record is classified.
+     */
+    public boolean isClassify() {
+        return ((String) getValue("cClassify")).equals("1");
+    }
 
     /**
      * @return The xMainCatx of this record.

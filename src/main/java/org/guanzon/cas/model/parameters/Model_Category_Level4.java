@@ -385,40 +385,6 @@ public class Model_Category_Level4 implements GEntity {
     }
 
     /**
-     * Sets the Category_Level4 MainCategory of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setMainCategory(String fsValue) {
-        return setValue("sMainCatx", fsValue);
-    }
-
-    /**
-     * @return The Category_Level4 of this record.
-     */
-    public String getMainCategory() {
-        return (String) getValue("sMainCatx");
-    }
-
-    /**
-     * Sets the sMainCatx of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setMainCategoryName(String fsValue) {
-        return setValue("xMainCatx", fsValue);
-    }
-
-    /**
-     * @return The sMainCatx of this record.
-     */
-    public String getMainCategoryName() {
-        return (String) getValue("xMainCatx");
-    }
-
-    /**
      * Sets the Category_Level4 RecdStat of this record.
      *
      * @param fsValue

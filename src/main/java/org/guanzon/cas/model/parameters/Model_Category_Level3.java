@@ -385,23 +385,6 @@ public class Model_Category_Level3 implements GEntity {
     }
 
     /**
-     * Sets the Category_Level3 MainCatx of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setMainCategory(String fsValue) {
-        return setValue("sMainCatx", fsValue);
-    }
-
-    /**
-     * @return The sMainCatx of this record.
-     */
-    public String getMainCategory() {
-        return (String) getValue("sMainCatx");
-    }
-
-    /**
      * Sets the Category_Level3 RecdStat of this record.
      *
      * @param fsValue
@@ -468,25 +451,6 @@ public class Model_Category_Level3 implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-
-    /**
-     * Sets the sMainCatx of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setMainCategoryName(String fsValue) {
-        return setValue("xMainCatx", fsValue);
-    }
-    
-    
-    /**
-     * @return The Category_Level3 MainCatx of this record.
-     */
-    public String getMainCategoryName() {
-        return (String) getValue("xMainCatx");
-    }
-
 
     /**
      * Gets the SQL statement for this entity.

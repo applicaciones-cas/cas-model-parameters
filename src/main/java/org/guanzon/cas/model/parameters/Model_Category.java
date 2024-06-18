@@ -383,73 +383,73 @@ public class Model_Category implements GEntity {
         return (String) getValue("sDescript");
     }
 
-    /**
-     * Sets the sInvTypCd Code of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setInventorypCode(String fsValue) {
-        return setValue("sInvTypCd", fsValue);
-    }
-
-    /**
-     * @return The sInvTypCd Code of this record.
-     */
-    public String getInventorypCode() {
-        return (String) getValue("sInvTypCd");
-    }
-
-    /**
-     * Sets the xInvTypNm Code of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setInvTypeName(String fsValue) {
-        return setValue("xInvTypNm", fsValue);
-    }
-
-    /**
-     * @return The xInvTypNm Code of this record.
-     */
-    public String getInvTypeName() {
-        return (String) getValue("xInvTypNm");
-    }
-
-    /**
-     * Sets the cClassify of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setClassify(String fsValue) {
-        return setValue("cClassify", fsValue);
-    }
-
-    /**
-     * @return The cClassify of this record.
-     */
-    public String getClassify() {
-        return (String) getValue("cClassify");
-    }
-
-    /**
-     * Sets record as classified.
-     *
-     * @param fbValue
-     * @return result as success/failed
-     */
-    public JSONObject setClassify(boolean fbValue) {
-        return setValue("cClassify", fbValue ? "1" : "0");
-    }
-
-    /**
-     * @return If record is classified.
-     */
-    public boolean isClassify() {
-        return ((String) getValue("cClassify")).equals("1");
-    }
+//    /**
+//     * Sets the sInvTypCd Code of this record.
+//     *
+//     * @param fsValue
+//     * @return result as success/failed
+//     */
+//    public JSONObject setInventorypCode(String fsValue) {
+//        return setValue("sInvTypCd", fsValue);
+//    }
+//
+//    /**
+//     * @return The sInvTypCd Code of this record.
+//     */
+//    public String getInventorypCode() {
+//        return (String) getValue("sInvTypCd");
+//    }
+//
+//    /**
+//     * Sets the xInvTypNm Code of this record.
+//     *
+//     * @param fsValue
+//     * @return result as success/failed
+//     */
+//    public JSONObject setInvTypeName(String fsValue) {
+//        return setValue("xInvTypNm", fsValue);
+//    }
+//
+//    /**
+//     * @return The xInvTypNm Code of this record.
+//     */
+//    public String getInvTypeName() {
+//        return (String) getValue("xInvTypNm");
+//    }
+//
+//    /**
+//     * Sets the cClassify of this record.
+//     *
+//     * @param fsValue
+//     * @return result as success/failed
+//     */
+//    public JSONObject setClassify(String fsValue) {
+//        return setValue("cClassify", fsValue);
+//    }
+//
+//    /**
+//     * @return The cClassify of this record.
+//     */
+//    public String getClassify() {
+//        return (String) getValue("cClassify");
+//    }
+//
+//    /**
+//     * Sets record as classified.
+//     *
+//     * @param fbValue
+//     * @return result as success/failed
+//     */
+//    public JSONObject setClassify(boolean fbValue) {
+//        return setValue("cClassify", fbValue ? "1" : "0");
+//    }
+//
+//    /**
+//     * @return If record is classified.
+//     */
+//    public boolean isClassify() {
+//        return ((String) getValue("cClassify")).equals("1");
+//    }
 
     /**
      * Sets the Category RecdStat of this record.
@@ -534,7 +534,7 @@ public class Model_Category implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xInvTypNm");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {
