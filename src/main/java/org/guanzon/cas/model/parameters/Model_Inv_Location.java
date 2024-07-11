@@ -285,7 +285,7 @@ public class Model_Inv_Location implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLocatnCd = " + SQLUtil.toSQL(this.getLocationCode()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sLocatnCd = " + SQLUtil.toSQL(this.getLocationCode()), "xWHouseNm»xSectnNme");
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -383,24 +383,23 @@ public class Model_Inv_Location implements GEntity {
     public String getDescription() {
         return (String) getValue("sDescript");
     }
-
-    /**
-     * Description: Sets the sBriefDsc of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setBriefDescription(String fsValue) {
-        return setValue("sBriefDsc", fsValue);
+    
+    public JSONObject setWarehouseID(String fsValue){
+        return setValue("sWHouseID", fsValue);
     }
-
-    /**
-     * @return The sBriefDsc of this record.
-     */
-    public String getBriefDescription() {
-        return (String) getValue("sBriefDsc");
+    
+    public String getWarehouseID(String fsValue){
+        return (String) getValue("sWHouseID");
     }
-
+    
+    public JSONObject setSectionID(String fsValue){
+        return setValue("sSectnIDx", fsValue);
+    }
+    
+    public String getSectionID(String fsValue){
+        return (String) getValue("sSectnIDx");
+    }
+    
     /**
      * Description: Sets the cRecdStat of this record.
      *
@@ -433,6 +432,22 @@ public class Model_Inv_Location implements GEntity {
      */
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
+    }
+
+    public JSONObject setWarehouseName(String fsValue){
+        return setValue("xWHouseNm", fsValue);
+    }
+    
+    public String getWarehouseName(String fsValue){
+        return (String) getValue("xWHouseNm");
+    }
+    
+    public JSONObject setSectionName(String fsValue){
+        return setValue("xSectnNme", fsValue);
+    }
+    
+    public String getSectionName(String fsValue){
+        return (String) getValue("xSectnNme");
     }
 
     /**
@@ -475,7 +490,7 @@ public class Model_Inv_Location implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this);
+        return MiscUtil.makeSQL(this, "xWHouseNm»xSectnNme");
     }
 
     /**
