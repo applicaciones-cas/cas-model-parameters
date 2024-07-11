@@ -202,7 +202,7 @@ public class Model_Warehouse implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", true, poGRider.getConnection(), ""));
+        setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", false, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -261,7 +261,7 @@ public class Model_Warehouse implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", true, poGRider.getConnection(), ""));
+                setsWHouseID(MiscUtil.getNextCode(getTable(), "sWHouseID", false, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 

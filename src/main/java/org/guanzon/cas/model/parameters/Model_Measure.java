@@ -17,9 +17,9 @@ import org.json.simple.JSONObject;
 /**
  * @author Michael Cuison
  */
-public class Model_Size implements GEntity {
+public class Model_Measure implements GEntity {
 
-    final String XML = "Model_Size.xml";
+    final String XML = "Model_Measure.xml";
 
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
@@ -31,7 +31,7 @@ public class Model_Size implements GEntity {
      *
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Size(GRider foValue) {
+    public Model_Measure(GRider foValue) {
         if (foValue == null) {
             System.err.println("Application Driver is not set.");
             System.exit(1);
@@ -106,7 +106,7 @@ public class Model_Size implements GEntity {
      */
     @Override
     public String getTable() {
-        return "Size";
+        return "Measure";
     }
 
     /**
@@ -202,7 +202,7 @@ public class Model_Size implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setMeasurementID(MiscUtil.getNextCode(getTable(), "sMeasurID", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -222,7 +222,7 @@ public class Model_Size implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sSizeIDxx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sMeasurID = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +261,7 @@ public class Model_Size implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setSizeID(MiscUtil.getNextCode(getTable(), "sSizeIDxx", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setMeasurementID(MiscUtil.getNextCode(getTable(), "sMeasurID", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
                 lsSQL = makeSQL();
 
@@ -278,14 +278,14 @@ public class Model_Size implements GEntity {
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Size loOldEntity = new Model_Size(poGRider);
+                Model_Measure loOldEntity = new Model_Measure(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getSizeID());
+                JSONObject loJSON = loOldEntity.openRecord(this.getMeasurementID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getSizeID()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sMeasurID = " + SQLUtil.toSQL(this.getMeasurementID()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -351,20 +351,20 @@ public class Model_Size implements GEntity {
     }
 
     /**
-     * Description: Sets the sSizeIDxx of this record.
+     * Description: Sets the sMeasurID of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setSizeID(String fsValue) {
-        return setValue("sSizeIDxx", fsValue);
+    public JSONObject setMeasurementID(String fsValue) {
+        return setValue("sMeasurID", fsValue);
     }
 
     /**
-     * @return The sSizeIDxx of this record.
+     * @return The sMeasurID of this record.
      */
-    public String getSizeID() {
-        return (String) getValue("sSizeIDxx");
+    public String getMeasurementID() {
+        return (String) getValue("sMeasurID");
     }
 
     /**
@@ -373,15 +373,15 @@ public class Model_Size implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setSizeName(String fsValue) {
-        return setValue("sSizeName", fsValue);
+    public JSONObject setMeasurementName(String fsValue) {
+        return setValue("sMeasurNm", fsValue);
     }
 
     /**
      * @return The sSizeName of this record.
      */
-    public String getSizeName() {
-        return (String) getValue("sSizeName");
+    public String getMeasurementName() {
+        return (String) getValue("sMeasurNm");
     }
 
     /**
