@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
+import org.guanzon.appdriver.base.CommonUtils;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
 import org.guanzon.appdriver.base.SQLUtil;
@@ -219,6 +220,7 @@ public class Model_Category implements GEntity {
         poJSON = new JSONObject();
 
         String lsSQL = MiscUtil.makeSelect(this, "xInvTypNm");
+//        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd = " + SQLUtil.toSQL(fsCondition));
@@ -517,6 +519,19 @@ public class Model_Category implements GEntity {
      */
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
+    }
+    public String getSQL(){
+        String lsSQL = "SELECT" +
+                            "  sCategrCd" +
+                            ", sDescript" +
+                            ", cRecdStat" +
+                            ", sModified" +
+                            ", dModified" +
+                        " FROM Category ";
+        if (!System.getProperty("store.inventory.industry").isEmpty())
+            lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd IN " + CommonUtils.getParameter(System.getProperty("store.inventory.industry")));
+        System.out.println("category lsSQL = " + lsSQL);
+        return lsSQL;
     }
 
     /**
