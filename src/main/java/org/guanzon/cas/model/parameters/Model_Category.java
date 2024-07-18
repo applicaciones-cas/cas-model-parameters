@@ -531,6 +531,7 @@ public class Model_Category implements GEntity {
         if (!System.getProperty("store.inventory.industry").isEmpty())
             lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd IN " + CommonUtils.getParameter(System.getProperty("store.inventory.industry")));
         System.out.println("category lsSQL = " + lsSQL);
+        
         return lsSQL;
     }
 
