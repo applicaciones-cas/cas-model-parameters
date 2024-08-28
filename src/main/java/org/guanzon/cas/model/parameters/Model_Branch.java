@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
+import org.guanzon.appdriver.base.CommonUtils;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
 import org.guanzon.appdriver.base.SQLUtil;
@@ -179,7 +180,7 @@ public class Model_Branch implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xCategrNm"); //xCategrNm perhaps is subject to change. This method was only copied from another so remember this.
+        String lsSQL = MiscUtil.makeSelect(this); 
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, " sBranchCd = " + SQLUtil.toSQL(fsCondition));
@@ -216,8 +217,8 @@ public class Model_Branch implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBranchCd(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
-                
+//                setBranchCd(MiscUtil.getNextCode(getTable(), "sBranchCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBranchCd("Aw01");
 
                 lsSQL = makeSQL();
 
@@ -234,14 +235,14 @@ public class Model_Branch implements GEntity{
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Brand loOldEntity = new Model_Brand(poGRider);
+                Model_Branch loOldEntity = new Model_Branch(poGRider);
 
                 //replace with the primary key column info
                 JSONObject loJSON = loOldEntity.openRecord(this.getBranchCd());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBranchCd = " + SQLUtil.toSQL(this.getBranchCd()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBranchCd = " + SQLUtil.toSQL(this.getBranchCd()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -320,12 +321,28 @@ public class Model_Branch implements GEntity{
         return (String) getValue("sDescript");
     }
     /////////////////////////////////////////////////////////
-    public String makeSQL() {
-        return MiscUtil.makeSQL(this);
+    public JSONObject setAddress(String fsValue) {
+        return setValue("sAddressx", fsValue);
     }
     
-    public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+    public String getAddress() {
+        return (String) getValue("sAddressx");
+    }
+    /////////////////////////////////////////////////////////
+    public JSONObject setContact(String fsValue) {
+        return setValue("sContactx", fsValue);
+    }
+    
+    public String getContact() {
+        return (String) getValue("sContactx");
+    }
+    /////////////////////////////////////////////////////////
+    public JSONObject setTeleNum(String fsValue) {
+        return setValue("sTelNumbr", fsValue);
+    }
+    
+    public String getTeleNum() {
+        return (String) getValue("sTelNumbr");
     }
     /////////////////////////////////////////////////////////
     public JSONObject setActive(boolean fbValue) {
@@ -360,9 +377,39 @@ public class Model_Branch implements GEntity{
         return (Date) getValue("dModified");
     }
     /////////////////////////////////////////////////////////
+    public String makeSQL() {
+        return MiscUtil.makeSQL(this);
+    }
     
+    public String makeSelectSQL() {
+        return MiscUtil.makeSelect(this);
+    }
     /////////////////////////////////////////////////////////
-    
+    public String getSQL(){
+        String lsSQL = "SELECT" +
+                            "  sBranchCd" +
+                            ", sBranchNm" +
+                            ", sDescript" +
+                            ", sCompnyID" +
+                            ", sAddressx" +
+                            ", sTownIDxx" +
+                            ", sManagerx" +
+                            ", sSellCode" +
+                            ", cWareHous" +
+                            ", sTelNumbr" +
+                            ", cRecdStat" +
+                            ", sContactx" +
+                            ", dExportxx" +
+                            ", cSrvcCntr" +
+                            ", cAutomate" +
+                            ", cMainOffc" +
+                            ", sModified" +
+                            ", dModified" +
+                        " FROM " + System.getProperty("sys.table") +
+                        " WHERE 0=1";
+        
+        return lsSQL;
+    }
     
     
     
@@ -373,24 +420,3 @@ public class Model_Branch implements GEntity{
     
     
 }
-//"SELECT" +
-//                            "  sBranchCd" +
-//                            ", sBranchNm" +
-//                            ", sDescript" +
-//                            ", sCompnyID" +
-//                            ", sAddressx" +
-//                            ", sTownIDxx" +
-//                            ", sManagerx" +
-//                            ", sSellCode" +
-//                            ", cWareHous" +
-//                            ", sTelNumbr" +
-//                            ", cRecdStat" +
-//                            ", sContactx" +
-//                            ", dExportxx" +
-//                            ", cSrvcCntr" +
-//                            ", cAutomate" +
-//                            ", cMainOffc" +
-//                            ", sModified" +
-//                            ", dModified" +
-//                        " FROM " + System.getProperty("sys.table") +
-//                        " WHERE 0=1"
