@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
@@ -167,7 +168,7 @@ public class Model_Branch implements GEntity{
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setBranchCode(MiscUtil.getNextCode(getTable(), "sBranchCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setBranchCd(MiscUtil.getNextCode(getTable(), "sBranchCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -215,7 +216,7 @@ public class Model_Branch implements GEntity{
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBranchCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setBranchCd(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
                 
 
                 lsSQL = makeSQL();
@@ -236,11 +237,11 @@ public class Model_Branch implements GEntity{
                 Model_Brand loOldEntity = new Model_Brand(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBranchCode());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBranchCd());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBranchCd = " + SQLUtil.toSQL(this.getBranchCode()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBranchCd = " + SQLUtil.toSQL(this.getBranchCd()), "xCategrNm");
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -303,11 +304,11 @@ public class Model_Branch implements GEntity{
     
     
     
-    public JSONObject setBranchCode(String fsValue) {
+    public JSONObject setBranchCd(String fsValue) {
         return setValue("sBranchCd", fsValue);
     }
     
-    public String getBranchCode() {
+    public String getBranchCd() {
         return (String) getValue("sBranchCd");
     }
     /////////////////////////////////////////////////////////
@@ -320,11 +321,11 @@ public class Model_Branch implements GEntity{
     }
     /////////////////////////////////////////////////////////
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xCategrNm");
+        return MiscUtil.makeSQL(this);
     }
     
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xCategrNm");
+        return MiscUtil.makeSelect(this);
     }
     /////////////////////////////////////////////////////////
     public JSONObject setActive(boolean fbValue) {
@@ -335,11 +336,29 @@ public class Model_Branch implements GEntity{
         return ((String) getValue("cRecdStat")).equals("1");
     }
     /////////////////////////////////////////////////////////
+    public JSONObject setBranchNm(String fsValue) {
+        return setValue("sBranchNm", fsValue);
+    }
     
+    public String getBranchNm() {
+        return (String) getValue("sBranchNm");
+    }
     /////////////////////////////////////////////////////////
+    public JSONObject setModifiedBy(String fsValue) {
+        return setValue("sModified", fsValue);
+    }
     
+    public String getModifiedBy() {
+        return (String) getValue("sModified");
+    }
     /////////////////////////////////////////////////////////
+    public JSONObject setModifiedDate(Date fdValue) {
+        return setValue("dModified", fdValue);
+    }
     
+    public Date getModifiedDate() {
+        return (Date) getValue("dModified");
+    }
     /////////////////////////////////////////////////////////
     
     /////////////////////////////////////////////////////////
