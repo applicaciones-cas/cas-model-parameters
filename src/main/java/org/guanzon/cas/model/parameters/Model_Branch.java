@@ -53,8 +53,9 @@ public class Model_Branch implements GEntity{
             poEntity.moveToInsertRow();
 
             MiscUtil.initRowSet(poEntity);
+            
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
-
+            poEntity.updateObject("dExportxx", null);
             poEntity.insertRow();
             poEntity.moveToCurrentRow();
 
@@ -168,9 +169,7 @@ public class Model_Branch implements GEntity{
     public JSONObject newRecord() {
         pnEditMode = EditMode.ADDNEW;
 
-        //replace with the primary key column info
-        setBranchCd(MiscUtil.getNextCode(getTable(), "sBranchCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
-
+ 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
         return poJSON;
@@ -212,14 +211,12 @@ public class Model_Branch implements GEntity{
     @Override
     public JSONObject saveRecord() {
         poJSON = new JSONObject();
-
+        
         if (pnEditMode == EditMode.ADDNEW || pnEditMode == EditMode.UPDATE) {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
-                //replace with the primary key column info
-//                setBranchCd(MiscUtil.getNextCode(getTable(), "sBranchCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
-                setBranchCd("Aw01");
-
+                // Setting stuff to null for testing
+                
                 lsSQL = makeSQL();
 
                 if (!lsSQL.isEmpty()) {
@@ -361,6 +358,22 @@ public class Model_Branch implements GEntity{
         return (String) getValue("sBranchNm");
     }
     /////////////////////////////////////////////////////////
+    public JSONObject setCompanyID(String fsValue) {
+        return setValue("sCompnyID", fsValue);
+    }
+    
+    public String getCompanyID() {
+        return (String) getValue("sCompnyID");
+    }
+    /////////////////////////////////////////////////////////
+    public JSONObject setTownID(String fsValue) {
+        return setValue("sTownIDxx", fsValue);
+    }
+    
+    public String getTownID() {
+        return (String) getValue("sTownIDxx");
+    }
+    /////////////////////////////////////////////////////////
     public JSONObject setModifiedBy(String fsValue) {
         return setValue("sModified", fsValue);
     }
@@ -375,6 +388,14 @@ public class Model_Branch implements GEntity{
     
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
+    }
+    /////////////////////////////////////////////////////////
+    public JSONObject setExportDate(Date fdValue) {
+        return setValue("dExportxx", fdValue);
+    }
+    
+    public Date getExportDate() {
+        return (Date) getValue("dExportxx");
     }
     /////////////////////////////////////////////////////////
     public String makeSQL() {
@@ -405,8 +426,7 @@ public class Model_Branch implements GEntity{
                             ", cMainOffc" +
                             ", sModified" +
                             ", dModified" +
-                        " FROM " + System.getProperty("sys.table") +
-                        " WHERE 0=1";
+                        " FROM " + System.getProperty("sys.table") ;
         
         return lsSQL;
     }
