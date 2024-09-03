@@ -534,7 +534,7 @@ public class Model_Color_Detail implements GEntity {
                 + ", a.cRecdStat cRecdStat "
                 + ", a.sModified sModified "
                 + ", a.dModified dModified "
-                + ", a.sDescript xMnColorx "
+                + ", b.sDescript xMnColorx "
                 + " FROM " + getTable() + " a"
                 + " LEFT JOIN Color b ON a.sColorCde = b.sColorCde";
 
