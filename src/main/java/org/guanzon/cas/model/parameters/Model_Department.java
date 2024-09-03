@@ -485,8 +485,8 @@ public class Model_Department implements GEntity {
     public String getSupervisorAssignID() {
         return (String) getValue("sSAssgnID");
     }
-    
-        /**
+
+    /**
      * Sets the Department RecdStat of this record.
      *
      * @param fsValue
@@ -553,6 +553,7 @@ public class Model_Department implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
+
     /**
      * Sets the Department xHAssgnNm of this record.
      *

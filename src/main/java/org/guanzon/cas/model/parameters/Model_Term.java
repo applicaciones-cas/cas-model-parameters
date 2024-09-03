@@ -350,6 +350,7 @@ public class Model_Term implements GEntity {
         }
 
     }
+
     /**
      * Description: Sets the sTermCode of this record.
      *
@@ -417,8 +418,7 @@ public class Model_Term implements GEntity {
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
-    
-  
+
     /**
      * Sets the nTermValx of the record.
      *
@@ -437,7 +437,7 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * Sets  sRecdStat was modified.
+     * Sets sRecdStat was modified.
      *
      * @param fsValue
      * @return result as success/failed
@@ -447,14 +447,13 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return  sRecdStat was modified.
+     * @return sRecdStat was modified.
      */
     public String getRecordStatus() {
         return (String) getValue("sRecdStat");
     }
-    
-    
-        /**
+
+    /**
      * Sets the date and time the record was modified.
      *
      * @param fsValue
@@ -470,7 +469,8 @@ public class Model_Term implements GEntity {
     public String getModified() {
         return (String) getValue("sModified");
     }
-        /**
+
+    /**
      * Sets the date and time the record was modified.
      *
      * @param fdValue
@@ -486,8 +486,7 @@ public class Model_Term implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
-    
+
     /**
      * Gets the SQL statement for this entity.
      *

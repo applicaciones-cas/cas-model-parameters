@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.rowset.CachedRowSet;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
@@ -203,7 +201,7 @@ public class Model_Affiliated_Company implements GEntity {
     public JSONObject newRecord() {
         try {
             pnEditMode = EditMode.ADDNEW;
-            
+
             //replace with the primary key column info
             setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
             poJSON = new JSONObject();

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
-import org.guanzon.appdriver.base.CommonUtils;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
 import org.guanzon.appdriver.base.SQLUtil;
@@ -451,7 +450,7 @@ public class Model_Category implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
+
     /**
      * Gets the SQL statement for this entity.
      *

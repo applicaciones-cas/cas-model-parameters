@@ -383,23 +383,23 @@ public class Model_Inv_Location implements GEntity {
     public String getDescription() {
         return (String) getValue("sDescript");
     }
-    
-    public JSONObject setWarehouseID(String fsValue){
+
+    public JSONObject setWarehouseID(String fsValue) {
         return setValue("sWHouseID", fsValue);
     }
-    
-    public String getWarehouseID(String fsValue){
+
+    public String getWarehouseID(String fsValue) {
         return (String) getValue("sWHouseID");
     }
-    
-    public JSONObject setSectionID(String fsValue){
+
+    public JSONObject setSectionID(String fsValue) {
         return setValue("sSectnIDx", fsValue);
     }
-    
-    public String getSectionID(String fsValue){
+
+    public String getSectionID(String fsValue) {
         return (String) getValue("sSectnIDx");
     }
-    
+
     /**
      * Description: Sets the cRecdStat of this record.
      *
@@ -434,19 +434,19 @@ public class Model_Inv_Location implements GEntity {
         return ((String) getValue("cRecdStat")).equals("1");
     }
 
-    public JSONObject setWarehouseName(String fsValue){
+    public JSONObject setWarehouseName(String fsValue) {
         return setValue("xWHouseNm", fsValue);
     }
-    
-    public String getWarehouseName(){
+
+    public String getWarehouseName() {
         return (String) getValue("xWHouseNm");
     }
-    
-    public JSONObject setSectionName(String fsValue){
+
+    public JSONObject setSectionName(String fsValue) {
         return setValue("xSectnNme", fsValue);
     }
-    
-    public String getSectionName(){
+
+    public String getSectionName() {
         return (String) getValue("xSectnNme");
     }
 
@@ -499,7 +499,7 @@ public class Model_Inv_Location implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xWHouseNm»xSectnNme");
+        return MiscUtil.makeSelect(this, "xWHouseNm»xSectnNme");
     }
 
     private void initialize() {
@@ -523,7 +523,8 @@ public class Model_Inv_Location implements GEntity {
             System.exit(1);
         }
     }
-public String getSQL() {
+
+    public String getSQL() {
         String lsSQL = "SELECT"
                 + "  a.sLocatnCd sLocatnCd "
                 + ", a.sDescript sDescript "
@@ -541,4 +542,3 @@ public String getSQL() {
         return lsSQL;
     }
 }
-

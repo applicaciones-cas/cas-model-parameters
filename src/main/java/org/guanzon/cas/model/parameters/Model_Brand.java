@@ -262,7 +262,6 @@ public class Model_Brand implements GEntity {
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
                 setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
-                
 
                 lsSQL = makeSQL();
 
@@ -502,7 +501,7 @@ public class Model_Brand implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xCategrNm");
+        return MiscUtil.makeSelect(this, "xCategrNm");
     }
 
     private void initialize() {
