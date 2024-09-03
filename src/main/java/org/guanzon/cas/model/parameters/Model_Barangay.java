@@ -219,10 +219,10 @@ public class Model_Barangay implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xTownName");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sBrgyIDxx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sBrgyIDxx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -581,10 +581,9 @@ public class Model_Barangay implements GEntity {
 
             MiscUtil.initRowSet(poEntity);
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
-            
+
             poEntity.updateString("cBlackLst", RecordStatus.INACTIVE);
             poEntity.updateString("cHasRoute", RecordStatus.INACTIVE);
-                    
 
             poEntity.insertRow();
             poEntity.moveToCurrentRow();
@@ -598,4 +597,20 @@ public class Model_Barangay implements GEntity {
         }
     }
 
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sBrgyIDxx sBrgyIDxx "
+                + ", a.sBrgyName sBrgyName "
+                + ", a.sTownIDxx sTownIDxx "
+                + ", a.cHasRoute cHasRoute "
+                + ", a.cBlackLst cBlackLst "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sTownName xTownName "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN TownCity b ON a.sTownIDxx = b.sTownIDxx";
+
+        return lsSQL;
+    }
 }

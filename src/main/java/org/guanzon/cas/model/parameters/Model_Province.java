@@ -219,7 +219,7 @@ public class Model_Province implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xRegionNm");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, "sProvIDxx = " + SQLUtil.toSQL(fsCondition));
@@ -524,5 +524,20 @@ public class Model_Province implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sProvIDxx sProvIDxx "
+                + ", a.sProvName sProvName "
+                + ", a.sRegionID sRegionID "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sRegionNm xRegionNm "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Region b ON a.sRegionID = b.sRegionID";
+
+        return lsSQL;
     }
 }

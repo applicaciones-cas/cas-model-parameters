@@ -219,7 +219,7 @@ public class Model_Category_Level4 implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xMainCatx");
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd = " + SQLUtil.toSQL(fsCondition));
@@ -285,7 +285,7 @@ public class Model_Category_Level4 implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategoryCode()), "xMainCatx");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategoryCode()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -458,7 +458,7 @@ public class Model_Category_Level4 implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this,"xMainCatx");
+        return MiscUtil.makeSQL(this);
     }
 
     /**
@@ -467,7 +467,7 @@ public class Model_Category_Level4 implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xMainCatx");
+        return MiscUtil.makeSelect(this);
     }
 
     private void initialize() {

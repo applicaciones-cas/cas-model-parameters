@@ -203,10 +203,9 @@ public class Model_Affiliated_Company implements GEntity {
     public JSONObject newRecord() {
         try {
             pnEditMode = EditMode.ADDNEW;
-
+            
             //replace with the primary key column info
             setCompanyCode(MiscUtil.getNextCode(getTable(), "sCompnyCd", true, poGRider.getConnection(), poGRider.getBranchCode()));
-
             poJSON = new JSONObject();
 
             poEntity.updateObject("dAffiliat", poGRider.getServerDate());
