@@ -219,10 +219,10 @@ public class Model_Color_Detail implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xMnColorx");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sColorIDx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sColorIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -407,14 +407,14 @@ public class Model_Color_Detail implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescript(String fsValue) {
+    public JSONObject setColorNmeMain(String fsValue) {
         return setValue("xMnColorx", fsValue);
     }
 
     /**
      * @return The Color Detail Code of this record.
      */
-    public String getDescript() {
+    public String getColorNmeMain() {
         return (String) getValue("xMnColorx");
     }
 
@@ -524,5 +524,20 @@ public class Model_Color_Detail implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sColorIDx sColorIDx "
+                + ", a.sDescript sDescript "
+                + ", a.sColorCde sColorCde "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", a.sDescript xMnColorx "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Color b ON a.sColorCde = b.sColorCde";
+
+        return lsSQL;
     }
 }

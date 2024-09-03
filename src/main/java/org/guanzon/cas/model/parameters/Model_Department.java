@@ -553,6 +553,22 @@ public class Model_Department implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
+    /**
+     * Sets the Department xHAssgnNm of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setDeptHeadNme(String fsValue) {
+        return setValue("xDeptHead", fsValue);
+    }
+
+    /**
+     * @return The Department xHAssgnNm of this record.
+     */
+    public String getDeptHeadNme() {
+        return (String) getValue("xDeptHead");
+    }
 
     /**
      * Sets the Department xHAssgnNm of this record.
