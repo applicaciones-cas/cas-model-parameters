@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
-import org.guanzon.appdriver.base.CommonUtils;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
 import org.guanzon.appdriver.base.SQLUtil;
@@ -23,16 +22,15 @@ import org.json.simple.JSONObject;
  *
  * @author user
  */
-public class Model_Branch implements GEntity{
-    
+public class Model_Branch implements GEntity {
+
     final String XML = "Model_Branch.xml";
 
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
     JSONObject poJSON;              //json container
     int pnEditMode;                 //edit mode
-    
-    
+
     public Model_Branch(GRider foValue) {
         if (foValue == null) {
             System.err.println("Application Driver is not set.");
@@ -43,8 +41,7 @@ public class Model_Branch implements GEntity{
 
         initialize();
     }
-    
-    
+
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
@@ -53,7 +50,7 @@ public class Model_Branch implements GEntity{
             poEntity.moveToInsertRow();
 
             MiscUtil.initRowSet(poEntity);
-            
+
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
             poEntity.updateObject("dExportxx", null);
             poEntity.insertRow();
@@ -169,7 +166,6 @@ public class Model_Branch implements GEntity{
     public JSONObject newRecord() {
         pnEditMode = EditMode.ADDNEW;
 
- 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
         return poJSON;
@@ -179,7 +175,7 @@ public class Model_Branch implements GEntity{
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this); 
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, " sBranchCd = " + SQLUtil.toSQL(fsCondition));
@@ -211,12 +207,12 @@ public class Model_Branch implements GEntity{
     @Override
     public JSONObject saveRecord() {
         poJSON = new JSONObject();
-        
+
         if (pnEditMode == EditMode.ADDNEW || pnEditMode == EditMode.UPDATE) {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 // Setting stuff to null for testing
-                
+
                 lsSQL = makeSQL();
 
                 if (!lsSQL.isEmpty()) {
@@ -299,144 +295,147 @@ public class Model_Branch implements GEntity{
         }
 
     }
-    
-    
-    
+
     public JSONObject setBranchCd(String fsValue) {
         return setValue("sBranchCd", fsValue);
     }
-    
+
     public String getBranchCd() {
         return (String) getValue("sBranchCd");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setDescription(String fsValue) {
         return setValue("sDescript", fsValue);
     }
-    
+
     public String getDescription() {
         return (String) getValue("sDescript");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setAddress(String fsValue) {
         return setValue("sAddressx", fsValue);
     }
-    
+
     public String getAddress() {
         return (String) getValue("sAddressx");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setContact(String fsValue) {
         return setValue("sContactx", fsValue);
     }
-    
+
     public String getContact() {
         return (String) getValue("sContactx");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setTeleNum(String fsValue) {
         return setValue("sTelNumbr", fsValue);
     }
-    
+
     public String getTeleNum() {
         return (String) getValue("sTelNumbr");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
-    
+
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setBranchNm(String fsValue) {
         return setValue("sBranchNm", fsValue);
     }
-    
+
     public String getBranchNm() {
         return (String) getValue("sBranchNm");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setCompanyID(String fsValue) {
         return setValue("sCompnyID", fsValue);
     }
-    
+
     public String getCompanyID() {
         return (String) getValue("sCompnyID");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setTownID(String fsValue) {
         return setValue("sTownIDxx", fsValue);
     }
-    
+
     public String getTownID() {
         return (String) getValue("sTownIDxx");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setModifiedBy(String fsValue) {
         return setValue("sModified", fsValue);
     }
-    
+
     public String getModifiedBy() {
         return (String) getValue("sModified");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setModifiedDate(Date fdValue) {
         return setValue("dModified", fdValue);
     }
-    
+
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
+
     /////////////////////////////////////////////////////////
     public JSONObject setExportDate(Date fdValue) {
         return setValue("dExportxx", fdValue);
     }
-    
+
     public Date getExportDate() {
         return (Date) getValue("dExportxx");
     }
+
     /////////////////////////////////////////////////////////
     public String makeSQL() {
         return MiscUtil.makeSQL(this);
     }
-    
+
     public String makeSelectSQL() {
         return MiscUtil.makeSelect(this);
     }
+
     /////////////////////////////////////////////////////////
-    public String getSQL(){
-        String lsSQL = "SELECT" +
-                            "  sBranchCd" +
-                            ", sBranchNm" +
-                            ", sDescript" +
-                            ", sCompnyID" +
-                            ", sAddressx" +
-                            ", sTownIDxx" +
-                            ", sManagerx" +
-                            ", sSellCode" +
-                            ", cWareHous" +
-                            ", sTelNumbr" +
-                            ", cRecdStat" +
-                            ", sContactx" +
-                            ", dExportxx" +
-                            ", cSrvcCntr" +
-                            ", cAutomate" +
-                            ", cMainOffc" +
-                            ", sModified" +
-                            ", dModified" +
-                        " FROM " + System.getProperty("sys.table") ;
-        
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  sBranchCd"
+                + ", sBranchNm"
+                + ", sDescript"
+                + ", sCompnyID"
+                + ", sAddressx"
+                + ", sTownIDxx"
+                + ", sManagerx"
+                + ", sSellCode"
+                + ", cWareHous"
+                + ", sTelNumbr"
+                + ", cRecdStat"
+                + ", sContactx"
+                + ", dExportxx"
+                + ", cSrvcCntr"
+                + ", cAutomate"
+                + ", cMainOffc"
+                + ", sModified"
+                + ", dModified"
+                + " FROM " + System.getProperty("sys.table");
+
         return lsSQL;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -1,7 +1,6 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -391,15 +390,15 @@ public class Model_Labor_Category implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setAmount(BigDecimal fsValue) {
+    public JSONObject setAmount(Number fsValue) {
         return setValue("nAmountxx", fsValue);
     }
 
     /**
      * @return The nAmountxx of this record.
      */
-    public String getAmount() {
-        return getValue("nAmountxx").toString();
+    public Number getAmount() {
+        return (Number) getValue("nAmountxx");
     }
 
     /**
@@ -525,5 +524,21 @@ public class Model_Labor_Category implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sLaborIDx sLaborIDx "
+                + ", a.sCategrCd sCategrCd "
+                + ", a.nAmountxx nAmountxx "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", a.sDescript xCategrNm "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Section b ON a.sSectnIDx = b.sSectnIDx"
+                + " LEFT JOIN Warehouse c ON a.sWHouseID = c.sWHouseID";
+
+        return lsSQL;
     }
 }

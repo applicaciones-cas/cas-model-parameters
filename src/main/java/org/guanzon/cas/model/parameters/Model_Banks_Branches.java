@@ -219,10 +219,10 @@ public class Model_Banks_Branches implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xBankName»xBankCode»xTownName");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sBrBankID = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrBankID = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -662,4 +662,27 @@ public class Model_Banks_Branches implements GEntity {
         }
     }
 
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sBrBankID sBrBankID "
+                + ", a.sBrBankNm sBrBankNm "
+                + ", a.sBrBankCD sBrBankCD "
+                + ", a.sBankIDxx sBankIDxx "
+                + ", a.sContactP sContactP "
+                + ", a.sAddressx sAddressx "
+                + ", a.sTownIDxx sTownIDxx "
+                + ", a.sTelNoxxx sTelNoxxx "
+                + ", a.sFaxNoxxx sFaxNoxxx "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sBankName xBankName "
+                + ", b.sBankCode xBankCode "
+                + ", c.sTownName xTownName "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Banks b ON a.sBankIDxx = b.sBankIDxx"
+                + " LEFT JOIN TownCity c ON a.sTownIDxx = c.sTownIDxx";
+
+        return lsSQL;
+    }
 }

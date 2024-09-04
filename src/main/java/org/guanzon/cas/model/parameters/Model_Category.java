@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import javax.sql.rowset.CachedRowSet;
-import org.guanzon.appdriver.base.CommonUtils;
 import org.guanzon.appdriver.base.GRider;
 import org.guanzon.appdriver.base.MiscUtil;
 import org.guanzon.appdriver.base.SQLUtil;
@@ -219,8 +218,7 @@ public class Model_Category implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xInvTypNm");
-//        String lsSQL = getSQL();
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
         lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd = " + SQLUtil.toSQL(fsCondition));
@@ -286,7 +284,7 @@ public class Model_Category implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategoryCode()), "xInvTypNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sCategrCd = " + SQLUtil.toSQL(this.getCategoryCode()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -385,74 +383,6 @@ public class Model_Category implements GEntity {
         return (String) getValue("sDescript");
     }
 
-//    /**
-//     * Sets the sInvTypCd Code of this record.
-//     *
-//     * @param fsValue
-//     * @return result as success/failed
-//     */
-//    public JSONObject setInventorypCode(String fsValue) {
-//        return setValue("sInvTypCd", fsValue);
-//    }
-//
-//    /**
-//     * @return The sInvTypCd Code of this record.
-//     */
-//    public String getInventorypCode() {
-//        return (String) getValue("sInvTypCd");
-//    }
-//
-//    /**
-//     * Sets the xInvTypNm Code of this record.
-//     *
-//     * @param fsValue
-//     * @return result as success/failed
-//     */
-//    public JSONObject setInvTypeName(String fsValue) {
-//        return setValue("xInvTypNm", fsValue);
-//    }
-//
-//    /**
-//     * @return The xInvTypNm Code of this record.
-//     */
-//    public String getInvTypeName() {
-//        return (String) getValue("xInvTypNm");
-//    }
-//
-//    /**
-//     * Sets the cClassify of this record.
-//     *
-//     * @param fsValue
-//     * @return result as success/failed
-//     */
-//    public JSONObject setClassify(String fsValue) {
-//        return setValue("cClassify", fsValue);
-//    }
-//
-//    /**
-//     * @return The cClassify of this record.
-//     */
-//    public String getClassify() {
-//        return (String) getValue("cClassify");
-//    }
-//
-//    /**
-//     * Sets record as classified.
-//     *
-//     * @param fbValue
-//     * @return result as success/failed
-//     */
-//    public JSONObject setClassify(boolean fbValue) {
-//        return setValue("cClassify", fbValue ? "1" : "0");
-//    }
-//
-//    /**
-//     * @return If record is classified.
-//     */
-//    public boolean isClassify() {
-//        return ((String) getValue("cClassify")).equals("1");
-//    }
-
     /**
      * Sets the Category RecdStat of this record.
      *
@@ -520,20 +450,6 @@ public class Model_Category implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    public String getSQL(){
-        String lsSQL = "SELECT" +
-                            "  sCategrCd" +
-                            ", sDescript" +
-                            ", cRecdStat" +
-                            ", sModified" +
-                            ", dModified" +
-                        " FROM Category ";
-        if (!System.getProperty("store.inventory.industry").isEmpty())
-            lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd IN " + CommonUtils.getParameter(System.getProperty("store.inventory.industry")));
-        System.out.println("category lsSQL = " + lsSQL);
-        
-        return lsSQL;
-    }
 
     /**
      * Gets the SQL statement for this entity.
@@ -541,7 +457,7 @@ public class Model_Category implements GEntity {
      * @return SQL Statement
      */
     public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xInvTypNm");
+        return MiscUtil.makeSQL(this);
     }
 
     /**

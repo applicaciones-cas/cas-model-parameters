@@ -1,7 +1,6 @@
 package org.guanzon.cas.model.parameters;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -391,15 +390,15 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setMinimumWages(BigDecimal fsValue) {
+    public JSONObject setMinimumWages(Number fsValue) {
         return setValue("nMinWages", fsValue);
     }
 
     /**
      * @return The nMinWages of this record.
      */
-    public String getMinimumWages() {
-        return  getValue("nMinWages").toString();
+    public Number getMinimumWages() {
+        return (Number) getValue("nMinWages");
     }
 
     /**
@@ -408,15 +407,15 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setColaAmount(BigDecimal fsValue) {
+    public JSONObject setColaAmount(Number fsValue) {
         return setValue("nColaAmtx", fsValue);
     }
 
     /**
      * @return The nColaAmtx of this record.
      */
-    public String getColaAmount() {
-        return getValue("nColaAmtx").toString();
+    public Number getColaAmount() {
+        return (Number) getValue("nColaAmtx");
     }
 
     /**
@@ -425,15 +424,15 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setMinimumWage2(BigDecimal fsValue) {
+    public JSONObject setMinimumWage2(Number fsValue) {
         return setValue("nMinWage2", fsValue);
     }
 
     /**
      * @return The nMinWage2 of this record.
      */
-    public String getMinimumWage2() {
-        return getValue("nMinWage2").toString();
+    public Number getMinimumWage2() {
+        return (Number) getValue("nMinWage2");
     }
 
     /**
@@ -442,15 +441,15 @@ public class Model_Region implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setColaAmount2(BigDecimal fsValue) {
+    public JSONObject setColaAmount2(Number fsValue) {
         return setValue("nColaAmt2", fsValue);
     }
 
     /**
      * @return The nColaAmt2 of this record.
      */
-    public String getColaAmount2() {
-        return  getValue("nColaAmt2").toString();
+    public Number getColaAmount2() {
+        return (Number) getValue("nColaAmt2");
     }
 
     /**

@@ -219,10 +219,9 @@ public class Model_Category_Level2 implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xInvTypNm»xMainCatx");
-
+        String lsSQL = getSQL();
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sCategrCd = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sCategrCd = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -444,7 +443,7 @@ public class Model_Category_Level2 implements GEntity {
     public JSONObject setMainCategoryName(String fsValue) {
         return setValue("xMainCatx", fsValue);
     }
-    
+
     /**
      * Sets the cClassify of this record.
      *
@@ -569,7 +568,7 @@ public class Model_Category_Level2 implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this,"xInvTypNm»xMainCatx");
+        return MiscUtil.makeSelect(this, "xInvTypNm»xMainCatx");
     }
 
     private void initialize() {
@@ -592,5 +591,24 @@ public class Model_Category_Level2 implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sCategrCd sCategrCd "
+                + ", a.sDescript sDescript "
+                + ", a.sInvTypCd sInvTypCd "
+                + ", a.sMainCatx sMainCatx "
+                + ", a.cClassify cClassify "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sDescript xInvTypNm "
+                + ", c.sDescript xMainCatx "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Inv_Type b ON a.sInvTypCd = b.sInvTypCd"
+                + " LEFT JOIN Category c ON a.sMainCatx = c.sCategrCd";
+
+        return lsSQL;
     }
 }

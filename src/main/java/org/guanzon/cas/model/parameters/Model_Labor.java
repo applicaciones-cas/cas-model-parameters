@@ -391,15 +391,15 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel1(BigDecimal fsValue) {
+    public JSONObject setPriceLevel1(Number fsValue) {
         return setValue("nPriceLv1", fsValue);
     }
 
     /**
      * @return The nPriceLv1 of this record.
      */
-    public String getPriceLevel1() {
-        return (String) getValue("nPriceLv1");
+    public Number getPriceLevel1() {
+        return (Number) getValue("nPriceLv1");
     }
 
     /**
@@ -408,15 +408,15 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel2(BigDecimal fsValue) {
+    public JSONObject setPriceLevel2(Number fsValue) {
         return setValue("nPriceLv2", fsValue);
     }
 
     /**
      * @return The nPriceLv2 of this record.
      */
-    public String getPriceLevel2() {
-        return (String) getValue("nPriceLv2");
+    public Number getPriceLevel2() {
+        return (Number) getValue("nPriceLv2");
     }
 
     /**
@@ -425,15 +425,15 @@ public class Model_Labor implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setPriceLevel3(BigDecimal fsValue) {
+    public JSONObject setPriceLevel3(Number fsValue) {
         return setValue("nPriceLv3", fsValue);
     }
 
     /**
      * @return The nPriceLv3 of this record.
      */
-    public String getPriceLevel3() {
-        return (String) getValue("nPriceLv3");
+    public Number getPriceLevel3() {
+        return (Number) getValue("nPriceLv3");
     }
 
     /**

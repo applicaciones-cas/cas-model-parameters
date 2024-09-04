@@ -219,10 +219,10 @@ public class Model_Inv_Location implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this);
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sLocatnCd = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sLocatnCd = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -383,23 +383,23 @@ public class Model_Inv_Location implements GEntity {
     public String getDescription() {
         return (String) getValue("sDescript");
     }
-    
-    public JSONObject setWarehouseID(String fsValue){
+
+    public JSONObject setWarehouseID(String fsValue) {
         return setValue("sWHouseID", fsValue);
     }
-    
-    public String getWarehouseID(String fsValue){
+
+    public String getWarehouseID(String fsValue) {
         return (String) getValue("sWHouseID");
     }
-    
-    public JSONObject setSectionID(String fsValue){
+
+    public JSONObject setSectionID(String fsValue) {
         return setValue("sSectnIDx", fsValue);
     }
-    
-    public String getSectionID(String fsValue){
+
+    public String getSectionID(String fsValue) {
         return (String) getValue("sSectnIDx");
     }
-    
+
     /**
      * Description: Sets the cRecdStat of this record.
      *
@@ -434,19 +434,19 @@ public class Model_Inv_Location implements GEntity {
         return ((String) getValue("cRecdStat")).equals("1");
     }
 
-    public JSONObject setWarehouseName(String fsValue){
+    public JSONObject setWarehouseName(String fsValue) {
         return setValue("xWHouseNm", fsValue);
     }
-    
-    public String getWarehouseName(String fsValue){
+
+    public String getWarehouseName() {
         return (String) getValue("xWHouseNm");
     }
-    
-    public JSONObject setSectionName(String fsValue){
+
+    public JSONObject setSectionName(String fsValue) {
         return setValue("xSectnNme", fsValue);
     }
-    
-    public String getSectionName(String fsValue){
+
+    public String getSectionName() {
         return (String) getValue("xSectnNme");
     }
 
@@ -499,7 +499,7 @@ public class Model_Inv_Location implements GEntity {
      * @return SelectSQL Statement
      */
     public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this);
+        return MiscUtil.makeSelect(this, "xWHouseNm»xSectnNme");
     }
 
     private void initialize() {
@@ -522,5 +522,23 @@ public class Model_Inv_Location implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sLocatnCd sLocatnCd "
+                + ", a.sDescript sDescript "
+                + ", a.sWHouseID sWHouseID "
+                + ", a.sSectnIDx sSectnIDx "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sSectnNme xSectnNme "
+                + ", c.sWHouseNm xWHouseNm "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Section b ON a.sSectnIDx = b.sSectnIDx"
+                + " LEFT JOIN Warehouse c ON a.sWHouseID = c.sWHouseID";
+
+        return lsSQL;
     }
 }

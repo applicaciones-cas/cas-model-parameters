@@ -220,10 +220,10 @@ public class Model_Labor_Model implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xModelNme");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "sLaborIDx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sLaborIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -391,15 +391,15 @@ public class Model_Labor_Model implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setAmount(BigDecimal fsValue) {
+    public JSONObject setAmount(Number fsValue) {
         return setValue("nAmountxx", fsValue);
     }
 
     /**
      * @return The nAmountxx of this record.
      */
-    public String getAmount() {
-        return getValue("nAmountxx").toString();
+    public Number getAmount() {
+        return (Number) getValue("nAmountxx");
     }
 
     /**
@@ -525,5 +525,20 @@ public class Model_Labor_Model implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sLaborIDx sLaborIDx "
+                + ", a.sModelIDx sModelIDx "
+                + ", a.nAmountxx nAmountxx "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sModelNme xModelNme "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Model b ON a.sModelIDx = b.sModelCde";
+
+        return lsSQL;
     }
 }

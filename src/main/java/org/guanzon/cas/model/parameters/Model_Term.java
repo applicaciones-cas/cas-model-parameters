@@ -350,6 +350,7 @@ public class Model_Term implements GEntity {
         }
 
     }
+
     /**
      * Description: Sets the sTermCode of this record.
      *
@@ -417,27 +418,31 @@ public class Model_Term implements GEntity {
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
-    
-  
+    /**
+     * @return If record is active.
+     */
+    public boolean isCoverage() {
+        return ((String) getValue("cCoverage")).equals("1");
+    }
     /**
      * Sets the nTermValx of the record.
      *
      * @param fnValue
      * @return result as success/failed
      */
-    public JSONObject setTermValue(BigDecimal fnValue) {
+    public JSONObject setTermValue(Number fnValue) {
         return setValue("nTermValx", fnValue);
     }
 
     /**
      * @return The nTermValx of the record
      */
-    public BigDecimal getTermValue() {
-        return (BigDecimal) getValue("nTermValx");
+    public Number getTermValue() {
+        return (Number) getValue("nTermValx");
     }
 
     /**
-     * Sets  sRecdStat was modified.
+     * Sets sRecdStat was modified.
      *
      * @param fsValue
      * @return result as success/failed
@@ -447,14 +452,13 @@ public class Model_Term implements GEntity {
     }
 
     /**
-     * @return  sRecdStat was modified.
+     * @return sRecdStat was modified.
      */
     public String getRecordStatus() {
         return (String) getValue("sRecdStat");
     }
-    
-    
-        /**
+
+    /**
      * Sets the date and time the record was modified.
      *
      * @param fsValue
@@ -470,7 +474,8 @@ public class Model_Term implements GEntity {
     public String getModified() {
         return (String) getValue("sModified");
     }
-        /**
+
+    /**
      * Sets the date and time the record was modified.
      *
      * @param fdValue
@@ -486,8 +491,7 @@ public class Model_Term implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-    
-    
+
     /**
      * Gets the SQL statement for this entity.
      *
