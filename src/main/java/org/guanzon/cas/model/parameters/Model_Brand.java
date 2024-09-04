@@ -219,10 +219,10 @@ public class Model_Brand implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSelect(this, "xCategrNm");
+        String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sBrandCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrandCde = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -526,4 +526,18 @@ public class Model_Brand implements GEntity {
         }
     }
 
+    public String getSQL() {
+        String lsSQL = "SELECT"
+                + "  a.sBrandCde sBrandCde "
+                + ", a.sDescript sDescript "
+                + ", a.sCategrCd sCategrCd "
+                + ", a.cRecdStat cRecdStat "
+                + ", a.sModified sModified "
+                + ", a.dModified dModified "
+                + ", b.sDescript xCategrNm "
+                + " FROM " + getTable() + " a"
+                + " LEFT JOIN Category b ON a.sCategrCd = b.sCategrCd";
+
+        return lsSQL;
+    }
 }
