@@ -537,7 +537,7 @@ public class Model_Labor_Model implements GEntity {
                 + ", a.dModified dModified "
                 + ", b.sModelNme xModelNme "
                 + " FROM " + getTable() + " a"
-                + " LEFT JOIN Model b ON a.sModelIDx = b.sModelIDx";
+                + " LEFT JOIN Model b ON a.sModelIDx = b.sModelCde";
 
         return lsSQL;
     }
