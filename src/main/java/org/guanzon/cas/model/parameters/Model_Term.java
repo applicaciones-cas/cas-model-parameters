@@ -418,22 +418,27 @@ public class Model_Term implements GEntity {
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
-
+    /**
+     * @return If record is active.
+     */
+    public boolean isCoverage() {
+        return ((String) getValue("cCoverage")).equals("1");
+    }
     /**
      * Sets the nTermValx of the record.
      *
      * @param fnValue
      * @return result as success/failed
      */
-    public JSONObject setTermValue(BigDecimal fnValue) {
+    public JSONObject setTermValue(Number fnValue) {
         return setValue("nTermValx", fnValue);
     }
 
     /**
      * @return The nTermValx of the record
      */
-    public BigDecimal getTermValue() {
-        return (BigDecimal) getValue("nTermValx");
+    public Number getTermValue() {
+        return (Number) getValue("nTermValx");
     }
 
     /**
