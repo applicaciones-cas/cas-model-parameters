@@ -286,7 +286,7 @@ public class Model_Term implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sSizeIDxx = " + SQLUtil.toSQL(this.getTermCode()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sTermCode = " + SQLUtil.toSQL(this.getTermCode()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -402,6 +402,20 @@ public class Model_Term implements GEntity {
         return (String) getValue("cCoverage");
     }
 
+    
+        /**
+     * Sets record as Coverage by boolean.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
+    public JSONObject setCoverage(boolean fbValue) {
+        return setValue("cCoverage", fbValue ? "1" : "0");
+    }
+
+    
+    
+    
     /**
      * Sets record as active.
      *

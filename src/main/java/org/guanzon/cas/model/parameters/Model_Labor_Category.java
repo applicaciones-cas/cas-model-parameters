@@ -526,19 +526,19 @@ public class Model_Labor_Category implements GEntity {
         }
     }
 
-    public String getSQL() {
-        String lsSQL = "SELECT"
-                + "  a.sLaborIDx sLaborIDx "
-                + ", a.sCategrCd sCategrCd "
-                + ", a.nAmountxx nAmountxx "
-                + ", a.cRecdStat cRecdStat "
-                + ", a.sModified sModified "
-                + ", a.dModified dModified "
-                + ", a.sDescript xCategrNm "
-                + " FROM " + getTable() + " a"
-                + " LEFT JOIN Section b ON a.sSectnIDx = b.sSectnIDx"
-                + " LEFT JOIN Warehouse c ON a.sWHouseID = c.sWHouseID";
-
-        return lsSQL;
-    }
+//    public String getSQL() {
+//        String lsSQL = "SELECT"
+//                + "  a.sLaborIDx sLaborIDx "
+//                + ", a.sCategrCd sCategrCd "
+//                + ", a.nAmountxx nAmountxx "
+//                + ", a.cRecdStat cRecdStat "
+//                + ", a.sModified sModified "
+//                + ", a.dModified dModified "
+//                + ", a.sDescript xCategrNm "
+//                + " FROM " + getTable() + " a"
+//                + " LEFT JOIN Section b ON a.sSectnIDx = b.sSectnIDx"
+//                + " LEFT JOIN Warehouse c ON a.sWHouseID = c.sWHouseID";
+//
+//        return lsSQL;
+//    }
 }
