@@ -296,146 +296,259 @@ public class Model_Branch implements GEntity {
 
     }
 
+      /**
+     * Description: Sets the sBranchCd of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setBranchCd(String fsValue) {
         return setValue("sBranchCd", fsValue);
     }
-
+    
+    /**
+     * @return The sBranchCd of this record.
+     */
     public String getBranchCd() {
         return (String) getValue("sBranchCd");
     }
 
-    /////////////////////////////////////////////////////////
+      /**
+     * Description: Sets the sDescript of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setDescription(String fsValue) {
         return setValue("sDescript", fsValue);
     }
 
+     /**
+     * @return The sDescript of this record.
+     */
     public String getDescription() {
         return (String) getValue("sDescript");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Description: Sets the sAddressx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setAddress(String fsValue) {
         return setValue("sAddressx", fsValue);
     }
-
+    
+     /**
+     * @return The sAddressx of this record.
+     */
     public String getAddress() {
         return (String) getValue("sAddressx");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Description: Sets the sContactx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setContact(String fsValue) {
         return setValue("sContactx", fsValue);
     }
-
+    
+     /**
+     * @return The sContactx of this record.
+     */
     public String getContact() {
         return (String) getValue("sContactx");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Description: Sets the sTelNumbr of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setTeleNum(String fsValue) {
         return setValue("sTelNumbr", fsValue);
     }
-
+     /**
+     * @return The sTelNumbr of this record.
+     */
     public String getTeleNum() {
         return (String) getValue("sTelNumbr");
     }
 
-    /////////////////////////////////////////////////////////
+    /**
+     * Sets record as active.
+     *
+     * @param fbValue
+     * @return result as success/failed
+     */
     public JSONObject setActive(boolean fbValue) {
         return setValue("cRecdStat", fbValue ? "1" : "0");
     }
-
+    /**
+     * @return If record is active.
+     */
     public boolean isActive() {
         return ((String) getValue("cRecdStat")).equals("1");
     }
+    
+     /**
+     * Sets the cWareHous of the record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+        public JSONObject setWareHouse(String fsValue) {
+        return setValue("cWareHous", fsValue);
+    }
 
-    /////////////////////////////////////////////////////////
+    /**
+     * @return The cWareHous of this record.
+     */
+    public String getWareHouse() {
+        return (String) getValue("cWareHous");
+    }
+     /**
+     * Sets the sBranchNm of the record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setBranchNm(String fsValue) {
         return setValue("sBranchNm", fsValue);
     }
-
+    /**
+     * @return The sBranchNm of this record.
+     */
     public String getBranchNm() {
         return (String) getValue("sBranchNm");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Sets the sCompnyID of the record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setCompanyID(String fsValue) {
         return setValue("sCompnyID", fsValue);
     }
-
+    /**
+     * @return The sCompnyID of this record.
+     */
     public String getCompanyID() {
         return (String) getValue("sCompnyID");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Sets the sTownIDxx of the record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setTownID(String fsValue) {
         return setValue("sTownIDxx", fsValue);
     }
-
+    /**
+     * @return The sCompnyID of this record.
+     */
     public String getTownID() {
         return (String) getValue("sTownIDxx");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Sets the sModified of the record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
     public JSONObject setModifiedBy(String fsValue) {
         return setValue("sModified", fsValue);
     }
-
+    /**
+     * @return The sModified of this record.
+     */
     public String getModifiedBy() {
         return (String) getValue("sModified");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Sets the dModified of the record.
+     *
+     * @param fdValue
+     * @return result as success/failed
+     */
     public JSONObject setModifiedDate(Date fdValue) {
         return setValue("dModified", fdValue);
     }
-
+    /**
+     * @return The dModified of this record.
+     */
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
 
-    /////////////////////////////////////////////////////////
+     /**
+     * Sets the dExportxx of the record.
+     *
+     * @param fdValue
+     * @return result as success/failed
+     */
     public JSONObject setExportDate(Date fdValue) {
         return setValue("dExportxx", fdValue);
     }
-
+    /**
+     * @return The dExportxx of this record.
+     */
     public Date getExportDate() {
         return (Date) getValue("dExportxx");
     }
 
-    /////////////////////////////////////////////////////////
+    /**
+     * Gets the SQL statement for this entity.
+     *
+     * @return SQL Statement
+     */
     public String makeSQL() {
         return MiscUtil.makeSQL(this);
     }
-
+    /**
+     * Gets the SQL Select statement for this entity.
+     *
+     * @return SelectSQL Statement
+     */
     public String makeSelectSQL() {
         return MiscUtil.makeSelect(this);
     }
 
     /////////////////////////////////////////////////////////
-    public String getSQL() {
-        String lsSQL = "SELECT"
-                + "  sBranchCd"
-                + ", sBranchNm"
-                + ", sDescript"
-                + ", sCompnyID"
-                + ", sAddressx"
-                + ", sTownIDxx"
-                + ", sManagerx"
-                + ", sSellCode"
-                + ", cWareHous"
-                + ", sTelNumbr"
-                + ", cRecdStat"
-                + ", sContactx"
-                + ", dExportxx"
-                + ", cSrvcCntr"
-                + ", cAutomate"
-                + ", cMainOffc"
-                + ", sModified"
-                + ", dModified"
-                + " FROM " + System.getProperty("sys.table");
-
-        return lsSQL;
-    }
+//    public String getSQL() {
+//        String lsSQL = "SELECT"
+//                + "  sBranchCd"
+//                + ", sBranchNm"
+//                + ", sDescript"
+//                + ", sCompnyID"
+//                + ", sAddressx"
+//                + ", sTownIDxx"
+//                + ", sManagerx"
+//                + ", sSellCode"
+//                + ", cWareHous"
+//                + ", sTelNumbr"
+//                + ", cRecdStat"
+//                + ", sContactx"
+//                + ", dExportxx"
+//                + ", cSrvcCntr"
+//                + ", cAutomate"
+//                + ", cMainOffc"
+//                + ", sModified"
+//                + ", dModified"
+//                + " FROM " + System.getProperty("sys.table");
+//
+//        return lsSQL;
+//    }
 
 }
