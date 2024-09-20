@@ -359,6 +359,16 @@ public class Model_Branch implements GEntity {
 
 
     /////////////////////////////////////////////////////////
+    public JSONObject setActiveWarehouse(boolean fbValue) {
+        return setValue("cWareHous", fbValue ? "1" : "0");
+    }
+
+    public boolean isActiveWarehouse() {
+        return ((String) getValue("cWareHous")).equals("1");
+    }
+
+    /////////////////////////////////////////////////////////
+    
     public JSONObject setBranchNm(String fsValue) {
         return setValue("sBranchNm", fsValue);
     }
