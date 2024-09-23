@@ -202,7 +202,7 @@ public class Model_Color implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setColorCode(MiscUtil.getNextCode(getTable(), "sColorCde", true, poGRider.getConnection(), ""));
+        setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -222,7 +222,7 @@ public class Model_Color implements GEntity {
         String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " sColorCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, " sColorIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +261,7 @@ public class Model_Color implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setColorCode(MiscUtil.getNextCode(getTable(), "sColorCde", true, poGRider.getConnection(), ""));
+                setColorID(MiscUtil.getNextCode(getTable(), "sColorIDx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -281,11 +281,11 @@ public class Model_Color implements GEntity {
                 Model_Color loOldEntity = new Model_Color(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getColorCode());
+                JSONObject loJSON = loOldEntity.openRecord(this.getColorID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorCde = " + SQLUtil.toSQL(this.getColorCode()));
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sColorIDx = " + SQLUtil.toSQL(this.getColorID()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -356,15 +356,15 @@ public class Model_Color implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setColorCode(String fsValue) {
-        return setValue("sColorCde", fsValue);
+    public JSONObject setColorID(String fsValue) {
+        return setValue("sColorIDx", fsValue);
     }
 
     /**
      * @return The Color Code of this record.
      */
-    public String getColorCode() {
-        return (String) getValue("sColorCde");
+    public String getColorID() {
+        return (String) getValue("sColorIDx");
     }
 
     /**

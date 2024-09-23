@@ -202,7 +202,7 @@ public class Model_Model implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setModelCode(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+        setModelID(MiscUtil.getNextCode(getTable(), "sModelIDx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -222,7 +222,7 @@ public class Model_Model implements GEntity {
         String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +261,7 @@ public class Model_Model implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setModelCode(MiscUtil.getNextCode(getTable(), "sModelCde", true, poGRider.getConnection(), poGRider.getBranchCode()));
+                setModelID(MiscUtil.getNextCode(getTable(), "sModelIDx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -281,11 +281,11 @@ public class Model_Model implements GEntity {
                 Model_Model loOldEntity = new Model_Model(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getModelCode());
+                JSONObject loJSON = loOldEntity.openRecord(this.getModelID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sModelCde = " + SQLUtil.toSQL(this.getModelCode()), "xBrandNme");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sModelIDx = " + SQLUtil.toSQL(this.getModelID()), "xBrandNme");
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -351,20 +351,20 @@ public class Model_Model implements GEntity {
     }
 
     /**
-     * Description: Sets the sModelCde of this record.
+     * Description: Sets the sModelIDx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setModelCode(String fsValue) {
-        return setValue("sModelCde", fsValue);
+    public JSONObject setModelID(String fsValue) {
+        return setValue("sModelIDx", fsValue);
     }
 
     /**
-     * @return The sModelCde of this record.
+     * @return The sModelIDx of this record.
      */
-    public String getModelCode() {
-        return (String) getValue("sModelCde");
+    public String getModelID() {
+        return (String) getValue("sModelIDx");
     }
 
     /**
@@ -596,7 +596,7 @@ public class Model_Model implements GEntity {
 
     public String getSQL() {
         String lsSQL = "SELECT"
-                + "  a.sModelCde sModelCde "
+                + "  a.sModelIDx sModelIDx "
                 + ", a.sCategrCd sCategrCd "
                 + ", a.sModelNme sModelNme "
                 + ", a.sDescript sDescript "
