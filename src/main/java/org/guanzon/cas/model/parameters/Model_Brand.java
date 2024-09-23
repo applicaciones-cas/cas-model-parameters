@@ -199,6 +199,7 @@ public class Model_Brand implements GEntity {
      */
     @Override
     public JSONObject newRecord() {
+        initialize();
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
@@ -217,12 +218,13 @@ public class Model_Brand implements GEntity {
      */
     @Override
     public JSONObject openRecord(String fsCondition) {
+        initialize();
         poJSON = new JSONObject();
 
-        String lsSQL = getSQL();
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrandIDx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sBrandIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -263,7 +265,7 @@ public class Model_Brand implements GEntity {
                 //replace with the primary key column info
                 setBrandID(MiscUtil.getNextCode(getTable(), "sBrandIDx", true, poGRider.getConnection(), ""));
 
-                lsSQL = makeSQL();
+                lsSQL = MiscUtil.makeSQL(this);
 
                 if (!lsSQL.isEmpty()) {
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -285,7 +287,7 @@ public class Model_Brand implements GEntity {
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandIDx = " + SQLUtil.toSQL(this.getBrandID()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandIDx = " + SQLUtil.toSQL(this.getBrandID()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -402,23 +404,6 @@ public class Model_Brand implements GEntity {
     }
 
     /**
-     * Sets the Bank xCategrNm of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setCategoryName(String fsValue) {
-        return setValue("xCategrNm", fsValue);
-    }
-
-    /**
-     * @return The xCategrNm of this record.
-     */
-    public String getCategoryName() {
-        return (String) getValue("xCategrNm");
-    }
-
-    /**
      * Sets the cRecdStat of this record.
      *
      * @param fsValue
@@ -486,24 +471,6 @@ public class Model_Brand implements GEntity {
         return (Date) getValue("dModified");
     }
 
-    /**
-     * Gets the SQL statement for this entity.
-     *
-     * @return SQL Statement
-     */
-    public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xCategrNm");
-    }
-
-    /**
-     * Gets the SQL Select statement for this entity.
-     *
-     * @return SelectSQL Statement
-     */
-    public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this, "xCategrNm");
-    }
-
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
@@ -512,6 +479,8 @@ public class Model_Brand implements GEntity {
             poEntity.moveToInsertRow();
 
             MiscUtil.initRowSet(poEntity);
+            poEntity.updateString("sDescript", "");
+            poEntity.updateString("sCategrCd", "");
             poEntity.updateString("cRecdStat", RecordStatus.ACTIVE);
 
             poEntity.insertRow();
@@ -524,20 +493,5 @@ public class Model_Brand implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    public String getSQL() {
-        String lsSQL = "SELECT"
-                + "  a.sBrandIDx sBrandIDx "
-                + ", a.sDescript sDescript "
-                + ", a.sCategrCd sCategrCd "
-                + ", a.cRecdStat cRecdStat "
-                + ", a.sModified sModified "
-                + ", a.dModified dModified "
-                + ", b.sDescript xCategrNm "
-                + " FROM " + getTable() + " a"
-                + " LEFT JOIN Category b ON a.sCategrCd = b.sCategrCd";
-
-        return lsSQL;
     }
 }
