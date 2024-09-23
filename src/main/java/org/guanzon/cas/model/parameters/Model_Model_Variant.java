@@ -16,10 +16,11 @@ import org.json.simple.JSONObject;
 
 /**
  * @author Michael Cuison
+ * @since 2024.09.24 11:57am
  */
-public class Model_Brand implements GEntity {
+public class Model_Model_Variant implements GEntity {
 
-    final String XML = "Model_Brand.xml";
+    final String XML = "Model_Model_Variant.xml";
 
     GRider poGRider;                //application driver
     CachedRowSet poEntity;          //rowset
@@ -31,7 +32,7 @@ public class Model_Brand implements GEntity {
      *
      * @param foValue - GhostRider Application Driver
      */
-    public Model_Brand(GRider foValue) {
+    public Model_Model_Variant(GRider foValue) {
         if (foValue == null) {
             System.err.println("Application Driver is not set.");
             System.exit(1);
@@ -106,7 +107,7 @@ public class Model_Brand implements GEntity {
      */
     @Override
     public String getTable() {
-        return "Brand";
+        return "Model_Variant";
     }
 
     /**
@@ -202,7 +203,7 @@ public class Model_Brand implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
+        setVariantID(MiscUtil.getNextCode(getTable(), "sVrntIDxx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -219,10 +220,10 @@ public class Model_Brand implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = getSQL();
+        String lsSQL = MiscUtil.makeSQL(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrandCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelCde = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,9 +262,9 @@ public class Model_Brand implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
+                setVariantID(MiscUtil.getNextCode(getTable(), "sVrntIDxx", true, poGRider.getConnection(), ""));
 
-                lsSQL = makeSQL();
+                lsSQL = MiscUtil.makeSQL(this);
 
                 if (!lsSQL.isEmpty()) {
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -278,14 +279,14 @@ public class Model_Brand implements GEntity {
                     poJSON.put("message", "No record to save.");
                 }
             } else {
-                Model_Brand loOldEntity = new Model_Brand(poGRider);
+                Model_Model_Variant loOldEntity = new Model_Model_Variant(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBrandCode());
+                JSONObject loJSON = loOldEntity.openRecord(this.getVariantID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandCde = " + SQLUtil.toSQL(this.getBrandCode()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sVrntIDxx = " + SQLUtil.toSQL(this.getVariantID()));
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -351,24 +352,41 @@ public class Model_Brand implements GEntity {
     }
 
     /**
-     * Sets the sBrandCde of this record.
+     * Description: Sets the sVrntIDxx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBrandCode(String fsValue) {
-        return setValue("sBrandCde", fsValue);
+    public JSONObject setVariantID(String fsValue) {
+        return setValue("sVrntIDxx", fsValue);
     }
 
     /**
-     * @return The sBrandCde of this record.
+     * @return The sVrntIDxx of this record.
      */
-    public String getBrandCode() {
-        return (String) getValue("sBrandCde");
+    public String getVariantID() {
+        return (String) getValue("sVrntIDxx");
+    }
+    
+    /**
+     * Description: Sets the sVrntName of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setVariantName(String fsValue) {
+        return setValue("sVrntName", fsValue);
     }
 
     /**
-     * Sets the sDescript of this record.
+     * @return The sVrntName of this record.
+     */
+    public String getVariantName() {
+        return (String) getValue("sVrntName");
+    }
+
+    /**
+     * Description: Sets the sDescript of this record.
      *
      * @param fsValue
      * @return result as success/failed
@@ -383,56 +401,22 @@ public class Model_Brand implements GEntity {
     public String getDescription() {
         return (String) getValue("sDescript");
     }
-
+    
     /**
-     * Sets the Bank sCategrCd of this record.
+     * Description: Sets the sBrandCde of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setCategoryCode(String fsValue) {
-        return setValue("sCategrCd", fsValue);
+    public JSONObject setBrandCode(String fsValue) {
+        return setValue("sBrandCde", fsValue);
     }
 
     /**
-     * @return The sCategrCde of this record.
+     * @return The sBrandCde of this record.
      */
-    public String getCategoryCode() {
-        return (String) getValue("sCategrCd");
-    }
-
-    /**
-     * Sets the Bank xCategrNm of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setCategoryName(String fsValue) {
-        return setValue("xCategrNm", fsValue);
-    }
-
-    /**
-     * @return The xCategrNm of this record.
-     */
-    public String getCategoryName() {
-        return (String) getValue("xCategrNm");
-    }
-
-    /**
-     * Sets the cRecdStat of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setRecdStat(String fsValue) {
-        return setValue("cRecdStat", fsValue);
-    }
-
-    /**
-     * @return The cRecdStat of this record.
-     */
-    public String getRecdStat() {
-        return (String) getValue("cRecdStat");
+    public String getBrandCode() {
+        return (String) getValue("sBrandCde");
     }
 
     /**
@@ -486,24 +470,6 @@ public class Model_Brand implements GEntity {
         return (Date) getValue("dModified");
     }
 
-    /**
-     * Gets the SQL statement for this entity.
-     *
-     * @return SQL Statement
-     */
-    public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xCategrNm");
-    }
-
-    /**
-     * Gets the SQL Select statement for this entity.
-     *
-     * @return SelectSQL Statement
-     */
-    public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this, "xCategrNm");
-    }
-
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
@@ -524,20 +490,5 @@ public class Model_Brand implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    public String getSQL() {
-        String lsSQL = "SELECT"
-                + "  a.sBrandCde sBrandCde "
-                + ", a.sDescript sDescript "
-                + ", a.sCategrCd sCategrCd "
-                + ", a.cRecdStat cRecdStat "
-                + ", a.sModified sModified "
-                + ", a.dModified dModified "
-                + ", b.sDescript xCategrNm "
-                + " FROM " + getTable() + " a"
-                + " LEFT JOIN Category b ON a.sCategrCd = b.sCategrCd";
-
-        return lsSQL;
     }
 }
