@@ -202,7 +202,7 @@ public class Model_Brand implements GEntity {
         pnEditMode = EditMode.ADDNEW;
 
         //replace with the primary key column info
-        setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
+        setBrandID(MiscUtil.getNextCode(getTable(), "sBrandIDx", true, poGRider.getConnection(), ""));
 
         poJSON = new JSONObject();
         poJSON.put("result", "success");
@@ -222,7 +222,7 @@ public class Model_Brand implements GEntity {
         String lsSQL = getSQL();
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrandCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, " a.sBrandIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -261,7 +261,7 @@ public class Model_Brand implements GEntity {
             String lsSQL;
             if (pnEditMode == EditMode.ADDNEW) {
                 //replace with the primary key column info
-                setBrandCode(MiscUtil.getNextCode(getTable(), "sBrandCde", true, poGRider.getConnection(), ""));
+                setBrandID(MiscUtil.getNextCode(getTable(), "sBrandIDx", true, poGRider.getConnection(), ""));
 
                 lsSQL = makeSQL();
 
@@ -281,11 +281,11 @@ public class Model_Brand implements GEntity {
                 Model_Brand loOldEntity = new Model_Brand(poGRider);
 
                 //replace with the primary key column info
-                JSONObject loJSON = loOldEntity.openRecord(this.getBrandCode());
+                JSONObject loJSON = loOldEntity.openRecord(this.getBrandID());
 
                 if ("success".equals((String) loJSON.get("result"))) {
                     //replace the condition based on the primary key column of the record
-                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandCde = " + SQLUtil.toSQL(this.getBrandCode()), "xCategrNm");
+                    lsSQL = MiscUtil.makeSQL(this, loOldEntity, "sBrandIDx = " + SQLUtil.toSQL(this.getBrandID()), "xCategrNm");
 
                     if (!lsSQL.isEmpty()) {
                         if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -351,20 +351,20 @@ public class Model_Brand implements GEntity {
     }
 
     /**
-     * Sets the sBrandCde of this record.
+     * Sets the sBrandIDx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBrandCode(String fsValue) {
-        return setValue("sBrandCde", fsValue);
+    public JSONObject setBrandID(String fsValue) {
+        return setValue("sBrandIDx", fsValue);
     }
 
     /**
-     * @return The sBrandCde of this record.
+     * @return The sBrandIDx of this record.
      */
-    public String getBrandCode() {
-        return (String) getValue("sBrandCde");
+    public String getBrandID() {
+        return (String) getValue("sBrandIDx");
     }
 
     /**
@@ -528,7 +528,7 @@ public class Model_Brand implements GEntity {
 
     public String getSQL() {
         String lsSQL = "SELECT"
-                + "  a.sBrandCde sBrandCde "
+                + "  a.sBrandIDx sBrandIDx "
                 + ", a.sDescript sDescript "
                 + ", a.sCategrCd sCategrCd "
                 + ", a.cRecdStat cRecdStat "
