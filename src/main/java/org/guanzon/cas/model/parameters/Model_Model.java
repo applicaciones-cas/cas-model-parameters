@@ -219,10 +219,10 @@ public class Model_Model implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = getSQL();
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelIDx = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sModelIDx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -263,7 +263,7 @@ public class Model_Model implements GEntity {
                 //replace with the primary key column info
                 setModelID(MiscUtil.getNextCode(getTable(), "sModelIDx", true, poGRider.getConnection(), ""));
 
-                lsSQL = makeSQL();
+                lsSQL = MiscUtil.makeSQL(this);
 
                 if (!lsSQL.isEmpty()) {
                     if (poGRider.executeQuery(lsSQL, getTable(), poGRider.getBranchCode(), "") > 0) {
@@ -368,37 +368,20 @@ public class Model_Model implements GEntity {
     }
 
     /**
-     * Description: Sets the sCategrCd of this record.
+     * Description: Sets the sModelCde of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setCategoryCode(String fsValue) {
-        return setValue("sCategrCd", fsValue);
+    public JSONObject setModelCode(String fsValue) {
+        return setValue("sModelCde", fsValue);
     }
 
     /**
-     * @return The sCategrCd of this record.
+     * @return The sModelCde of this record.
      */
-    public String getCategoryCode() {
-        return (String) getValue("sCategrCd");
-    }
-
-    /**
-     * Description: Sets the sModelNme of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setModelName(String fsValue) {
-        return setValue("sModelNme", fsValue);
-    }
-
-    /**
-     * @return The sModelNme of this record.
-     */
-    public String getModelName() {
-        return (String) getValue("sModelNme");
+    public String getModelCode() {
+        return (String) getValue("sModelCde");
     }
 
     /**
@@ -407,49 +390,83 @@ public class Model_Model implements GEntity {
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setDescription(String fsValue) {
+    public JSONObject setModelDescription(String fsValue) {
         return setValue("sDescript", fsValue);
     }
 
     /**
      * @return The sDescript of this record.
      */
-    public String getDescription() {
+    public String getModelDescription() {
         return (String) getValue("sDescript");
     }
 
     /**
-     * Description: Sets the sBriefDsc of this record.
+     * Description: Sets the sBrandIDx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBriefDescription(String fsValue) {
-        return setValue("sBriefDsc", fsValue);
+    public JSONObject setBrandID(String fsValue) {
+        return setValue("sBrandIDx", fsValue);
     }
 
     /**
-     * @return The sBriefDsc of this record.
+     * @return The sBrandIDx of this record.
      */
-    public String getBriefDescription() {
-        return (String) getValue("sBriefDsc");
+    public String getBrandID() {
+        return (String) getValue("sBrandIDx");
     }
-
+    
     /**
-     * Description: Sets the sBrandCde of this record.
+     * Description: Sets the sSeriesID of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBrandCode(String fsValue) {
-        return setValue("sBrandCde", fsValue);
+    public JSONObject setSeriesID(String fsValue) {
+        return setValue("sSeriesID", fsValue);
     }
 
     /**
-     * @return The sBrandCde of this record.
+     * @return The sSeriesID of this record.
      */
-    public String getBrandCode() {
-        return (String) getValue("sBrandCde");
+    public String getSeriesID() {
+        return (String) getValue("sSeriesID");
+    }
+    
+    /**
+     * Description: Sets the sVrntIDxx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setVariantID(String fsValue) {
+        return setValue("sVrntIDxx", fsValue);
+    }
+
+    /**
+     * @return The sVrntIDxx of this record.
+     */
+    public String getVariantID() {
+        return (String) getValue("sVrntIDxx");
+    }
+
+    /**
+     * Description: Sets the nYearModl of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setYearModel(String fsValue) {
+        return setValue("nYearModl", fsValue);
+    }
+
+    /**
+     * @return The nYearModl of this record.
+     */
+    public int getYearModel() {
+        return (int) getValue("nYearModl");
     }
 
     /**
@@ -467,23 +484,6 @@ public class Model_Model implements GEntity {
      */
     public String getEndOfLife() {
         return (String) getValue("cEndOfLfe");
-    }
-
-    /**
-     * Description: Sets the cRecdStat of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setRecdStat(String fsValue) {
-        return setValue("cRecdStat", fsValue);
-    }
-
-    /**
-     * @return The cRecdStat of this record.
-     */
-    public String getRecdStat() {
-        return (String) getValue("cRecdStat");
     }
 
     /**
@@ -536,42 +536,7 @@ public class Model_Model implements GEntity {
     public Date getModifiedDate() {
         return (Date) getValue("dModified");
     }
-
-    /**
-     * Description: Sets the xBrandNme of this record.
-     *
-     * @param fsValue
-     * @return result as success/failed
-     */
-    public JSONObject setBrandName(String fsValue) {
-        return setValue("xBrandNme", fsValue);
-    }
-
-    /**
-     * @return The xBrandNme of this record.
-     */
-    public String getBrandName() {
-        return (String) getValue("xBrandNme");
-    }
-
-    /**
-     * Gets the SQL statement for this entity.
-     *
-     * @return SQL Statement
-     */
-    public String makeSQL() {
-        return MiscUtil.makeSQL(this, "xBrandNme");
-    }
-
-    /**
-     * Gets the SQL Select statement for this entity.
-     *
-     * @return SelectSQL Statement
-     */
-    public String makeSelectSQL() {
-        return MiscUtil.makeSelect(this, "xBrandNme");
-    }
-
+    
     private void initialize() {
         try {
             poEntity = MiscUtil.xml2ResultSet(System.getProperty("sys.default.path.metadata") + XML, getTable());
@@ -592,24 +557,5 @@ public class Model_Model implements GEntity {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    public String getSQL() {
-        String lsSQL = "SELECT"
-                + "  a.sModelIDx sModelIDx "
-                + ", a.sCategrCd sCategrCd "
-                + ", a.sModelNme sModelNme "
-                + ", a.sDescript sDescript "
-                + ", a.sBriefDsc sBriefDsc "
-                + ", a.sBrandCde sBrandCde "
-                + ", a.cEndOfLfe cEndOfLfe "
-                + ", a.cRecdStat cRecdStat "
-                + ", a.sModified sModified "
-                + ", a.dModified dModified "
-                + ", b.sDescript xBrandNme "
-                + " FROM " + getTable() + " a"
-                + " LEFT JOIN Brand b ON a.sBrandCde = b.sBrandCde";
-
-        return lsSQL;
     }
 }
