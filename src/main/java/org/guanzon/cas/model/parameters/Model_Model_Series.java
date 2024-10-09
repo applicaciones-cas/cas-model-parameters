@@ -220,10 +220,10 @@ public class Model_Model_Series implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSQL(this);
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sSeriesID = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
@@ -386,20 +386,20 @@ public class Model_Model_Series implements GEntity {
     }
 
     /**
-     * Description: Sets the sBrandCde of this record.
+     * Description: Sets the sBrandIDx of this record.
      *
      * @param fsValue
      * @return result as success/failed
      */
-    public JSONObject setBrandCode(String fsValue) {
-        return setValue("sBrandCde", fsValue);
+    public JSONObject setBrandID(String fsValue) {
+        return setValue("sBrandIDx", fsValue);
     }
 
     /**
-     * @return The sBrandCde of this record.
+     * @return The sBrandIDx of this record.
      */
-    public String getBrandCode() {
-        return (String) getValue("sBrandCde");
+    public String getBrandID() {
+        return (String) getValue("sBrandIDx");
     }
 
     /**
