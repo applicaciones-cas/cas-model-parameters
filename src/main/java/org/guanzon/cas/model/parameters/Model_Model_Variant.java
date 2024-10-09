@@ -220,10 +220,10 @@ public class Model_Model_Variant implements GEntity {
     public JSONObject openRecord(String fsCondition) {
         poJSON = new JSONObject();
 
-        String lsSQL = MiscUtil.makeSQL(this);
+        String lsSQL = MiscUtil.makeSelect(this);
 
         //replace the condition based on the primary key column of the record
-        lsSQL = MiscUtil.addCondition(lsSQL, "a.sModelCde = " + SQLUtil.toSQL(fsCondition));
+        lsSQL = MiscUtil.addCondition(lsSQL, "sVrntIDxx = " + SQLUtil.toSQL(fsCondition));
 
         ResultSet loRS = poGRider.executeQuery(lsSQL);
 
