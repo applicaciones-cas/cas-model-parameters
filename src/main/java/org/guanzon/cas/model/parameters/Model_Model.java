@@ -448,10 +448,10 @@ public class Model_Model implements GEntity {
     /**
      * @return The sBrandCde of this record.
      */
-<<<<<<< Updated upstream
+
     public String getBrandCode() {
         return (String) getValue("sBrandCde");
-=======
+    }
     public String getSeriesID() {
         return (String) getValue("sSeriesID");
     }
@@ -488,7 +488,7 @@ public class Model_Model implements GEntity {
      */
     public int getYearModel() {
         return (int) getValue("nYearModl");
->>>>>>> Stashed changes
+
     }
 
     /**
