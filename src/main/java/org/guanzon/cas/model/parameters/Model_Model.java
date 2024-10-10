@@ -448,8 +448,47 @@ public class Model_Model implements GEntity {
     /**
      * @return The sBrandCde of this record.
      */
+<<<<<<< Updated upstream
     public String getBrandCode() {
         return (String) getValue("sBrandCde");
+=======
+    public String getSeriesID() {
+        return (String) getValue("sSeriesID");
+    }
+    
+    /**
+     * Description: Sets the sVrntIDxx of this record.
+     *
+     * @param fsValue
+     * @return result as success/failed
+     */
+    public JSONObject setVariantID(String fsValue) {
+        return setValue("sVrntIDxx", fsValue);
+    }
+
+    /**
+     * @return The sVrntIDxx of this record.
+     */
+    public String getVariantID() {
+        return (String) getValue("sVrntIDxx");
+    }
+
+    /**
+     * Description: Sets the nYearModl of this record.
+     *
+     * @param fnValue
+     * @return result as success/failed
+     */
+    public JSONObject setYearModel(int fnValue) {
+        return setValue("nYearModl", fnValue);
+    }
+
+    /**
+     * @return The nYearModl of this record.
+     */
+    public int getYearModel() {
+        return (int) getValue("nYearModl");
+>>>>>>> Stashed changes
     }
 
     /**
@@ -586,7 +625,7 @@ public class Model_Model implements GEntity {
             poEntity.moveToCurrentRow();
 
             poEntity.absolute(1);
-
+            setYearModel(0);
             pnEditMode = EditMode.UNKNOWN;
         } catch (SQLException e) {
             e.printStackTrace();
